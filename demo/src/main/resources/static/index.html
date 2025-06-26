@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ticketlite</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Barra de navegación -->
+  <header class="navbar">
+    <div class="navbar-left">
+      <span class="nombre">TICKETLITE</span>
+      <nav class="menu">
+      <nav class="menu">
+      <a href="#" id="btn-eventos">eventos</a>
+      <a href="#" id="btn-puntos">puntos de venta</a>
+      <a href="#" id="btn-gratis">eventos gratis</a>
+      <button id="btnEventosGratis">Eventos Gratis</button>
+
+      </nav>
+
+
+      </nav>
+    </div>
+    <div class="navbar-right">
+      <a href="#">inicio sesión</a>
+      <a href="#">registro</a>
+      <span class="menu-icon">☰</span>
+    </div>
+  </header>
+
+  <!-- Layout principal con 3 columnas -->
+  <div class="layout">
+
+    <!-- Columna izquierda -->
+    <aside class="col-izquierda">
+      <div class="contenedor-secciones">
+        <!-- Favoritos -->
+        <div class="seccion favoritos">
+          <h2>Favoritos</h2>
+          <div class="contenido-seccion">
+            <div class="evento1">
+              <img src="img/evento1.jpg" class="imagen-principal">
+              <img src="img/evento4.jpg" class="imagen-hover">
+            </div>
+          </div>
+        </div>
+
+        <!-- Recomendaciones -->
+        <div class="seccion recomendaciones">
+          <h2>Recomendaciones</h2>
+          <div class="contenido-seccion">
+            <div class="evento2">
+              <img src="img/evento2.jpg" class="imagen-principal">
+              <img src="img/rock3.jpg" class="imagen-hover">
+            </div>
+          </div>
+        </div>
+
+        <!-- Calificaciones -->
+        <div class="seccion calificaciones">
+          <h2>Calificaciones</h2>
+          <div class="contenido-seccion">
+            <div class="estrellas">
+              <span class="estrella llena">★</span>
+              <span class="estrella llena">★</span>
+              <span class="estrella llena">★</span>
+              <span class="estrella">★</span>
+              <span class="estrella">★</span>
+            </div>
+            <p class="puntuacion-texto">Puntuación: 3 de 5</p>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Columna central -->
+    <main class="col-central">
+      <section class="imagen1">
+        <img src="img/suso.jpg" alt="Suso en teatro">
+      </section>
+
+      <section class="busqueda">
+        <input type="text" placeholder="Buscar artista, lugar o evento">
+        <input type="date" placeholder="Buscar fecha">
+        <input type="text" placeholder="Buscar categoría">
+        <input type="text" placeholder="Buscar ubicación">
+      </section>
+
+      <section class="eventos-categorias">
+        <div class="titulo-categorias">
+          <h2>Categorías de Eventos</h2>
+        </div>
+        <div class="grid-categorias">
+          <div class="categoria"><img src="img/metal1.jpg" alt="metal">
+            <p>metal</p>
+          </div>
+          <div class="categoria"><img src="img/vallenato1.jpg" alt="vallenato">
+            <p>vallenato</p>
+          </div>
+          <div class="categoria"><img src="img/modelaje1.jpg" alt="modelaje">
+            <p>modelaje</p>
+          </div>
+          <div class="categoria"><img src="img/anime1.jpg" alt="anime">
+            <p>anime</p>
+          </div>
+          <div class="categoria"><img src="img/regueton1.jpg" alt="reguetón">
+            <p>reguetón</p>
+          </div>
+          <div class="categoria"><img src="img/victor1.jpg" alt="vallenato victor">
+            <p>vallenato victor</p>
+          </div>
+          <div class="categoria"><img src="img/salsa0.jpg" alt="salsa">
+            <p>salsa</p>
+          </div>
+          <div class="categoria"><img src="img/disfraces1.jpg" alt="disfraces">
+            <p>disfraces</p>
+          </div>
+          <div class="categoria"><img src="img/rock1.jpg" alt="rock">
+            <p>rock</p>
+          </div>
+          <div class="categoria"><img src="img/salsa.jpg" alt="salsa">
+            <p>salsa</p>
+          </div>
+          <div class="categoria"><img src="img/musica1.jpg" alt="musica">
+            <p>musica</p>
+          </div>
+          <div class="categoria"><img src="img/infantil1.jpg" alt="infantil">
+            <p>infantil</p>
+          </div>
+          <div class="categoria"><img src="img/deportivo1.jpg" alt="deportivo">
+            <p>deportivo</p>
+          </div>
+          <div class="categoria"><img src="img/ferias1.jpg" alt="ferias">
+            <p>ferias</p>
+          </div>
+          <div class="categoria"><img src="img/techno.jpg" alt="techno">
+            <p>techno</p>
+          </div>
+          <div class="categoria"><img src="img/tecnologico1.jpg" alt="tecnologico">
+            <p>tecnologico</p>
+          </div>
+          <div class="categoria"><img src="img/expos1.jpg" alt="expos">
+            <p>expos</p>
+          </div>
+          <div class="categoria"><img src="img/educacion1.jpg" alt="educacion">
+            <p>educacion</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Columna derecha -->
+    <aside class="col-derecha">
+      <div class="publicidad">
+        <img src="img/publicidad.jpg" alt="Publicidad">
+      </div>
+    </aside>
+  </div>
+ 
+  <div id="contenedorEventosGratis" class="eventos-contenedor"></div>
+
+
+
+<script src="script.js"></script>
+</body>
+</html>
