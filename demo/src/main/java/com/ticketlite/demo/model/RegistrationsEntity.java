@@ -44,7 +44,7 @@ public class RegistrationsEntity {
             required = true,
             allowableValues = {"Confirmado", "Cancelado", "Pendiente"}
     )
-    private RegistrationStatus status = RegistrationStatus.Confirmado;
+    private RegistrationStatus status;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "reminder_delivery_status", nullable = false)
@@ -54,7 +54,7 @@ public class RegistrationsEntity {
             required = true,
             allowableValues = {"Recordado", "NoRecordado"}
     )
-    private ReminderStatus reminderDeliveryStatus = ReminderStatus.Recordado;
+    private ReminderStatus reminderDeliveryStatus;
 
     @CreationTimestamp
     @Column(name = "registered_at")

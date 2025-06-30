@@ -1,5 +1,6 @@
 package com.ticketlite.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -17,11 +18,13 @@ public class NotificationsEntity {
     @Schema(description = "Identificador único de la notificación", example = "1", required = true)
     private Long id;
 
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     @Schema(description = "Usuario al que va dirigida la notificación", required = true)
     private UsersEntity user;
 
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "event_id")
     @Schema(description = "Evento relacionado con la notificación, si aplica", required = false)
@@ -101,7 +104,7 @@ public class NotificationsEntity {
         this.type = type;
     }
 
-    public boolean isRead() {
+    public boolean isRead(boolean b) {
         return isRead;
     }
 

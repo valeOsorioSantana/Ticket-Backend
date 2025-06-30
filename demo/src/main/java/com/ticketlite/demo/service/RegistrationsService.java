@@ -45,20 +45,23 @@ public class RegistrationsService {
 
     //POST
     //Crear registro
-    public RegistrationsEntity register(Long userId, Long eventId, String ticketType, BigDecimal price) {
+    public RegistrationsEntity register(RegistrationsEntity registration) {
         try {
+            Long userId = registration.getUsers().getId();
+            Long eventId = registration.getEvents().getId();
+
             UsersEntity user = usersRepository.findById(userId).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
             EventsEntity event = eventsRepository.findById(eventId).orElseThrow(() -> new RuntimeException("Evento no encontrado"));
 
-            RegistrationsEntity newRegistration = new RegistrationsEntity();
-            newRegistration.setUsers(user);
-            newRegistration.setEvents(event);
-            newRegistration.setTicketType(ticketType);
-            newRegistration.setPrice(price);
-            newRegistration.setStatus(RegistrationsEntity.RegistrationStatus.Confirmado);
-            newRegistration.setReminderDeliveryStatus(RegistrationsEntity.ReminderStatus.NoRecordado);
+            registration.setUsers(user);
+            registration.setEvents(event);
+            registration.setTicketType(registration.getTicketType());
+            registration.setPrice(registration.getPrice());
+            registration.setStatus(registration.getStatus());
+            registration.setReminderDeliveryStatus(registration.getReminderDeliveryStatus());
+            registration.setRegisteredAt(LocalDateTime.now());
 
-            return registrationsRepository.save(newRegistration);
+            return registrationsRepository.save(registration);
         }catch (NotFoundException e){
             throw e;
         }catch (Exception e){
@@ -67,17 +70,34 @@ public class RegistrationsService {
     }
 
     //PUT
-    public RegistrationsEntity updateRegistrationDetails(Long registrationId, RegistrationsEntity.RegistrationStatus status, Boolean markReminderAsSent, LocalDateTime reminderTime) {
-        RegistrationsEntity registration = registrationsRepository.findById(registrationId).orElseThrow(() -> new RuntimeException("Registro no encontrado"));
+    public RegistrationsEntity updateRegistrationDetails(RegistrationsEntity registration) {
+        Long registrationId =registration.getId();
+        registrationsRepository.findById(registrationId).orElseThrow(() -> new RuntimeException("Registro no encontrado"));
 
+        RegistrationsEntity.RegistrationStatus status = registration.getStatus();
         if (status != null) {
             registration.setStatus(status);
         }
-
+        RegistrationsEntity.ReminderStatus markReminderAsSent = registration.getReminderDeliveryStatus();
+        LocalDateTime reminderTime = registration.getReminderTime();
         if (Boolean.TRUE.equals(markReminderAsSent)) {
             registration.setReminderDeliveryStatus(RegistrationsEntity.ReminderStatus.Recordado);
             registration.setReminderTime(reminderTime != null ? reminderTime : LocalDateTime.now());
         }
+
+        Long userId = registration.getUsers().getId();
+        Long eventId = registration.getEvents().getId();
+
+        UsersEntity user = usersRepository.findById(userId).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        EventsEntity event = eventsRepository.findById(eventId).orElseThrow(() -> new RuntimeException("Evento no encontrado"));
+
+        registration.setUsers(user);
+        registration.setEvents(event);
+        registration.setTicketType(registration.getTicketType());
+        registration.setPrice(registration.getPrice());
+        registration.setStatus(registration.getStatus());
+        registration.setReminderDeliveryStatus(registration.getReminderDeliveryStatus());
+        registration.setRegisteredAt(LocalDateTime.now());
 
         return registrationsRepository.save(registration);
     }

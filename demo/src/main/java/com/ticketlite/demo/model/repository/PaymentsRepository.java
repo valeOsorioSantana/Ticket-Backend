@@ -8,4 +8,6 @@ import java.util.Optional;
 public interface PaymentsRepository extends JpaRepository<PaymentsEntity,Long> {
 
     Optional<PaymentsEntity> findByRegistrationId(Long registrationId);
+
+    boolean existsByRegistrationId(Long registrationId);
 }

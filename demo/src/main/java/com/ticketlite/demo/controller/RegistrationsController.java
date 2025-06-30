@@ -85,11 +85,17 @@ public class RegistrationsController {
             @ApiResponse(responseCode = "500", description = "Error interno al crear el registro")
     })
 
-    @PostMapping("/{id}")
-    public ResponseEntity<?> createRegistration(@RequestParam Long userId,  @RequestParam Long eventId,  @RequestParam(required = false) String ticketType,  @RequestParam(required = false) BigDecimal price ) {
+    @PostMapping("/")
+    public ResponseEntity<?> createRegistration(@RequestBody RegistrationsEntity registration) {
         try {
-            RegistrationsEntity result = registrationsService.register(eventId, userId,ticketType,price);
-            return ResponseEntity.status(HttpStatus.CREATED).body("Se creó exitosamente el registro"+ result);
+            if (registration.getUsers() == null || registration.getUsers().getId() == null) {
+                return ResponseEntity.badRequest().body("El usuario es requerido");
+            }
+            if (registration.getEvents() == null || registration.getEvents().getId() == null) {
+                return ResponseEntity.badRequest().body("El evento es requerido");
+            }
+            RegistrationsEntity result = registrationsService.register(registration);
+            return ResponseEntity.status(HttpStatus.CREATED).body("Se creó exitosamente el registro");
         }catch (NotFoundException e){
             return ResponseEntity.status(404).body(e.getMessage());
         }catch (Exception e){
@@ -108,9 +114,9 @@ public class RegistrationsController {
     })
 
     @PutMapping("/{id}")
-    public ResponseEntity<String>updateRegistrationDetails(@PathVariable Long registrationId, @RequestParam(required = false) RegistrationsEntity.RegistrationStatus status, @RequestParam(required = false) Boolean markReminderAsSent, @RequestParam(required = false) LocalDateTime reminderTime){
+    public ResponseEntity<String>updateRegistrationDetails(@RequestBody RegistrationsEntity registration){
         try {
-            RegistrationsEntity result = registrationsService.updateRegistrationDetails(registrationId,status,markReminderAsSent,reminderTime);
+            RegistrationsEntity result = registrationsService.updateRegistrationDetails(registration);
 
             return ResponseEntity.ok("Registro actualizado con exito."+result);
         }catch (NotFoundException e){
@@ -129,8 +135,8 @@ public class RegistrationsController {
             @ApiResponse(responseCode = "404", description = "Registro no encontrado"),
     })
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteRegistration(@PathVariable Long registrationId){
+    @DeleteMapping("/{registrationId}")
+    public ResponseEntity<String> deleteRegistration(@RequestParam Long registrationId){
         try {
             registrationsService.deleteRegistration(registrationId);
 

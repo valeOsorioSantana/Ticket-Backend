@@ -1,5 +1,6 @@
 package com.ticketlite.demo.model.repository;
 
+import com.ticketlite.demo.model.Imagen;
 import com.ticketlite.demo.model.RegistrationsEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 

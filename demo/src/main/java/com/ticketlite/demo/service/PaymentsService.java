@@ -41,6 +41,11 @@ public class PaymentsService {
     //crear un nuevo pago
     public PaymentsEntity createPayment(Long registrationId, String method, BigDecimal amount) {
         try {
+            boolean exists = paymentsRepository.existsByRegistrationId(registrationId);
+            if (exists) {
+                throw new IllegalStateException("Ya existe un pago para este registro");
+            }
+
             RegistrationsEntity registration = registrationsRepository.findById(registrationId).orElseThrow(() -> new RuntimeException("Registro no encontrado"));
 
             PaymentsEntity payment = new PaymentsEntity();

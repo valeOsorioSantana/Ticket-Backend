@@ -2,9 +2,14 @@
 .idea/
 *.iml
 
+
 # Maven / Gradle
 target/
 build/
 
 # Java
 *.class
+
+# Ignorar archivo de configuración
+application.properties
+

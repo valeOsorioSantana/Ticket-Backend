@@ -63,10 +63,10 @@ public class NotificationsController {
     })
 
     @PostMapping("/")
-    public ResponseEntity<?> crearNotifi(@RequestParam Long userId, @RequestParam(required = false) Long eventId, @RequestParam String message, @RequestParam String type){
+    public ResponseEntity<?> crearNotifi(@RequestParam Long userId, @RequestParam(required = false) Long eventId, @RequestParam String message, @RequestParam(required = false) String type){
         try {
             NotificationsEntity result = notificationsService.crearNotifi(userId, eventId, message, type);
-            return ResponseEntity.status(HttpStatus.CREATED).body("Se creó exitosamente la notificacion"+ result);
+            return ResponseEntity.status(HttpStatus.CREATED).body("Se creó exitosamente la notificacion");
         }catch (NotFoundException e){
             return ResponseEntity.status(404).body(e.getMessage());
         }catch (Exception e){
@@ -75,22 +75,45 @@ public class NotificationsController {
     }
 
     //PUT
-    //marcar notificaciones como leidas
-    @Operation(summary = "Marcar notificaciones como leidas", description = "Marca notificaciones como leidas en la base de datos")
+    //marcar una notificacion como leida
+    @Operation(summary = "Marcar una notificacion como leida", description = "Marca una notificacion como leida en la base de datos")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Las notificaciones han sido marcadas como leidas.",
+            @ApiResponse(responseCode = "200", description = "Notificacion marcada como leida.",
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = NotificationsEntity.class))),
             @ApiResponse(responseCode = "404", description = "Notificacion no encontrada"),
+            @ApiResponse(responseCode = "500", description = "Error interno al marcar la notificacion como leida")
+    })
+
+    @PutMapping("/{id}/mark-as-read")
+    public ResponseEntity<?>markRead(@RequestParam Long notificationId){
+        try {
+            NotificationsEntity notifications = notificationsService.markRead(notificationId);
+
+            return ResponseEntity.ok("Notificacion marcada como leida.");
+        }catch (NotFoundException e){
+            return ResponseEntity.status(404).body(e.getMessage());
+        }catch (Exception e){
+            return ResponseEntity.status(500).body("Error interno al marcar notificaciones como leidas");
+        }
+    }
+
+    //PUT
+    //marcar notificaciones como leidas
+    @Operation(summary = "Marcar notificaciones como leidas", description = "Marca notificaciones como leidas en la base de datos")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Notificaciones marcadas como leidas.",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = NotificationsEntity.class))),
+            @ApiResponse(responseCode = "404", description = "No hay notificaciones no leídas"),
             @ApiResponse(responseCode = "500", description = "Error interno al marcar notificaciones como leidas")
     })
 
-    @PutMapping("/{id}")
-    public ResponseEntity<String>markRead(@PathVariable Long notificationId, @RequestBody NotificationsEntity notifications){
+    @PutMapping("/{userId}/mark-all-as-read")
+    public ResponseEntity<?>markAllNotiRead(@RequestParam Long userId){
         try {
-            notifications.setId(notificationId);
-            notificationsService.markRead(notificationId);
-            return ResponseEntity.ok("Las notificaciones han sido marcadas como leidas.");
+            notificationsService.markAllNotiRead(userId);
+            return ResponseEntity.ok("Notificaciones marcadas como leidas.");
         }catch (NotFoundException e){
             return ResponseEntity.status(404).body(e.getMessage());
         }catch (Exception e){
@@ -108,7 +131,7 @@ public class NotificationsController {
             @ApiResponse(responseCode = "404", description = "notificacion no encontrada"),
     })
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{notificationId}")
     public ResponseEntity<String> deleteNoti(@PathVariable Long notificationId){
         try {
             notificationsService.deleteNoti(notificationId);

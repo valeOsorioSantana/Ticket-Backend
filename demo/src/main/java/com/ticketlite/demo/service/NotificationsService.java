@@ -71,7 +71,7 @@ public class NotificationsService {
     }
 
     //PUT
-    //marcar notificaciones como leidas
+    //marcar una notificacion como leida
     public NotificationsEntity markRead(Long notificationId){
         try {
         NotificationsEntity readNotification = notificationsRepository.findById(notificationId).orElseThrow(() -> new RuntimeException("Notificación no encontrada"));
@@ -79,6 +79,28 @@ public class NotificationsService {
         readNotification.setRead(true);
 
         return notificationsRepository.save(readNotification);
+        }catch (NotFoundException e){
+            throw e;
+        }catch (Exception e){
+            throw new RuntimeException("Error al marcar notificaciones como leidas: " + e.getMessage(), e);
+        }
+    }
+
+    //PUT
+    //marcar notificaciones como leidas
+    public void markAllNotiRead(Long userId){
+        try {
+            List<NotificationsEntity> readNotifications = notificationsRepository.findByUserIdAndIsReadFalse(userId);
+
+            if (readNotifications.isEmpty()) {
+                throw new NotFoundException("No hay notificaciones no leídas para el usuario con ID: " + userId);
+            }
+
+            for (NotificationsEntity notification : readNotifications) {
+                notification.setRead(true);
+            }
+
+            notificationsRepository.saveAll(readNotifications);
         }catch (NotFoundException e){
             throw e;
         }catch (Exception e){

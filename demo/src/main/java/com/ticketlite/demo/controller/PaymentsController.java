@@ -131,7 +131,7 @@ public class PaymentsController {
     public ResponseEntity<?> deletePayment(@PathVariable Long paymentId) {
         try {
             paymentsService.deletePay(paymentId);
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.ok("Se Elimino correctamente el pago");
         } catch (Exception e) {
             return ResponseEntity.status(404).body("Error al eliminar el pago: " + e.getMessage());
         }

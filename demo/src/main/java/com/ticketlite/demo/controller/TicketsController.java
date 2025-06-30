@@ -103,11 +103,11 @@ public class TicketsController {
     public ResponseEntity<?> createTicket(@PathVariable Long registrationId, @RequestParam String qrCode){
         try {
             TicketsEntity result = ticketsService.createTicket(registrationId, qrCode);
-            return ResponseEntity.status(HttpStatus.CREATED).body("Se creó exitosamente el evento");
+            return ResponseEntity.status(HttpStatus.CREATED).body("Se creó exitosamente el ticket");
         }catch(NotFoundException e){
             return ResponseEntity.status(404).body(e.getMessage());
         }catch (Exception e){
-            return ResponseEntity.status(500).body("Error interno al crear el ticket");
+            return ResponseEntity.status(500).body("Error interno al procesar la solicitud");
         }
     }
 
@@ -120,11 +120,11 @@ public class TicketsController {
             @ApiResponse(responseCode = "404", description = "ticket no encontrado"),
     })
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{ticketId}")
     public ResponseEntity<?> deleteTicket(@PathVariable Long ticketId){
         try {
             ticketsService.deleteTicket(ticketId);
-            return ResponseEntity.ok("Evento eliminado Correctamente.");
+            return ResponseEntity.ok("Ticket eliminado Correctamente.");
         }catch (RuntimeException e){
             return ResponseEntity.status(404).body(e.getMessage());
         }
