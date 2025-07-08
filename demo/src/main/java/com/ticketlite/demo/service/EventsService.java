@@ -29,7 +29,6 @@ public class EventsService {
 
     //Importante para conectar el repository
     @Autowired
-    //Constructor
     public EventsService(EventsRepository eventsRepository, GeometryFactory geometryFactory) {
         this.eventsRepository = eventsRepository;
         this.geometryFactory = geometryFactory;

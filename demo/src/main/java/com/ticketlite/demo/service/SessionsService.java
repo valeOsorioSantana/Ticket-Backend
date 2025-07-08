@@ -20,8 +20,6 @@ public class SessionsService {
     private EventsRepository eventsRepository;
     //Importante para conectar el repository
     @Autowired
-    //Constructor
-
     public SessionsService(SessionsRepository sessionsRepository, EventsRepository eventsRepository) {
         this.sessionsRepository = sessionsRepository;
         this.eventsRepository = eventsRepository;

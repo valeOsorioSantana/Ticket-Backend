@@ -2,13 +2,17 @@ package com.ticketlite.demo.service;
 
 import com.ticketlite.demo.model.UsersEntity;
 import com.ticketlite.demo.model.repository.UsersRepository;
+import com.ticketlite.demo.security.CreateUserRequest;
 import com.ticketlite.demo.structure.exception.ConflictException;
 import com.ticketlite.demo.structure.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class UsersService {
@@ -16,11 +20,13 @@ public class UsersService {
     //Atributos
 
     private UsersRepository usersRepository;
+    private PasswordEncoder passwordEncoder;
+
     //Importante para conectar el repository
     @Autowired
-    //Constructor
-    public UsersService(UsersRepository usersRepository) {
+    public UsersService(UsersRepository usersRepository, PasswordEncoder passwordEncoder) {
         this.usersRepository = usersRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     //Metodos
@@ -36,27 +42,29 @@ public class UsersService {
     }
 
     //POST
-    public String saveUser(UsersEntity user) throws ConflictException {
+    public String saveUser(CreateUserRequest request) throws ConflictException {
         try {
+            if (request.getPassword() == null || request.getPassword().isEmpty()) {
+                throw new IllegalArgumentException("La contraseña no puede estar vacía");
+            }
 
-            if (usersRepository.existsByEmail(user.getEmail())) {
-                throw new RuntimeException("Este Email ya ha sido registrado");
+            if (usersRepository.existsByEmail(request.getEmail())) {
+                throw new ConflictException("Este Email ya ha sido registrado");
             }
 
             UsersEntity newUser = new UsersEntity();
 
-            newUser.setEmail(user.getEmail());
-            newUser.setPasswordHash(user.getPasswordHash());
-            newUser.setFirstName(user.getFirstName());
-            newUser.setLastName(user.getLastName());
-            newUser.setPhone(user.getPhone());
-            newUser.setCity(user.getCity());
-            newUser.setBio(user.getBio());
-            newUser.setAvatarUrl(user.getAvatarUrl());
-            newUser.setRole(user.isRole());
+            newUser.setEmail(request.getEmail());
+            newUser.setPasswordHash(passwordEncoder.encode(request.getPassword()));
+            newUser.setName(request.getName());
+            newUser.setLastName(request.getLastName());
+            newUser.setPhone(request.getPhone());
+            newUser.setCity(request.getCity());
+            newUser.setBio(request.getBio());
+            newUser.setAvatarUrl(request.getAvatarUrl());
 
             usersRepository.save(newUser);
-            return "Se creo correctamente el usuario: " + user.getFirstName() + " " + user.getLastName();
+            return "Se creo correctamente el usuario: " + request.getName() + " " + request.getLastName();
         }catch (NotFoundException e){
             throw e;
         }catch (Exception e){
@@ -71,16 +79,14 @@ public class UsersService {
             UsersEntity editUser = usersRepository.findById(userId).orElseThrow(() -> new NotFoundException("Usuario no encontrado"));
 
             editUser.setEmail(user.getEmail());
-            editUser.setPasswordHash(user.getPasswordHash());
-            editUser.setFirstName(user.getFirstName());
+            editUser.setPasswordHash(passwordEncoder.encode(user.getPasswordHash()));
+            editUser.setName(user.getName());
             editUser.setLastName(user.getLastName());
             editUser.setPhone(user.getPhone());
             editUser.setCity(user.getCity());
             editUser.setBio(user.getBio());
             editUser.setAvatarUrl(user.getAvatarUrl());
-            editUser.setRole(user.isRole());
 
-            usersRepository.save(editUser);
             return usersRepository.save(editUser);
 
 
@@ -98,5 +104,18 @@ public class UsersService {
         }else {
             throw new RuntimeException("Usuario no encontrado por ID: " + userId);
         }
+    }
+
+    // AUTHENTICATE
+
+    public Optional<UsersEntity> authenticateUser(String email, String password) {
+        // Buscar el usuario por email
+        Optional<UsersEntity> user = usersRepository.findByEmail(email);
+
+        if (user == null || !passwordEncoder.matches(password, user.get().getPasswordHash())) {
+            return null; // Usuario no encontrado o contraseña incorrecta
+        }
+
+        return user;
     }
 }

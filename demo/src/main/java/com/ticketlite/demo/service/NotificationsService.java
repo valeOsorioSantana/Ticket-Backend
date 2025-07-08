@@ -24,8 +24,6 @@ public class NotificationsService {
 
     //Importante para conectar el repository
     @Autowired
-    //Constructor
-
     public NotificationsService(NotificationsRepository notificationsRepository, UsersRepository usersRepository, EventsRepository eventsRepository) {
         this.notificationsRepository = notificationsRepository;
         this.usersRepository = usersRepository;

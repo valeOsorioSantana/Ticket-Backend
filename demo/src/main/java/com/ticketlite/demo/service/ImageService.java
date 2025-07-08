@@ -3,6 +3,7 @@ package com.ticketlite.demo.service;
 
 import com.ticketlite.demo.model.Imagen;
 import com.ticketlite.demo.model.repository.ImagenRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,6 +18,7 @@ public class ImageService {
     private final ImageStorageService imageStorageService;
     private final ImagenRepository imagenRepository;
 
+    @Autowired
     public ImageService(ImageStorageService imageStorageService, ImagenRepository imagenRepository) {
         this.imageStorageService = imageStorageService;
         this.imagenRepository = imagenRepository;

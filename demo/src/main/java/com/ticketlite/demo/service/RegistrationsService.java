@@ -24,8 +24,6 @@ public class RegistrationsService {
     private EventsRepository eventsRepository;
     //Importante para conectar el repository
     @Autowired
-    //Constructor
-
     public RegistrationsService(RegistrationsRepository registrationsRepository, UsersRepository usersRepository, EventsRepository eventsRepository) {
         this.registrationsRepository = registrationsRepository;
         this.usersRepository = usersRepository;

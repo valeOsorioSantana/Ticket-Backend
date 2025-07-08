@@ -12,6 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 				title = "TicketLite API",
 				version = "1.0.0",
 				description = "API para la gestión de usuarios, eventos y tickets",
+
 				contact = @Contact(
 						name = "Equipo de Soporte",
 						email = "soporte@ticketlite.com"

@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/events")
+@RequestMapping("/api/public/events")
 @Tag(name = "Gestion de Eventos", description = "Operaciones Crud para la administracion de eventos")
 public class EventsController {
     //Atributo

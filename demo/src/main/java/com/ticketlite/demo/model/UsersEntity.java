@@ -2,16 +2,23 @@ package com.ticketlite.demo.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "users")
 @Schema(description = "Entidad que representa a un usuario dentro del sistema")
 public class UsersEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
@@ -26,15 +33,17 @@ public class UsersEntity {
     @Schema(description = "Hash de la contraseña del usuario", example = "$2a$10$abc123...", required = true)
     private String passwordHash;
 
-    @Column(name = "first_name", length = 100, nullable = false)
-    @Schema(description = "Nombre del usuario", example = "Juan", required = true)
-    private String firstName;
+    @NotBlank
+    @Column(name = "name", length = 100, nullable = false)
+    @Schema(description = "Nombre del usuario", example = "Juan")
+    private String name;
+
 
     @Column(name = "last_name", length = 100)
     @Schema(description = "Apellido del usuario", example = "Pérez")
     private String lastName;
 
-    @Column(length = 20, nullable = false)
+    @Column(length = 20)
     @Schema(description = "Teléfono del usuario", example = "+51987654321", required = true)
     private String phone;
 
@@ -50,10 +59,9 @@ public class UsersEntity {
     @Schema(description = "URL de la imagen de perfil del usuario", example = "https://example.com/avatar.jpg")
     private String avatarUrl;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    @Schema( description = "Rol del usuario en el sistema", example = "USUARIO", allowableValues = {"USUARIO", "ADMIN"}, required = true)
-    private UserRole role = UserRole.USUARIO;
+    @Column(length = 255)
+    @Schema(description = "El rol del usuario", example = "ADMIN-USUARIO")
+    private String role;
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false)
@@ -65,18 +73,14 @@ public class UsersEntity {
     @Schema(description = "Fecha y hora de última actualización", example = "2025-06-26T10:15:00")
     private LocalDateTime updatedAt;
 
-    public enum UserRole {
-        USUARIO,
-        ADMIN
-    }
-
     //Constructor
 
-    public UsersEntity(Long id, String email, String passwordHash, String firstName, String lastName, String phone, String city, String bio, String avatarUrl, UserRole role, LocalDateTime createdAt, LocalDateTime updatedAt) {
+
+    public UsersEntity(Long id, String email, String passwordHash, String name, String lastName, String phone, String city, String bio, String avatarUrl, String role, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.email = email;
         this.passwordHash = passwordHash;
-        this.firstName = firstName;
+        this.name = name;
         this.lastName = lastName;
         this.phone = phone;
         this.city = city;
@@ -116,12 +120,12 @@ public class UsersEntity {
         this.passwordHash = passwordHash;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getLastName() {
@@ -156,20 +160,20 @@ public class UsersEntity {
         this.bio = bio;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     public String getAvatarUrl() {
         return avatarUrl;
     }
 
     public void setAvatarUrl(String avatarUrl) {
         this.avatarUrl = avatarUrl;
-    }
-
-    public UserRole isRole() {
-        return role;
-    }
-
-    public void setRole(UserRole role) {
-        this.role = role;
     }
 
     public LocalDateTime getCreatedAt() {

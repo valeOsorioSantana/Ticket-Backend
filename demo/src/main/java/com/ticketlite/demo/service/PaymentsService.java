@@ -20,7 +20,6 @@ public class PaymentsService {
     private RegistrationsRepository registrationsRepository;
     //Importante para conectar el repository
     @Autowired
-    //Constructor
     public PaymentsService(PaymentsRepository paymentsRepository, RegistrationsRepository registrationsRepository) {
         this.paymentsRepository = paymentsRepository;
         this.registrationsRepository = registrationsRepository;

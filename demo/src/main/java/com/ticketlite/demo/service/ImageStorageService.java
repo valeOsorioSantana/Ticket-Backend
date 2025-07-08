@@ -1,5 +1,6 @@
 package com.ticketlite.demo.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,6 +22,7 @@ public class ImageStorageService {
     @Value("${cloudflare.r2.bucket}")
     private String bucketName;
 
+    @Autowired
     public ImageStorageService(S3Client s3Client, S3Presigner s3Presigner) {
         this.s3Client = s3Client;
         this.s3Presigner = s3Presigner;

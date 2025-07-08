@@ -24,8 +24,6 @@ public class EventAnalyticsService {
 
     //Importante para conectar el repository
     @Autowired
-    //Constructor
-
     public EventAnalyticsService(EventAnalyticsRepository eventAnalyticsRepository, EventsRepository eventsRepository) {
         this.eventAnalyticsRepository = eventAnalyticsRepository;
         this.eventsRepository = eventsRepository;
