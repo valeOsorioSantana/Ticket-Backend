@@ -1,6 +1,8 @@
 package com.ticketlite.demo.controller;
 
+import com.ticketlite.demo.DTO.EventCalendarDTO;
 import com.ticketlite.demo.model.EventsEntity;
+import com.ticketlite.demo.model.repository.EventsRepository;
 import com.ticketlite.demo.service.EventsService;
 import com.ticketlite.demo.structure.exception.ConflictException;
 import com.ticketlite.demo.structure.exception.NotFoundException;
@@ -11,13 +13,19 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.GeometryFactory;
+import org.locationtech.jts.geom.Point;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/public/events")
@@ -25,14 +33,42 @@ import java.util.Optional;
 public class EventsController {
     //Atributo
     private EventsService eventsService;
+    private EventsRepository eventsRepository;
+    private GeometryFactory geometryFactory;
 
     //Constructor
     @Autowired
-    public EventsController(EventsService eventsService) {
+    public EventsController(EventsService eventsService, EventsRepository eventsRepository, GeometryFactory geometryFactory) {
         this.eventsService = eventsService;
+        this.eventsRepository = eventsRepository;
+        this.geometryFactory = geometryFactory;
     }
 
+
     //Metodos
+    //GET event por calendario
+    @GetMapping("/calendar")
+    public List<EventCalendarDTO> getEventsForCalendar(@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start, @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end) {
+        List<EventsEntity> events;
+
+        if (start != null && end != null) {
+            events = eventsRepository.findByStartDateBetween(start, end);
+        } else {
+            events = eventsRepository.findAll();
+        }
+
+        return events.stream()
+                .map(e -> new EventCalendarDTO(
+                        e.getId(),
+                        e.getName(),
+                        e.getStartDate(),
+                        e.getEndDate(),
+                        e.getCategory(),
+                        e.getImageUrl(),
+                        e.getAddress()
+                ))
+                .collect(Collectors.toList());
+    }
     //GET ALL
     @Operation(summary = "Obtener todos los eventos", description = "Recupera una lista de todos los eventos desde la base de datos")
     @ApiResponses(value = {
@@ -92,6 +128,7 @@ public class EventsController {
             @ApiResponse(responseCode = "201", description = "Se creó exitosamente el evento",
             content = @Content(mediaType = "application/json",
             schema = @Schema(implementation = EventsEntity.class))),
+            @ApiResponse(responseCode = "400", description = "Error al guardar evento"),
             @ApiResponse(responseCode = "409", description = "Datos de eventos invalidos")
     })
 
@@ -100,6 +137,8 @@ public class EventsController {
         try {
             String result = eventsService.saveEvent(event);
             return ResponseEntity.status(HttpStatus.CREATED).body("Se creó exitosamente el evento");
+        }catch (Exception e) {
+            return ResponseEntity.status(400).body("Error al guardar evento: " + e.getMessage());
         }catch (ConflictException e){
             return ResponseEntity.status(409).body(e.getMessage());
         }

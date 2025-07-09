@@ -55,9 +55,14 @@ public class EventsService {
 
     public String saveEvent(EventsEntity event ) throws ConflictException {
         try {
+            if (eventsRepository.existsByName(event.getName())) {
+                throw new ConflictException("Ya existe un evento con ese nombre");
+            }
+
             if (event.getLatitude() != null && event.getLongitude() != null) {
                 GeometryFactory geometryFactory = new GeometryFactory(new PrecisionModel(), 4326);
                 Point location = geometryFactory.createPoint(new Coordinate(event.getLongitude(), event.getLatitude()));
+                location.setSRID(4326);
                 event.setLocation(location);
             } else {
                 throw new RuntimeException("Latitud y longitud son obligatorios para crear la ubicación del evento.");

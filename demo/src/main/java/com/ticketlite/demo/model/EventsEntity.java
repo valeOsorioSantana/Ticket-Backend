@@ -9,11 +9,8 @@ import org.locationtech.jts.geom.Point;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.ticketlite.demo.structure.json.PointDeserializer;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.ticketlite.demo.structure.json.PointSerializer;
-import com.ticketlite.demo.structure.json.PointDeserializer;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -32,18 +29,17 @@ public class EventsEntity {
     @Schema(description = "Nombre del evento", example = "Concierto de Rock", required = true)
     private String name;
 
-    @Size(max = 255)
     @Column(nullable = false, columnDefinition = "TEXT")
     @Schema(description = "Descripción detallada del evento", example = "Un evento musical en vivo con bandas internacionales", required = true)
     private String description;
 
     @Column(name = "start_date")
     @Schema(description = "Fecha de inicio del evento", example = "2025-07-15")
-    private LocalDate startDate;
+    private LocalDateTime startDate;
 
     @Column(name = "end_date")
     @Schema(description = "Fecha de finalización del evento", example = "2025-07-16")
-    private LocalDate endDate;
+    private LocalDateTime endDate;
 
     @JsonSerialize(using = PointSerializer.class)
     @JsonDeserialize(using = PointDeserializer.class)
@@ -90,8 +86,7 @@ public class EventsEntity {
 
     //Constructor
 
-
-    public EventsEntity(Long id, String name, String address, String description, LocalDate startDate, LocalDate endDate, Point location, String category, EventStatus status, String imageUrl, LocalDateTime createdAt, Double latitude, Double longitude) {
+    public EventsEntity(Long id, String name, String description, LocalDateTime startDate, LocalDateTime endDate, Point location, String category, EventStatus status, String imageUrl, String address, LocalDateTime createdAt, Double latitude, Double longitude) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -101,10 +96,10 @@ public class EventsEntity {
         this.category = category;
         this.status = status;
         this.imageUrl = imageUrl;
+        this.address = address;
         this.createdAt = createdAt;
         this.latitude = latitude;
         this.longitude = longitude;
-        this.address = address;
     }
 
     public EventsEntity() {
@@ -133,25 +128,22 @@ public class EventsEntity {
     }
 
     public void setDescription(String description) {
-        if (description != null && description.length() > 255) {
-            this.description = description.substring(0, 255);
-        } else {
-            this.description = description;
-        }    }
+        this.description = description;
+    }
 
-    public LocalDate getStartDate() {
+    public LocalDateTime getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDate startDate) {
+    public void setStartDate(LocalDateTime startDate) {
         this.startDate = startDate;
     }
 
-    public LocalDate getEndDate() {
+    public LocalDateTime getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(LocalDate endDate) {
+    public void setEndDate(LocalDateTime endDate) {
         this.endDate = endDate;
     }
 
@@ -184,11 +176,15 @@ public class EventsEntity {
     }
 
     public void setImageUrl(String imageUrl) {
-        if (imageUrl != null && imageUrl.length() > 255) {
-            this.imageUrl = imageUrl.substring(0, 255);
-        } else {
-            this.imageUrl = imageUrl;
-        }
+        this.imageUrl = imageUrl;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public LocalDateTime getCreatedAt() {
@@ -213,13 +209,5 @@ public class EventsEntity {
 
     public void setLongitude(Double longitude) {
         this.longitude = longitude;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 }
