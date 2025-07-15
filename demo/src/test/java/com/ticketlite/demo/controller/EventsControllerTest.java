@@ -1,5 +1,6 @@
 package com.ticketlite.demo.controller;
 
+import com.ticketlite.demo.DTO.EventCompleteDTO;
 import com.ticketlite.demo.model.EventsEntity;
 import com.ticketlite.demo.service.EventsService;
 import org.junit.jupiter.api.BeforeEach;
@@ -30,21 +31,21 @@ public class EventsControllerTest {
     @Test
     public void  testGetAllEvents(){
         // Crear datos simulados
-        EventsEntity event1 = new EventsEntity();
+        EventCompleteDTO event1 = new EventCompleteDTO();
         event1.setId(1L);
         event1.setName("Evento 1");
 
-        EventsEntity event2 = new EventsEntity();
+        EventCompleteDTO event2 = new EventCompleteDTO();
         event2.setId(2L);
         event2.setName("Evento 2");
 
-        List<EventsEntity> mockEvents = Arrays.asList(event1, event2);
+        List<EventCompleteDTO> mockEvents = Arrays.asList(event1, event2);
 
         // Definir comportamiento del mock
         when(eventsService.getAllEvents()).thenReturn(mockEvents);
 
         // Llamar al método que estamos probando
-        List<EventsEntity> result = eventsController.getAllEvents();
+        List<EventCompleteDTO> result = eventsController.getAllEvents();
 
         // Validar resultados
         assertEquals(2, result.size());

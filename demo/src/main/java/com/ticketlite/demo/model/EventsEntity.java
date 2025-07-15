@@ -1,5 +1,6 @@
 package com.ticketlite.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
@@ -57,11 +58,6 @@ public class EventsEntity {
             allowableValues = {"Publicado", "Borrador", "Cancelado", "Finalizado"})
     private EventStatus status;
 
-    @Size(max = 255)
-    @Column(name = "image_url", columnDefinition = "TEXT")
-    @Schema(description = "URL de la imagen asociada al evento", example = "https://example.com/images/pepitoclavounclavito.jpg")
-    private String imageUrl;
-
     @Column(length = 150)
     private String address;
 
@@ -72,21 +68,24 @@ public class EventsEntity {
 
     // Campos temporales para recibir latitude/longitude en el JSON
     @Transient
+    @JsonIgnore
     private Double latitude;
 
     @Transient
+    @JsonIgnore
     private Double longitude;
 
     public enum EventStatus {
-        Publicado,
-        Borrador,
-        Cancelado,
-        Finalizado
+        PUBLICADO,
+        BORRADOR,
+        CANCELADO,
+        FINALIZADO
     }
+
 
     //Constructor
 
-    public EventsEntity(Long id, String name, String description, LocalDateTime startDate, LocalDateTime endDate, Point location, String category, EventStatus status, String imageUrl, String address, LocalDateTime createdAt, Double latitude, Double longitude) {
+    public EventsEntity(Long id, String name, String description, LocalDateTime startDate, LocalDateTime endDate, Point location, String category, EventStatus status, String address, LocalDateTime createdAt, Double latitude, Double longitude) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -95,7 +94,6 @@ public class EventsEntity {
         this.location = location;
         this.category = category;
         this.status = status;
-        this.imageUrl = imageUrl;
         this.address = address;
         this.createdAt = createdAt;
         this.latitude = latitude;
@@ -169,14 +167,6 @@ public class EventsEntity {
 
     public void setStatus(EventStatus status) {
         this.status = status;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
     }
 
     public String getAddress() {

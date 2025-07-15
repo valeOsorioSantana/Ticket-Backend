@@ -3,6 +3,7 @@ package com.ticketlite.demo.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -44,6 +45,10 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .cors(cors -> {})
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() // ⬅️ Permitir preflight CORS
+                        .requestMatchers("/api/recuperacion/solicitar").permitAll()
+                        .requestMatchers("/api/recuperacion/validar").permitAll()
+                        .requestMatchers("/api/recuperacion/cambiar").permitAll()
                         .requestMatchers("auth/**","/", "/index", "/login", "/register", "/swagger-ui/**", "/v3/api-docs/**","api/public/events/**").permitAll()
                         .anyRequest().permitAll()//authenticated
                 )

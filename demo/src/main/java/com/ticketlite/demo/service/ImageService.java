@@ -1,6 +1,7 @@
 package com.ticketlite.demo.service;
 
 
+import com.ticketlite.demo.model.EventsEntity;
 import com.ticketlite.demo.model.Imagen;
 import com.ticketlite.demo.model.repository.ImagenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,11 @@ public class ImageService {
         this.imagenRepository = imagenRepository;
     }
 
-    public Imagen uploadImage(MultipartFile file) throws IOException {
+    public Imagen uploadImage(MultipartFile file, EventsEntity newEvent) throws IOException {
+        if (file == null || file.isEmpty()) {
+            throw new IOException("Archivo de imagen vacío o nulo");
+        }
+
         String fileName = UUID.randomUUID() + "-" + file.getOriginalFilename();
         String key = "imagenes/" + fileName;
 
@@ -33,11 +38,12 @@ public class ImageService {
         Imagen imagen = new Imagen();
         imagen.setNombreOriginal(file.getOriginalFilename());
         imagen.setKeyS3(key);
+        imagen.setEvents(newEvent);
         return imagenRepository.save(imagen);
     }
 
     public Optional<Imagen> getImage(Long id) {
-        return imagenRepository.findById(id);
+        return imagenRepository.findImagenByEventsId(id);
     }
 
     public String getPresignedUrl(Long id) throws Exception {

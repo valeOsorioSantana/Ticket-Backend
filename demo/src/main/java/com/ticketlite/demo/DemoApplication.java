@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.info.License;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @OpenAPIDefinition(
 		info = @Info(
@@ -25,6 +26,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 )
 
 @SpringBootApplication
+@EnableScheduling
 public class DemoApplication {
 
 	public static void main(String[] args) {

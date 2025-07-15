@@ -1,5 +1,7 @@
 package com.ticketlite.demo.DTO;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.time.LocalDateTime;
 
 public class EventCalendarDTO {
@@ -8,18 +10,18 @@ public class EventCalendarDTO {
     private LocalDateTime startDate;
     private LocalDateTime endDate;
     private String category;
-    private String imageUrl;
     private String address;
 
-    public EventCalendarDTO(Long id, String name, LocalDateTime startDate, LocalDateTime endDate, String category, String imageUrl, String address) {
+    @Autowired
+    public EventCalendarDTO(Long id, String name, LocalDateTime startDate, LocalDateTime endDate, String category, String address) {
         this.id = id;
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
         this.category = category;
-        this.imageUrl = imageUrl;
         this.address = address;
     }
+    //Getters and setters
 
     public Long getId() {
         return id;
@@ -59,14 +61,6 @@ public class EventCalendarDTO {
 
     public void setCategory(String category) {
         this.category = category;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
     }
 
     public String getAddress() {

@@ -1,61 +1,64 @@
 package com.ticketlite.demo.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ticketlite.demo.DTO.EventCalendarDTO;
+import com.ticketlite.demo.DTO.EventCompleteDTO;
+import com.ticketlite.demo.DTO.EventDTO;
 import com.ticketlite.demo.model.EventsEntity;
 import com.ticketlite.demo.model.repository.EventsRepository;
 import com.ticketlite.demo.service.EventsService;
 import com.ticketlite.demo.structure.exception.ConflictException;
 import com.ticketlite.demo.structure.exception.NotFoundException;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
-import org.locationtech.jts.geom.Point;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+
 @RestController
 @RequestMapping("/api/public/events")
-@Tag(name = "Gestion de Eventos", description = "Operaciones Crud para la administracion de eventos")
+@Tag(name = "Gestión de Eventos", description = "Operaciones CRUD para la administración de eventos")
 public class EventsController {
-    //Atributo
-    private EventsService eventsService;
-    private EventsRepository eventsRepository;
-    private GeometryFactory geometryFactory;
 
-    //Constructor
+    private final EventsService eventsService;
+    private final EventsRepository eventsRepository;
+    private final GeometryFactory geometryFactory;
+    private final ObjectMapper objectMapper;
+
     @Autowired
-    public EventsController(EventsService eventsService, EventsRepository eventsRepository, GeometryFactory geometryFactory) {
+    public EventsController(EventsService eventsService, EventsRepository eventsRepository, GeometryFactory geometryFactory, ObjectMapper objectMapper) {
         this.eventsService = eventsService;
         this.eventsRepository = eventsRepository;
         this.geometryFactory = geometryFactory;
+        this.objectMapper = objectMapper;
     }
 
-
-    //Metodos
-    //GET event por calendario
     @GetMapping("/calendar")
-    public List<EventCalendarDTO> getEventsForCalendar(@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start, @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end) {
-        List<EventsEntity> events;
+    public List<EventCalendarDTO> getEventsForCalendar(
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end) {
 
-        if (start != null && end != null) {
-            events = eventsRepository.findByStartDateBetween(start, end);
-        } else {
-            events = eventsRepository.findAll();
-        }
+        List<EventsEntity> events = (start != null && end != null)
+                ? eventsRepository.findByStartDateBetween(start, end)
+                : eventsRepository.findAll();
 
         return events.stream()
                 .map(e -> new EventCalendarDTO(
@@ -64,127 +67,140 @@ public class EventsController {
                         e.getStartDate(),
                         e.getEndDate(),
                         e.getCategory(),
-                        e.getImageUrl(),
                         e.getAddress()
                 ))
                 .collect(Collectors.toList());
     }
-    //GET ALL
-    @Operation(summary = "Obtener todos los eventos", description = "Recupera una lista de todos los eventos desde la base de datos")
+
+    @Operation(summary = "Obtener todos los eventos", description = "Recupera una lista de todos los eventos")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Lista de eventos obtenida exitosamente",
-                    content = @Content(mediaType = "application/json",
+                    content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
                             array = @ArraySchema(schema = @Schema(implementation = EventsEntity.class)))),
             @ApiResponse(responseCode = "204", description = "No hay eventos disponibles")
     })
-
     @GetMapping("/")
-    public List<EventsEntity> getAllEvents() {
+    public List<EventCompleteDTO> getAllEvents() {
         return eventsService.getAllEvents();
     }
 
-    //Get for location
-    @Operation(summary = "Buscar un evento cercano a la localizacion", description = "Busca un evento cercano a la localizacion actual del evento")
+    @Operation(summary = "Buscar eventos cercanos", description = "Busca eventos cercanos a una ubicación geográfica")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Eventos cercanos",
-                    content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = EventsEntity.class))),
-            @ApiResponse(responseCode = "404", description = "Eventos cercanos no encontrados"),
-            @ApiResponse(responseCode = "500", description = "Error interno al procesar la solicitud")
+            @ApiResponse(responseCode = "200", description = "Eventos encontrados"),
+            @ApiResponse(responseCode = "404", description = "No se encontraron eventos cercanos"),
+            @ApiResponse(responseCode = "500", description = "Error interno")
     })
-
     @GetMapping("/nearby")
-    public List<EventsEntity> getEventsNearby(@RequestParam double lat, @RequestParam double lon, @RequestParam(defaultValue = "5000") double radius) {
+    public List<EventCompleteDTO> getEventsNearby(
+            @RequestParam double lat,
+            @RequestParam double lon,
+            @RequestParam(defaultValue = "5000") double radius) {
         return eventsService.getEventsNearby(lat, lon, radius);
     }
 
-    //GET UNIQUE GET BY ID
-    @Operation(summary = "Buscar un evento por id", description = "Busca un evento por id en la base de datos")
+    @Operation(summary = "Obtener un evento por ID", description = "Busca un evento por su identificador")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Evento encontrado exitosamente",
-                    content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = EventsEntity.class))),
+            @ApiResponse(responseCode = "200", description = "Evento encontrado"),
             @ApiResponse(responseCode = "404", description = "Evento no encontrado"),
-            @ApiResponse(responseCode = "500", description = "Error interno al procesar la solicitud")
+            @ApiResponse(responseCode = "500", description = "Error interno")
     })
-
     @GetMapping("/{eventId}")
-    public ResponseEntity<?> getEventById(@PathVariable Long eventId){
+    public ResponseEntity<?> getEventById(@PathVariable Long eventId) {
         try {
-            Optional<EventsEntity> event = eventsService.getById(eventId);
-            if (event.isPresent()) {
-                return ResponseEntity.status(HttpStatus.OK).body(event.get());
-            }else {
-                return ResponseEntity.status(404).body("Evento no encontrado");
-            }
-        }catch (Exception e){
-            return ResponseEntity.status(500).body("Error interno al procesar la solicitud");
+            Optional<EventCompleteDTO> event = eventsService.getById(eventId);
+            return event.map(ResponseEntity::ok)
+                    .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error interno al procesar la solicitud");
         }
     }
 
-    //POST
-    @Operation(summary = "Guardar un evento", description = "Crea y guarda un nuevo evento en la base de datos")
+    @Operation(summary = "Guardar un evento", description = "Crea y guarda un nuevo evento con imagen adjunta")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Se creó exitosamente el evento",
-            content = @Content(mediaType = "application/json",
-            schema = @Schema(implementation = EventsEntity.class))),
+            @ApiResponse(responseCode = "201", description = "Evento creado exitosamente"),
             @ApiResponse(responseCode = "400", description = "Error al guardar evento"),
-            @ApiResponse(responseCode = "409", description = "Datos de eventos invalidos")
+            @ApiResponse(responseCode = "409", description = "Datos de evento inválidos")
     })
+    @PostMapping(value = "/", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<?> saveEvent(
+            @Parameter(
+                    description = "Datos del evento en JSON (como String)",
+                    required = true,
+                    content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = EventDTO.class))
+            )
+            @RequestPart("event") String eventJson,
 
-    @PostMapping("/")
-    public ResponseEntity<?> saveEvent(@RequestBody EventsEntity event){
+            @Parameter(
+                    description = "Archivo de imagen para el evento",
+                    required = true,
+                    content = @Content(mediaType = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+            )
+            @RequestPart("file") MultipartFile file) {
+
         try {
-            String result = eventsService.saveEvent(event);
+            EventDTO event = objectMapper.readValue(eventJson, EventDTO.class);
+            eventsService.saveEvent(event, file);
             return ResponseEntity.status(HttpStatus.CREATED).body("Se creó exitosamente el evento");
-        }catch (Exception e) {
-            return ResponseEntity.status(400).body("Error al guardar evento: " + e.getMessage());
-        }catch (ConflictException e){
-            return ResponseEntity.status(409).body(e.getMessage());
+        } catch (ConflictException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al guardar evento: " + e.getMessage());
         }
     }
 
-    //PUT
-    @Operation(summary = "Actualizar un evento", description = "Actualiza y guarda un evento en la base de datos")
+    @Operation(summary = "Actualizar un evento", description = "Actualiza un evento existente y su imagen")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Se actualizo correctamente el evento",
-                    content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = EventsEntity.class))),
+            @ApiResponse(responseCode = "200", description = "Evento actualizado con éxito"),
             @ApiResponse(responseCode = "404", description = "Evento no encontrado"),
-            @ApiResponse(responseCode = "500", description = "Error interno al actualizar el evento")
+            @ApiResponse(responseCode = "409", description = "Conflicto al actualizar evento"),
+            @ApiResponse(responseCode = "500", description = "Error interno")
     })
+    @PutMapping(value = "/{eventId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<String> updateEvent(
+            @PathVariable Long eventId,
 
-    @PutMapping("/{eventId}")
-    public ResponseEntity<String>updateEvent(@PathVariable Long eventId, @RequestBody EventsEntity editEvent){
+            @Parameter(
+                    description = "Datos del evento actualizado en JSON (como String)",
+                    required = true,
+                    content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = EventDTO.class))
+            )
+            @RequestPart("event") String eventJson,
+
+            @Parameter(
+                    description = "Archivo de imagen actualizado",
+                    required = true,
+                    content = @Content(mediaType = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+            )
+            @RequestPart("file") MultipartFile file) {
         try {
+            EventDTO editEvent = objectMapper.readValue(eventJson, EventDTO.class);
             editEvent.setId(eventId);
-            EventsEntity updated = eventsService.updateEvent(eventId,editEvent);
-
-            return ResponseEntity.ok("Evento actualizado con exito. ");
-        }catch (NotFoundException e){
-            return ResponseEntity.status(404).body(e.getMessage());
-        }catch (Exception e){
-            return ResponseEntity.status(500).body("Error interno al actualizar el evento");
+            eventsService.updateEvent(eventId, editEvent, file);
+            return ResponseEntity.ok("Evento actualizado con éxito.");
+        } catch (NotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (ConflictException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error interno al actualizar el evento");
         }
     }
 
-    //DELETE
-    @Operation(summary = "Eliminar un evento", description = "Elimina un evento en la base de datos")
+    @Operation(summary = "Eliminar un evento", description = "Elimina un evento por su ID")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Se Elimino correctamente el evento",
-                    content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = EventsEntity.class))),
+            @ApiResponse(responseCode = "200", description = "Evento eliminado correctamente"),
             @ApiResponse(responseCode = "404", description = "Evento no encontrado"),
+            @ApiResponse(responseCode = "500", description = "Error interno")
     })
-
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteEvent(@PathVariable Long id){
+    public ResponseEntity<String> deleteEvent(@PathVariable Long id) {
         try {
             eventsService.deleteEvent(id);
-
-            return ResponseEntity.ok("Evento eliminado Correctamente.");
-        }catch (RuntimeException e){
-            return ResponseEntity.status(404).body(e.getMessage());
+            return ResponseEntity.ok("Evento eliminado correctamente.");
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al eliminar el archivo del evento");
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 }

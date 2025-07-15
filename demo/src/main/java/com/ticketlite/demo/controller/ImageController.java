@@ -1,6 +1,8 @@
 package com.ticketlite.demo.controller;
 
+import com.ticketlite.demo.model.EventsEntity;
 import com.ticketlite.demo.model.Imagen;
+import com.ticketlite.demo.model.repository.EventsRepository;
 import com.ticketlite.demo.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,25 +11,33 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/images")
 public class ImageController {
 
     private final ImageService imageService;
+    private final EventsRepository eventsRepository;
 
     @Autowired
-    public ImageController(ImageService imageService) {
+    public ImageController(ImageService imageService, EventsRepository eventsRepository) {
         this.imageService = imageService;
+        this.eventsRepository = eventsRepository;
     }
 
-    @PostMapping("/upload")
-    public ResponseEntity<?> upload(@RequestParam("file") MultipartFile file) {
+    @PostMapping("/upload/{idEvent}")
+    public ResponseEntity<?> upload(@RequestParam("file") MultipartFile file, @PathVariable Long idEvent) {
         if (file.isEmpty()) {
             return ResponseEntity.badRequest().body(Map.of("error", "Archivo vacío o no proporcionado"));
         }
         try {
-            Imagen imagen = imageService.uploadImage(file);
+
+            Optional<EventsEntity> eventOpt = eventsRepository.findById(idEvent);
+            if (eventOpt.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("error", "Evento no encontrada"));
+            }
+            Imagen imagen = imageService.uploadImage(file, eventOpt.get());
 
             return ResponseEntity.status(HttpStatus.CREATED).body(Map.of(
                     "Mesaje", "Imagen guardada correctamente"
