@@ -45,4 +45,29 @@ public class EmailServiceImple {
             throw new MessagingException("Error al enviar el correo de recuperación: " + e.getMessage(), e);
         }
     }
+
+    public void sendConfirmationEmail(String toEmail, String userName) {
+        try {
+            // Prepara el contexto para Thymeleaf
+            Context context = new Context();
+            context.setVariable("name", userName);
+
+            // Genera el contenido HTML del correo
+            String html = templateEngine.process("welcome-email.html", context);
+
+            // Prepara el mensaje MIME
+            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true);
+            helper.setTo(toEmail);
+            helper.setSubject("Bienvenido a Nuestra Plataforma");
+            helper.setText(html, true);
+            helper.setFrom("noreply@tusitio.com");
+
+            // Envía el correo
+            mailSender.send(message);
+        } catch (MessagingException e) {
+            throw new RuntimeException("Error al enviar el correo", e);
+        }
+
+    }
 }

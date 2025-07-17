@@ -21,12 +21,14 @@ public class UsersService {
 
     private UsersRepository usersRepository;
     private PasswordEncoder passwordEncoder;
+    private EmailServiceImple emailServiceImple;
 
     //Importante para conectar el repository
     @Autowired
-    public UsersService(UsersRepository usersRepository, PasswordEncoder passwordEncoder) {
+    public UsersService(UsersRepository usersRepository, PasswordEncoder passwordEncoder, EmailServiceImple emailServiceImple) {
         this.usersRepository = usersRepository;
         this.passwordEncoder = passwordEncoder;
+        this.emailServiceImple = emailServiceImple;
     }
 
     //Metodos
@@ -64,6 +66,7 @@ public class UsersService {
             newUser.setAvatarUrl(request.getAvatarUrl());
 
             usersRepository.save(newUser);
+            emailServiceImple.sendConfirmationEmail(newUser.getEmail(), newUser.getName());
             return "Se creo correctamente el usuario: " + request.getName() + " " + request.getLastName();
         }catch (NotFoundException e){
             throw e;
