@@ -28,7 +28,7 @@ public class RegistrationsEntity {
     @Schema(description = "Evento al que se registra el usuario", required = true)
     private EventsEntity events;
 
-    @Column(name = "ticket_type", length = 100)
+    @Column(name = "ticket_type", length = 500)
     @Schema(description = "Tipo de boleto seleccionado por el usuario", example = "VIP", required = false)
     private String ticketType;
 

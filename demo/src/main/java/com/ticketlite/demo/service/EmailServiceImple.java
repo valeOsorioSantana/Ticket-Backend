@@ -3,6 +3,7 @@ package com.ticketlite.demo.service;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -69,5 +70,24 @@ public class EmailServiceImple {
             throw new RuntimeException("Error al enviar el correo", e);
         }
 
+    }
+
+    public void enviarTicketConQR(String emailDestino, String asunto, String cuerpo, byte[] imagenQR) {
+        try {
+            MimeMessage mensaje = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(mensaje, true);
+
+            helper.setTo(emailDestino);
+            helper.setSubject(asunto);
+            helper.setText(cuerpo);
+
+            // Adjuntar QR
+            ByteArrayResource resource = new ByteArrayResource(imagenQR);
+            helper.addAttachment("ticket-qr.png", resource);
+
+            mailSender.send(mensaje);
+        } catch (MessagingException e) {
+            throw new RuntimeException("Error al enviar el correo: " + e.getMessage());
+        }
     }
 }

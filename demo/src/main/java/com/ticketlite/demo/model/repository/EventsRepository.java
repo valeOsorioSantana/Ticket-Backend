@@ -12,10 +12,16 @@ public interface EventsRepository extends JpaRepository<EventsEntity,Long> {
     boolean existsById(Long id);
     List<EventsEntity> findByStartDateBetween(LocalDateTime startDate, LocalDateTime endDate);
 
-    @Query(value = """ 
-            SELECT * FROM events WHERE ST_DWithin( location, ST_SetSRID(ST_MakePoint(:lon, :lat), 4326)::geography, :radius) 
-           """, nativeQuery = true)
+    @Query(value = "SELECT e FROM EventsEntity e " +
+            "WHERE ST_DistanceSphere(POINT(:lon, :lat), POINT(e.longitude, e.latitude)) <= :radius",
+            nativeQuery = true)
     List<EventsEntity> findEventsNearby(@Param("lat") double lat, @Param("lon") double lon, @Param("radius") double radiusInMeters);
+
+    List<EventsEntity> findByStartDateAfter(LocalDateTime startDate);
+    List<EventsEntity> findByEndDateBefore(LocalDateTime endDate);
+    List<EventsEntity> findByCategory(String category);
+    List<EventsEntity> findByStatus(String status);
+
 
     boolean existsByName(String name);
 }

@@ -32,6 +32,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.toList;
+
 
 @RestController
 @RequestMapping("/api/public/events")
@@ -69,7 +71,7 @@ public class EventsController {
                         e.getCategory(),
                         e.getAddress()
                 ))
-                .collect(Collectors.toList());
+                .collect(toList());
     }
 
     @Operation(summary = "Obtener todos los eventos", description = "Recupera una lista de todos los eventos")
@@ -94,9 +96,38 @@ public class EventsController {
     public List<EventCompleteDTO> getEventsNearby(
             @RequestParam double lat,
             @RequestParam double lon,
-            @RequestParam(defaultValue = "5000") double radius) {
+            @RequestParam(defaultValue = "10000") double radius) {
         return eventsService.getEventsNearby(lat, lon, radius);
     }
+
+    @GetMapping("/events/filter")
+    public List<EventsEntity> filterEvents(
+            @RequestParam(required = false)
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+            LocalDateTime startDate,
+
+            @RequestParam(required = false)
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+            LocalDateTime endDate,
+
+            @RequestParam(required = false) String category,
+            @RequestParam(required = false) String status
+    ) {
+        final EventsEntity.EventStatus statusEnum;
+        try {
+            statusEnum = (status != null) ? EventsEntity.EventStatus.valueOf(status.toUpperCase()) : null;
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Status inválido: " + status);
+        }
+
+        return eventsRepository.findAll().stream()
+                .filter(e -> startDate == null || !e.getStartDate().isBefore(startDate))
+                .filter(e -> endDate == null || !e.getEndDate().isAfter(endDate))
+                .filter(e -> category == null || e.getCategory().equalsIgnoreCase(category))
+                .filter(e -> statusEnum == null || e.getStatus().equals(statusEnum))
+                .collect(Collectors.toList());
+    }
+
 
     @Operation(summary = "Obtener un evento por ID", description = "Busca un evento por su identificador")
     @ApiResponses(value = {

@@ -78,7 +78,7 @@ public class TicketsController {
             @ApiResponse(responseCode = "500", description = "Error interno al procesar la solicitud")
     })
 
-    @GetMapping("/resgistration/{registrationId}")
+    @GetMapping("/registration/{registrationId}")
     public ResponseEntity<?> getTicketByRegistration(@PathVariable Long registrationId){
         try {
             TicketsEntity ticket = ticketsService.getTicketByRegistration(registrationId);
@@ -100,10 +100,10 @@ public class TicketsController {
     })
     //crear un ticket
     @PostMapping("/{registrationId}")
-    public ResponseEntity<?> createTicket(@PathVariable Long registrationId, @RequestParam String qrCode){
+    public ResponseEntity<?> createTicket(@PathVariable Long registrationId){
         try {
-            TicketsEntity result = ticketsService.createTicket(registrationId, qrCode);
-            return ResponseEntity.status(HttpStatus.CREATED).body("Se creó exitosamente el ticket");
+            TicketsEntity result = ticketsService.createTicket(registrationId);
+            return ResponseEntity.status(HttpStatus.CREATED).body(result);
         }catch(NotFoundException e){
             return ResponseEntity.status(404).body(e.getMessage());
         }catch (Exception e){

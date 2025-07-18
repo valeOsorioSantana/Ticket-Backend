@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface TicketsRepository extends JpaRepository<TicketsEntity,Long> {
-    Optional<Object> findByRegistrationId(Long registrationId);
+    Optional<TicketsEntity> findByRegistrationId(Long registrationId);
 }

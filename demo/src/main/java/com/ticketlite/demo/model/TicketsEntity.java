@@ -21,26 +21,39 @@ public class TicketsEntity {
     @Schema(description = "Registro asociado al ticket", required = true)
     private RegistrationsEntity registration;
 
+    @ManyToOne
+    @JoinColumn(name = "event_id", nullable = false)
+    @Schema(description = "Evento asociado al ticket", required = true)
+    private EventsEntity event;
+
     @CreationTimestamp
     @Column(name = "issued_at", nullable = false)
     @Schema(description = "Fecha y hora en que se emitió el ticket", example = "2025-06-18T14:30:00", required = true)
     private LocalDateTime issuedAt;
 
-    @Column(name = "qr_code", length = 255)
+    @Column(name = "qr_code", columnDefinition = "TEXT")
     @Schema(description = "Código QR asociado al ticket", example = "QR123456789")
     private String qrCode;
 
+    @Schema(description = "Estado del ticket", example = "Cancelada")
+    private boolean cancelada;
+
     // Constructor
-    public TicketsEntity(Long id, RegistrationsEntity registration, LocalDateTime issuedAt, String qrCode) {
+
+
+    public TicketsEntity(Long id, RegistrationsEntity registration, EventsEntity event, LocalDateTime issuedAt, String qrCode, boolean cancelada) {
         this.id = id;
         this.registration = registration;
+        this.event = event;
         this.issuedAt = issuedAt;
         this.qrCode = qrCode;
+        this.cancelada = cancelada;
     }
 
     public TicketsEntity() {}
 
     // Getters y setters
+
     public Long getId() {
         return id;
     }
@@ -57,6 +70,14 @@ public class TicketsEntity {
         this.registration = registration;
     }
 
+    public EventsEntity getEvent() {
+        return event;
+    }
+
+    public void setEvent(EventsEntity event) {
+        this.event = event;
+    }
+
     public LocalDateTime getIssuedAt() {
         return issuedAt;
     }
@@ -71,5 +92,13 @@ public class TicketsEntity {
 
     public void setQrCode(String qrCode) {
         this.qrCode = qrCode;
+    }
+
+    public boolean isCancelada() {
+        return cancelada;
+    }
+
+    public void setCancelada(boolean cancelada) {
+        this.cancelada = cancelada;
     }
 }
