@@ -74,6 +74,7 @@ public class ImageService {
                 .orElseThrow(() -> new IOException("Imagen no encontrada"));
 
         imageStorageService.deleteImage(imagen.getKeyS3());
-        imagenRepository.delete(imagen);
+
+        imagenRepository.deleteById(imagen.getId());
     }
 }

@@ -17,7 +17,8 @@ import org.locationtech.jts.geom.PrecisionModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,10 +27,14 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static com.ticketlite.demo.model.EventsEntity.EventStatus.FINALIZADO;
+
 @Service
 public class EventsService {
 
     //Atributos
+
+    private RegistrationsService registrationsService;
 
     private EventsRepository eventsRepository;
     //Location
@@ -39,10 +44,11 @@ public class EventsService {
 
     //Importante para conectar el repository
     @Autowired
-    public EventsService(GeometryFactory geometryFactory, ImageService imageService, EventsRepository eventsRepository) {
+    public EventsService(RegistrationsService registrationsService, GeometryFactory geometryFactory, ImageService imageService, EventsRepository eventsRepository) {
         this.geometryFactory = geometryFactory;
         this.imageService = imageService;
         this.eventsRepository = eventsRepository;
+        this.registrationsService = registrationsService;
     }
 
 
@@ -53,13 +59,21 @@ public class EventsService {
         List<EventCompleteDTO> eventCompleteDTOS = new ArrayList<>();
 
         for (EventsEntity event : events) {
-            Optional<Imagen> imagene = imageService.getImage(event.getId());
-            EventCompleteDTO dto = convertDTO(event, imagene);
+            Optional<Imagen> optionalImagen = imageService.getImage(event.getId());
+
+            Imagen imagen = optionalImagen.orElseGet(() -> {
+                Imagen vacia = new Imagen();
+                vacia.setKeyS3("");
+                return vacia;
+            });
+
+            EventCompleteDTO dto = convertDTO(event, Optional.of(imagen));
             eventCompleteDTOS.add(dto);
         }
 
         return eventCompleteDTOS;
     }
+
 
     //Get Only
     public Optional<EventCompleteDTO> getById(Long eventId) {
@@ -226,20 +240,29 @@ public class EventsService {
 
     @Transactional
     public void deleteEvent(Long id) throws IOException {
-        if (!eventsRepository.existsById(id)) {
-            throw new NotFoundException("Evento no encontrado por ID: " + id);
-        }
+        Logger log = LoggerFactory.getLogger(getClass());
+
+        Optional<EventsEntity> event = eventsRepository.findById(id);
 
         // Intentar obtener la imagen asociada (opcional)
         Optional<Imagen> imagenOpt = imageService.getImage(id);
 
-        // Si la imagen existe, eliminarla
-        if (imagenOpt.isPresent()) {
-            imageService.deleteImage(imagenOpt.get().getId());
+        // Si la imagen existe, intentar eliminarla con manejo de errores
+        try {
+            imagenOpt.ifPresent(imagen -> {
+                try {
+                    imageService.deleteImage(imagen.getId());
+                    log.info("Imagen asociada al evento {} eliminada correctamente.", id);
+                } catch (Exception e) {
+                    log.warn("No se pudo eliminar la imagen asociada al evento {}: {}", id, e.getMessage());
+                }
+            });
+        } catch (Exception ex) {
+            log.warn("Error inesperado al procesar imagen asociada al evento {}: {}", id, ex.getMessage());
         }
 
-        // Finalmente eliminar el evento
-        eventsRepository.deleteById(id);
+        event.get().setStatus(FINALIZADO);
+
     }
 
 

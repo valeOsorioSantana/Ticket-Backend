@@ -109,4 +109,9 @@ public class RegistrationsService {
         }
     }
 
+
+    public void deleteAllByEventsId (Long id) {
+        registrationsRepository.deleteAllByEventsId(id);
+    }
+
 }

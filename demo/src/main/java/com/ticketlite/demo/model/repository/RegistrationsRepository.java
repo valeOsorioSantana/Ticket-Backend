@@ -12,4 +12,6 @@ public interface RegistrationsRepository extends JpaRepository<RegistrationsEnti
     List<RegistrationsEntity> findByUsersId(Long userId);
 
     List<RegistrationsEntity> findByEventsId(Long eventId);
+
+    void deleteAllByEventsId (Long id);
 }
