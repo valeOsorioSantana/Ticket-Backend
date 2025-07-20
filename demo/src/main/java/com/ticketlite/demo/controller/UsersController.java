@@ -6,6 +6,8 @@ import com.ticketlite.demo.service.UsersService;
 import com.ticketlite.demo.structure.exception.ConflictException;
 import com.ticketlite.demo.structure.exception.NotFoundException;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -83,23 +85,38 @@ public class UsersController {
     }
 
     //POST
-    @Operation(summary = "Guardar un Usuario", description = "Crea y guarda un nuevo usuario en la base de datos")
+    @Operation(
+            summary = "Guardar un Usuario",
+            description = "Crea y guarda un nuevo usuario en la base de datos. El parámetro 'user' indica si es usuario común o no."
+    )
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Se creó exitosamente el usuario",
+            @ApiResponse(
+                    responseCode = "201",
+                    description = "Se creó exitosamente el usuario",
                     content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = UsersEntity.class))),
-            @ApiResponse(responseCode = "409", description = "Datos de eventos invalidos")
+                            schema = @Schema(implementation = String.class)) // porque devuelves un mensaje, no un objeto
+            ),
+            @ApiResponse(
+                    responseCode = "409",
+                    description = "Datos del usuario inválidos o en conflicto",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = String.class))
+            )
+    })
+    @Parameters({
+            @Parameter(name = "user", description = "Indica si el usuario es de tipo común (true) o no (false)", required = true)
     })
     @PreAuthorize("hasRole('USER')")
-    @PostMapping("/")
-    public ResponseEntity<?> saveUser(@Valid @RequestBody CreateUserRequest request){
+    @PostMapping("/{user}")
+    public ResponseEntity<?> saveUser(@Valid @RequestBody CreateUserRequest request, @PathVariable boolean user) {
         try {
-            String result = usersService.saveUser(request);
+            String result = usersService.saveUser(request, user);
             return ResponseEntity.status(HttpStatus.CREATED).body("Se creó exitosamente el usuario");
-        }catch (ConflictException e){
+        } catch (ConflictException e) {
             return ResponseEntity.status(409).body(e.getMessage());
         }
     }
+
 
     //PUT
     @Operation(summary = "Actualizar un usuario", description = "Actualiza y guarda un usuario en la base de datos")

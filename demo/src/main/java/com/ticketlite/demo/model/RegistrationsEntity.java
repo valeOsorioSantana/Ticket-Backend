@@ -18,7 +18,7 @@ public class RegistrationsEntity {
     @Schema(description = "Identificador único del registro", example = "1", required = true)
     private Long id;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "users_id", nullable = false)
     @Schema(description = "Usuario que realiza el registro", required = true)
     private UsersEntity users;

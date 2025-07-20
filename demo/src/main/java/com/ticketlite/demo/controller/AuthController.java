@@ -64,18 +64,14 @@ public class AuthController {
         String email = loginRequest.getEmail();
         String password = loginRequest.getPassword();
 
-        // Validar usuario
-        Optional<UsersEntity> userAu = userService.authenticateUser(email, password);
-        if (userAu.isEmpty()) {
+        Optional<String> tokenOptional = authService.authenticate(email, password);
+
+        if (tokenOptional.isPresent()) {
+            String token = tokenOptional.get();
+            return ResponseEntity.ok(Map.of("token", token));
+        } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body("Correo electrónico o contraseña incorrectos.");
+                    .body(Map.of("error", "Credenciales incorrectas"));
         }
-        UsersEntity user = userAu.get();
-
-        String name = user.getName().toString();
-        // Generar token JWT
-        String token = jwtService.generateToken(user, name, email);
-
-        return ResponseEntity.ok(new JwtResponse(token));
     }
 }

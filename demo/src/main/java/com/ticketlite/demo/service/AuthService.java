@@ -9,6 +9,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -52,14 +53,28 @@ public class AuthService {
         return "Usuario registrado con exito";
     }
 
-    public String authenticate(String email, String rawPassword) {
-        authManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));
+    public Optional<String> authenticate(String email, String rawPassword) {
+        try {
+            // Verificar credenciales
+            authManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));
 
-        UsersEntity existing = userRepo.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+            // Buscar usuario
+            UsersEntity existing = userRepo.findByEmail(email)
+                    .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
-        String name = existing.getName().toString();
+            // Validar estado activo
+            if (!existing.isEstado()) {
+                return Optional.empty();
+            }
 
-        return jwtService.generateToken(existing, name, email);
+            // Generar token
+            String token = jwtService.generateToken(existing, existing.getName(), email);
+            return Optional.of(token);
+
+        } catch (Exception e) {
+            // En caso de fallo en la autenticación
+            return Optional.empty();
+        }
     }
+
 }

@@ -29,6 +29,7 @@ public class JwtService {
 
     // Generar token con roles
     public String generateToken(UsersEntity user, String name, String email) {
+
         Map<String, Object> claims = new HashMap<>();
         claims.put("name", name);
         claims.put("email", email);

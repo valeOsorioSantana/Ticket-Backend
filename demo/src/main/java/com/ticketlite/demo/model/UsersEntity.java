@@ -73,10 +73,15 @@ public class UsersEntity {
     @Schema(description = "Fecha y hora de última actualización", example = "2025-06-26T10:15:00")
     private LocalDateTime updatedAt;
 
+    @Column(nullable = false)
+    @Schema(description = "Estado actual del usuario", example = "Activo", required = true,
+            allowableValues = {"Inactivo"})
+    private boolean estado;
+
     //Constructor
 
 
-    public UsersEntity(Long id, String email, String passwordHash, String name, String lastName, String phone, String city, String bio, String avatarUrl, String role, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public UsersEntity(boolean estado,Long id, String email, String passwordHash, String name, String lastName, String phone, String city, String bio, String avatarUrl, String role, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.email = email;
         this.passwordHash = passwordHash;
@@ -89,6 +94,7 @@ public class UsersEntity {
         this.role = role;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.estado = estado;
     }
 
     public UsersEntity() {
@@ -190,5 +196,13 @@ public class UsersEntity {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
 }

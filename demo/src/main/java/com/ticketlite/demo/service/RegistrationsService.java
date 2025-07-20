@@ -59,7 +59,9 @@ public class RegistrationsService {
             registration.setReminderDeliveryStatus(registration.getReminderDeliveryStatus());
             registration.setRegisteredAt(LocalDateTime.now());
 
+            registration.setId(null);
             return registrationsRepository.save(registration);
+
         }catch (NotFoundException e){
             throw e;
         }catch (Exception e){

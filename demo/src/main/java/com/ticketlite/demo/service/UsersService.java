@@ -9,10 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class UsersService {
@@ -44,7 +42,7 @@ public class UsersService {
     }
 
     //POST
-    public String saveUser(CreateUserRequest request) throws ConflictException {
+    public String saveUser(CreateUserRequest request, boolean user) throws ConflictException {
         try {
             if (request.getPassword() == null || request.getPassword().isEmpty()) {
                 throw new IllegalArgumentException("La contraseña no puede estar vacía");
@@ -61,8 +59,16 @@ public class UsersService {
             newUser.setName(request.getName());
             newUser.setLastName(request.getLastName());
             newUser.setPhone(request.getPhone());
+
+            if (!user) {
+                newUser.setRole("ADMIN");
+            } else {
+                newUser.setRole("USER");
+            }
+
             newUser.setCity(request.getCity());
             newUser.setBio(request.getBio());
+            newUser.setEstado(true);
             newUser.setAvatarUrl(request.getAvatarUrl());
 
             usersRepository.save(newUser);
@@ -102,11 +108,18 @@ public class UsersService {
 
     //DELETE
     public void deleteUser (Long userId){
-        if (usersRepository.existsById(userId)){
-            usersRepository.deleteById(userId);
-        }else {
-            throw new RuntimeException("Usuario no encontrado por ID: " + userId);
-        }
+
+        // Consulta al usuario
+        Optional<UsersEntity> userOpt = usersRepository.findById(userId);
+
+        // Lo asigna a su entity respectiva
+        UsersEntity user = userOpt.get();
+
+        // Inhabilita al usuario
+        user.setEstado(false);
+
+        // Lo actualiza
+        usersRepository.save(user);
     }
 
     // AUTHENTICATE

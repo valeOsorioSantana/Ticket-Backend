@@ -19,7 +19,7 @@ public interface EventsRepository extends JpaRepository<EventsEntity,Long> {
 
     List<EventsEntity> findByStartDateAfter(LocalDateTime startDate);
     List<EventsEntity> findByEndDateBefore(LocalDateTime endDate);
-    List<EventsEntity> findByCategory(String category);
+    List<EventsEntity> findByCategoryIn(List<String> category);
     List<EventsEntity> findByStatus(String status);
 
 

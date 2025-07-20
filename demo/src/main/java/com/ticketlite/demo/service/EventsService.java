@@ -134,12 +134,6 @@ public class EventsService {
         return result;
     }
 
-
-
-
-
-
-
     //Post
 
     public EventsEntity saveEvent(EventDTO event, MultipartFile file) throws ConflictException {
@@ -302,6 +296,4 @@ public class EventsService {
 
         return dto;
     }
-
-
 }
