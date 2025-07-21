@@ -9,6 +9,7 @@ import com.ticketlite.demo.model.TicketsEntity;
 import com.ticketlite.demo.model.repository.PoliticaCancelacionRepository;
 import com.ticketlite.demo.model.repository.ReembolsoRepository;
 import com.ticketlite.demo.model.repository.TicketsRepository;
+import com.ticketlite.demo.service.EmailServiceImple;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,12 +30,14 @@ public class CancelacionController {
     private TicketsRepository ticketRepo;
     private PoliticaCancelacionRepository politicaRepo;
     private ReembolsoRepository reembolsoRepo;
+    private EmailServiceImple emailService;
 
     @Autowired
-    public CancelacionController(TicketsRepository ticketRepo, PoliticaCancelacionRepository politicaRepo, ReembolsoRepository reembolsoRepo) {
+    public CancelacionController(EmailServiceImple emailService,TicketsRepository ticketRepo, PoliticaCancelacionRepository politicaRepo, ReembolsoRepository reembolsoRepo) {
         this.ticketRepo = ticketRepo;
         this.politicaRepo = politicaRepo;
         this.reembolsoRepo = reembolsoRepo;
+        this.emailService = emailService;
     }
 
     @PostMapping("/{ticketId}/cancelar")
@@ -80,6 +83,13 @@ public class CancelacionController {
 
         ticket.setCancelada(true);
         ticketRepo.save(ticket);
+
+        //Enviar correo de cancelación
+        String correo = ticket.getRegistration().getUsers().getEmail();
+        String nombreUsuario = ticket.getRegistration().getUsers().getName();
+        String nombreEvento = evento.getName();
+
+        emailService.sendCancelationEmail(correo, nombreUsuario, nombreEvento);
 
         Reembolso reembolso = new Reembolso();
         reembolso.setTicket(ticket);

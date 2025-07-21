@@ -72,6 +72,32 @@ public class EmailServiceImple {
 
     }
 
+    public void sendCancelationEmail(String toEmail, String userName, String nombreEvento) {
+        try {
+            // Prepara el contexto de Thymeleaf
+            Context context = new Context();
+            context.setVariable("name", userName);
+            context.setVariable("evento", nombreEvento);
+
+            // Carga y procesa el template HTML
+            String html = templateEngine.process("cancelacion-email.html", context);
+
+            // Prepara el correo MIME
+            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true);
+            helper.setTo(toEmail);
+            helper.setSubject("Confirmación de Cancelación de Ticket");
+            helper.setText(html, true);
+            helper.setFrom("noreply@tusitio.com");
+
+            // Enviar
+            mailSender.send(message);
+        } catch (MessagingException e) {
+            throw new RuntimeException("Error al enviar el correo de cancelación", e);
+        }
+    }
+
+
     public void enviarTicketConQR(String emailDestino, String asunto, String cuerpo, byte[] imagenQR) {
         try {
             MimeMessage mensaje = mailSender.createMimeMessage();

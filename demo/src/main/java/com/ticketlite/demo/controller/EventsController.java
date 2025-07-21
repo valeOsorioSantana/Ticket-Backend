@@ -202,7 +202,7 @@ public class EventsController {
                     required = true,
                     content = @Content(mediaType = MediaType.APPLICATION_OCTET_STREAM_VALUE)
             )
-            @RequestPart("file") MultipartFile file) {
+            @RequestPart(value = "file", required = false) MultipartFile file) {
         try {
             EventDTO editEvent = objectMapper.readValue(eventJson, EventDTO.class);
             editEvent.setId(eventId);
