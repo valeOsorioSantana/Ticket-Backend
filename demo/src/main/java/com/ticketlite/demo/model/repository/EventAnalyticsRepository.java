@@ -7,8 +7,7 @@ import java.util.Optional;
 
 public interface EventAnalyticsRepository extends JpaRepository<EventAnalyticsEntity, Long> {
 
-    boolean existsByEventId(Long eventId);
-
     Optional<EventAnalyticsEntity> findByEventId(Long eventId);
 
+    boolean existsByEventId(Long eventId);
 }

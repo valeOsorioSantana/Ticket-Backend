@@ -52,31 +52,8 @@ public class EventAnalyticsController {
         }
     }
 
-    //POST
-    //crear estadisticas
-    @Operation(summary = "Crear una estadistica", description = "Crea y guarda una nueva estadistica en la base de datos")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Se creó exitosamente la estadistica",
-                    content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = EventAnalyticsEntity.class))),
-            @ApiResponse(responseCode = "409", description = "Datos de eventos invalidos"),
-            @ApiResponse(responseCode = "500", description = "Error interno al crear las estadisticas")
-    })
-
-    @PostMapping("/{eventId}")
-    public ResponseEntity<?> createAnalytics(@PathVariable Long eventId, @RequestBody EventAnalyticsEntity analyticsData) {
-        try {
-            EventAnalyticsEntity result = eventAnalyticsService.createEst(eventId, analyticsData);
-            return ResponseEntity.status(HttpStatus.CREATED).body("Se creó exitosamente las estadisticas");
-        }catch (NotFoundException e){
-            return ResponseEntity.status(404).body(e.getMessage());
-        }catch (Exception e){
-            return ResponseEntity.status(500).body("Analisis ya creado para id evento: "+ eventId);
-        }
-    }
-
     //PUT
-    //actualizar estadisticas
+    //actualizar y crear estadisticas
     @Operation(summary = "Actualizar una estadistica", description = "Actualiza y guarda una estadistica en la base de datos")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Se actualizo correctamente la estadistica",
@@ -86,13 +63,13 @@ public class EventAnalyticsController {
             @ApiResponse(responseCode = "500", description = "Error interno al actualizar la estadistica")
     })
 
-    @PutMapping("/{analisisId}")
-    public ResponseEntity<?> updateAna(@Parameter(description = "ID del análisis a actualizar", required = true) @PathVariable Long analisisId, @Parameter(description = "Acción a realizar: view, registration, tickets, satisfaction", required = true) @RequestParam String action, @Parameter(description = "Valor para la acción, solo requerido para tickets y satisfaction", required = false) @RequestParam(required = false) BigDecimal value) {
+    @PutMapping("/{eventId}")
+    public ResponseEntity<?> updateEsta(@Parameter(description = "ID del análisis a actualizar", required = true) @PathVariable Long eventId, @Parameter(description = "Acción a realizar: view, registration, tickets, satisfaction", required = true) @RequestParam String action, @Parameter(description = "Valor para la acción, solo requerido para tickets y satisfaction", required = false) @RequestParam(required = false) BigDecimal value) {
         try {
 
-            EventAnalyticsEntity updated = eventAnalyticsService.updateEsta(analisisId, action, value);
+            EventAnalyticsEntity updated = eventAnalyticsService.updateEsta(eventId, action, value);
 
-            return ResponseEntity.ok("Estadistica actualizada con exito.");
+            return ResponseEntity.ok("Estadistica actualizada con exito."+ updated);
         }catch (NotFoundException e){
             return ResponseEntity.status(404).body(e.getMessage());
         }catch (Exception e){

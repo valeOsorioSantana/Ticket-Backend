@@ -5,6 +5,7 @@ import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
+import com.ticketlite.demo.model.EventAnalyticsEntity;
 import com.ticketlite.demo.model.RegistrationsEntity;
 import com.ticketlite.demo.model.TicketsEntity;
 import com.ticketlite.demo.model.repository.RegistrationsRepository;
@@ -17,11 +18,13 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Base64;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -32,13 +35,15 @@ public class TicketsService {
     private TicketsRepository ticketsRepository;
     private RegistrationsRepository registrationsRepository;
     private EmailServiceImple emailServiceImple;
+    private EventAnalyticsService eventAnalyticsService;
 
     //Importante para conectar el repository
     @Autowired
-    public TicketsService(TicketsRepository ticketsRepository, RegistrationsRepository registrationsRepository, EmailServiceImple emailServiceImple) {
+    public TicketsService(TicketsRepository ticketsRepository, RegistrationsRepository registrationsRepository, EmailServiceImple emailServiceImple, EventAnalyticsService eventAnalyticsService) {
         this.ticketsRepository = ticketsRepository;
         this.registrationsRepository = registrationsRepository;
         this.emailServiceImple = emailServiceImple;
+        this.eventAnalyticsService = eventAnalyticsService;
     }
 
     //Metodos
@@ -77,6 +82,10 @@ public class TicketsService {
             ticket.setCancelada(false);
 
             ticketsRepository.save(ticket);
+
+            // Actualizar estadísticas de tickets vendidos
+            Long eventId = registration.getEvents().getId();
+            eventAnalyticsService.updateEsta(eventId, "tickets", BigDecimal.ONE);
 
             //Enviar el correo
             String email = registration.getUsers().getEmail();

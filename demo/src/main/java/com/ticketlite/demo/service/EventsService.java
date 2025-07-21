@@ -42,13 +42,16 @@ public class EventsService {
 
     private final ImageService imageService;
 
+    private EventAnalyticsService eventAnalyticsService;
+
     //Importante para conectar el repository
     @Autowired
-    public EventsService(RegistrationsService registrationsService, GeometryFactory geometryFactory, ImageService imageService, EventsRepository eventsRepository) {
+    public EventsService(EventAnalyticsService eventAnalyticsService, RegistrationsService registrationsService, GeometryFactory geometryFactory, ImageService imageService, EventsRepository eventsRepository) {
         this.geometryFactory = geometryFactory;
         this.imageService = imageService;
         this.eventsRepository = eventsRepository;
         this.registrationsService = registrationsService;
+        this.eventAnalyticsService = eventAnalyticsService;
     }
 
 

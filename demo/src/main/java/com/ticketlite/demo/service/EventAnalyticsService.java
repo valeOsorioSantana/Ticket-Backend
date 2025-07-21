@@ -33,38 +33,31 @@ public class EventAnalyticsService {
 
     //GET BY ID EVENT
 
-    public Optional<EventAnalyticsEntity> getByIdEvent(Long eventId){
+    public Optional<EventAnalyticsEntity> getByIdEvent(Long eventId) {
 
         Optional<EventAnalyticsEntity> analisis = eventAnalyticsRepository.findByEventId(eventId);
 
         return analisis;
     }
 
-    //POST
-    //crear estadisticas
-    public EventAnalyticsEntity createEst(Long eventId, EventAnalyticsEntity analytics) {
-        try {
-            boolean exists = eventAnalyticsRepository.existsByEventId(eventId);
-            if (exists) {
-                throw new IllegalStateException("Ya existe una estadística para este evento");
-            }
-
-            EventsEntity event = eventsRepository.findById(eventId).orElseThrow(() -> new EntityNotFoundException("Evento no encontrado"));
-
-            analytics.setEvent(event);
-            return eventAnalyticsRepository.save(analytics);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException("Error al crear estadísticas para el evento: " + e.getMessage(), e);
-        }
-    }
-
     //PUT
     //actualizar estadisticas
-    public EventAnalyticsEntity updateEsta(Long analisisId, String action, BigDecimal value) {
+    public EventAnalyticsEntity updateEsta(Long eventId, String action, BigDecimal value) {
         try {
-            EventAnalyticsEntity analisis = eventAnalyticsRepository.findById(analisisId).orElseThrow();
+            EventAnalyticsEntity analisis = eventAnalyticsRepository.findByEventId(eventId).orElseGet(() -> {
 
+                        EventsEntity event = eventsRepository.findById(eventId).orElseThrow(() -> new NotFoundException("Evento no encontrado para id " + eventId));
+
+                        EventAnalyticsEntity nuevaAnalitica = new EventAnalyticsEntity();
+
+                        nuevaAnalitica.setEvent(event);
+                        nuevaAnalitica.setTotalViews(0);
+                        nuevaAnalitica.setTotalRegistrations(0);
+                        nuevaAnalitica.setTotalTicketsSold(0);
+                        nuevaAnalitica.setSatisfactionAvg(BigDecimal.ZERO);
+
+                        return eventAnalyticsRepository.save(nuevaAnalitica);
+                    });
             switch (action.toLowerCase()) {
                 case "view":
                     analisis.setTotalViews(analisis.getTotalViews() + 1);
@@ -95,9 +88,8 @@ public class EventAnalyticsService {
         }
     }
 
-
-
-
-
+    public void incrementView(Long eventId) {
+        updateEsta(eventId, "view", null);
+    }
 
 }

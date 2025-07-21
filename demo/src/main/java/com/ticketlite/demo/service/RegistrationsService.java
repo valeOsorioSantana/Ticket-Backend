@@ -22,12 +22,15 @@ public class RegistrationsService {
     private RegistrationsRepository registrationsRepository;
     private UsersRepository usersRepository;
     private EventsRepository eventsRepository;
+    private EventAnalyticsService eventAnalyticsService;
+
     //Importante para conectar el repository
     @Autowired
-    public RegistrationsService(RegistrationsRepository registrationsRepository, UsersRepository usersRepository, EventsRepository eventsRepository) {
+    public RegistrationsService(EventAnalyticsService eventAnalyticsService, RegistrationsRepository registrationsRepository, UsersRepository usersRepository, EventsRepository eventsRepository) {
         this.registrationsRepository = registrationsRepository;
         this.usersRepository = usersRepository;
         this.eventsRepository = eventsRepository;
+        this.eventAnalyticsService = eventAnalyticsService;
     }
 
     //Metodos
@@ -60,7 +63,12 @@ public class RegistrationsService {
             registration.setRegisteredAt(LocalDateTime.now());
 
             registration.setId(null);
-            return registrationsRepository.save(registration);
+            RegistrationsEntity savedRegistration = registrationsRepository.save(registration);
+
+            // Actualizar estadísticas
+            eventAnalyticsService.updateEsta(eventId, "registration", null);
+
+            return savedRegistration;
 
         }catch (NotFoundException e){
             throw e;

@@ -6,6 +6,7 @@ import com.ticketlite.demo.DTO.EventCompleteDTO;
 import com.ticketlite.demo.DTO.EventDTO;
 import com.ticketlite.demo.model.EventsEntity;
 import com.ticketlite.demo.model.repository.EventsRepository;
+import com.ticketlite.demo.service.EventAnalyticsService;
 import com.ticketlite.demo.service.EventsService;
 import com.ticketlite.demo.structure.exception.ConflictException;
 import com.ticketlite.demo.structure.exception.NotFoundException;
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -44,13 +46,15 @@ public class EventsController {
     private final EventsRepository eventsRepository;
     private final GeometryFactory geometryFactory;
     private final ObjectMapper objectMapper;
+    private final EventAnalyticsService eventAnalyticsService;
 
     @Autowired
-    public EventsController(EventsService eventsService, EventsRepository eventsRepository, GeometryFactory geometryFactory, ObjectMapper objectMapper) {
+    public EventsController(EventAnalyticsService eventAnalyticsService, EventsService eventsService, EventsRepository eventsRepository, GeometryFactory geometryFactory, ObjectMapper objectMapper) {
         this.eventsService = eventsService;
         this.eventsRepository = eventsRepository;
         this.geometryFactory = geometryFactory;
         this.objectMapper = objectMapper;
+        this.eventAnalyticsService = eventAnalyticsService;
     }
 
     @GetMapping("/calendar")
@@ -139,8 +143,13 @@ public class EventsController {
     public ResponseEntity<?> getEventById(@PathVariable Long eventId) {
         try {
             Optional<EventCompleteDTO> event = eventsService.getById(eventId);
-            return event.map(ResponseEntity::ok)
-                    .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+
+            if (event.isEmpty()) {
+                return ResponseEntity.notFound().build();
+            }
+
+            eventAnalyticsService.incrementView(eventId);
+            return event.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error interno al procesar la solicitud");
         }
@@ -176,6 +185,21 @@ public class EventsController {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al guardar evento: " + e.getMessage());
+        }
+    }
+
+    @PostMapping("/{eventId}/rate")
+    public ResponseEntity<?> rateEvent(@PathVariable Long eventId, @RequestParam("rating") BigDecimal rating) {
+
+        if (rating == null || rating.compareTo(BigDecimal.ONE) < 0 || rating.compareTo(BigDecimal.valueOf(5)) > 0) {
+            return ResponseEntity.badRequest().body("La calificación debe estar entre 1 y 5");
+        }
+
+        try {
+            var updatedAnalytics = eventAnalyticsService.updateEsta(eventId, "satisfaction", rating);
+            return ResponseEntity.ok(updatedAnalytics);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al registrar la calificación: " + e.getMessage());
         }
     }
 
