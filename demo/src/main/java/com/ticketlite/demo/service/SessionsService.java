@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -32,15 +33,20 @@ public class SessionsService {
         return sessionsRepository.findById(sessionId).orElseThrow(() -> new RuntimeException("Sesión no encontrada"));
     }
 
+    //GET BY EVENT NAME
+    public EventsEntity getEventByName(String eventName) {
+        return eventsRepository.findByName(eventName).orElseThrow(() -> new NotFoundException("Evento no encontrado con el nombre: " + eventName));
+    }
+
     //GET BY Event Id Order By Start Time Asc
     public List<SessionsEntity> getBySessions(Long eventId) {
         return sessionsRepository.findByEventIdOrderByStartTimeAsc(eventId);
     }
 
     //POST
-    public SessionsEntity createSession(Long eventId, SessionsEntity sessionData) {
+    public SessionsEntity createSession(String eventName, SessionsEntity sessionData) {
         try {
-            EventsEntity event = eventsRepository.findById(eventId).orElseThrow(() -> new RuntimeException("Evento no encontrado"));
+            EventsEntity event = getEventByName(eventName);
 
             sessionData.setEvent(event);
             return sessionsRepository.save(sessionData);

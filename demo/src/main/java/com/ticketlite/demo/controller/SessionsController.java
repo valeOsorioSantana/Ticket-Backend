@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/sessions")
@@ -62,6 +63,11 @@ public class SessionsController {
         return sessionsService.getBySessions(eventId);
     }
 
+    @GetMapping("/name/{eventName}")
+    public EventsEntity eventExistsByName (@PathVariable String eventName){
+        return sessionsService.getEventByName(eventName);
+    }
+
     //POST
     @Operation(summary = "Guardar una session", description = "Crea y guarda una nueva session en la base de datos")
     @ApiResponses(value = {
@@ -71,15 +77,20 @@ public class SessionsController {
             @ApiResponse(responseCode = "409", description = "Datos de session invalidos")
     })
     //crear nueva session
-    @PostMapping("/{eventId}")
-    public ResponseEntity<?> saveSession (@PathVariable Long eventId, @RequestBody SessionsEntity sessionData){
+    @PostMapping("/{eventName}")
+    public ResponseEntity<?> saveSession(@PathVariable String eventName, @RequestBody SessionsEntity sessionData) {
         try {
-            sessionsService.createSession(eventId, sessionData);
-            return ResponseEntity.status(HttpStatus.CREATED).body("Se creó exitosamente la session");
-        }catch (NotFoundException e){
+            EventsEntity event = sessionsService.getEventByName(eventName);
+
+            sessionData.setEvent(event);
+
+            SessionsEntity createdSession = sessionsService.createSession(eventName, sessionData);
+
+            return ResponseEntity.ok(createdSession);
+        } catch (NotFoundException e) {
             return ResponseEntity.status(404).body(e.getMessage());
-        }catch (Exception e){
-            return ResponseEntity.status(500).body("Error interno al crear la session");
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Error interno al crear la sesión");
         }
     }
 

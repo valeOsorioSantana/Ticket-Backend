@@ -5,8 +5,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.lang.classfile.Opcode;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 public interface EventsRepository extends JpaRepository<EventsEntity,Long> {
     boolean existsById(Long id);
@@ -21,6 +23,7 @@ public interface EventsRepository extends JpaRepository<EventsEntity,Long> {
     List<EventsEntity> findByEndDateBefore(LocalDateTime endDate);
     List<EventsEntity> findByCategoryIn(List<String> category);
     List<EventsEntity> findByStatus(String status);
+    Optional<EventsEntity> findByName(String name);
 
 
     boolean existsByName(String name);
