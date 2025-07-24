@@ -49,6 +49,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/recuperacion/solicitar").permitAll()
                         .requestMatchers("/api/recuperacion/validar").permitAll()
                         .requestMatchers("/api/recuperacion/cambiar").permitAll()
+                        .requestMatchers("/api/users/me").authenticated()
                         .requestMatchers("auth/**","/", "/index", "/login", "/register", "/swagger-ui/**", "/v3/api-docs/**","api/public/events/**").permitAll()
                         .anyRequest().permitAll()//authenticated
                 )
