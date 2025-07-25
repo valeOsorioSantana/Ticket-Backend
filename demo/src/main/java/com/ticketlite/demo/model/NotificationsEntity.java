@@ -47,6 +47,11 @@ public class NotificationsEntity {
     @Schema(description = "Fecha y hora en que se creó la notificación", example = "2025-06-17T10:15:30")
     private LocalDateTime createdAt;
 
+    @Column(nullable = false)
+    @Schema(description = "Receptor de la notificación: USER o ADMIN", example = "USER")
+    private String receiverType;
+
+
     // Constructores
 
     public NotificationsEntity(Long id, UsersEntity user, EventsEntity event, String messageContent, String type, boolean isRead, LocalDateTime createdAt) {
@@ -104,7 +109,7 @@ public class NotificationsEntity {
         this.type = type;
     }
 
-    public boolean isRead(boolean b) {
+    public boolean isRead() {
         return isRead;
     }
 
@@ -118,5 +123,13 @@ public class NotificationsEntity {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public String getReceiverType() {
+        return receiverType;
+    }
+
+    public void setReceiverType(String receiverType) {
+        this.receiverType = receiverType;
     }
 }

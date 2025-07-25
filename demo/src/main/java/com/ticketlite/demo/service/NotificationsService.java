@@ -68,6 +68,38 @@ public class NotificationsService {
         }
     }
 
+    // Crear una notificación automática para el administrador
+    //POST
+    public  NotificationsEntity notiAdmin(UsersEntity user, EventsEntity event, String accion) {
+        String mensaje = String.format("El usuario %s %s %s al evento '%s'.",
+                user.getName(),
+                user.getLastName(),
+                accion,
+                event.getName());
+
+        NotificationsEntity noti = new NotificationsEntity();
+        noti.setUser(user);
+        noti.setEvent(event);
+        noti.setMessageContent(mensaje);
+        noti.setReceiverType("ADMIN");
+        noti.setType("info");
+        noti.setRead(false);
+
+        return notificationsRepository.save(noti);
+    }
+
+    // Crear una notificación automática para el usuario
+    //POST
+    public NotificationsEntity notiUser(UsersEntity user, String mensaje, String tipo) {
+        NotificationsEntity noti = new NotificationsEntity();
+        noti.setUser(user);
+        noti.setMessageContent(mensaje);
+        noti.setReceiverType("USER");
+        noti.setType(tipo);
+        noti.setRead(false);
+        return notificationsRepository.save(noti);
+    }
+
     //PUT
     //marcar una notificacion como leida
     public NotificationsEntity markRead(Long notificationId){

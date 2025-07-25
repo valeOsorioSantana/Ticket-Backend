@@ -14,7 +14,7 @@ public class CreateUserRequest {
     private String city;
     private String bio;
     private String avatarUrl;
-    private Set<Long> roleIds; // IDs de roles a asignar
+    private Set<Long> roleIds;
 
     // Getters y Setters
     public String getEmail() {

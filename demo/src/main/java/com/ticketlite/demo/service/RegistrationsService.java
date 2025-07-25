@@ -23,14 +23,16 @@ public class RegistrationsService {
     private UsersRepository usersRepository;
     private EventsRepository eventsRepository;
     private EventAnalyticsService eventAnalyticsService;
+    private NotificationsService notificationsService;
 
     //Importante para conectar el repository
     @Autowired
-    public RegistrationsService(EventAnalyticsService eventAnalyticsService, RegistrationsRepository registrationsRepository, UsersRepository usersRepository, EventsRepository eventsRepository) {
+    public RegistrationsService(NotificationsService notificationsService, EventAnalyticsService eventAnalyticsService, RegistrationsRepository registrationsRepository, UsersRepository usersRepository, EventsRepository eventsRepository) {
         this.registrationsRepository = registrationsRepository;
         this.usersRepository = usersRepository;
         this.eventsRepository = eventsRepository;
         this.eventAnalyticsService = eventAnalyticsService;
+        this.notificationsService = notificationsService;
     }
 
     //Metodos
@@ -67,6 +69,8 @@ public class RegistrationsService {
 
             // Actualizar estadísticas
             eventAnalyticsService.updateEsta(eventId, "registration", null);
+            notificationsService.notiAdmin(user, event, "se registró");
+            notificationsService.notiUser(user, "Te registraste al evento " + event.getName(), "recordatorio");
 
             return savedRegistration;
 

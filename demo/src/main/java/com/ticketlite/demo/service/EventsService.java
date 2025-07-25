@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -141,9 +142,15 @@ public class EventsService {
 
     public EventsEntity saveEvent(EventDTO event, MultipartFile file) throws ConflictException {
         try {
-            if (eventsRepository.existsByName(event.getName())) {
-                throw new ConflictException("Ya existe un evento con ese nombre");
+            Optional<EventsEntity> existente = eventsRepository.findByName(event.getName());
+
+            if (existente.isPresent()
+                    && !existente.get().getId().equals(event.getId())
+                    && !existente.get().getStatus().equals(FINALIZADO)) {
+
+                throw new IllegalArgumentException("Ya existe un evento con ese nombre");
             }
+
 
             EventsEntity newEvent = new EventsEntity();
 
@@ -232,7 +239,6 @@ public class EventsService {
     }
 
 
-
     //DELETE
 
     @Transactional
@@ -261,7 +267,6 @@ public class EventsService {
         event.get().setStatus(FINALIZADO);
 
     }
-
 
 
     private EventCompleteDTO convertDTO(EventsEntity eventsEntity, Optional<Imagen> imagenOpt) {

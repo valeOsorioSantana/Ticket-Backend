@@ -34,6 +34,9 @@ public class JwtService {
         claims.put("name", name);
         claims.put("email", email);
         claims.put("Rol", user.getRole());
+        claims.put("id", user.getId());
+
+        //console.log(localStorage.getItem("token"));
 
         Date now = new Date();
         Date exp = new Date(now.getTime() + expiration);

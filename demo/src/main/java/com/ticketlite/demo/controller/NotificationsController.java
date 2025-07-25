@@ -1,5 +1,6 @@
 package com.ticketlite.demo.controller;
 
+import com.ticketlite.demo.DTO.NotiRespuestaDTO;
 import com.ticketlite.demo.model.NotificationsEntity;
 import com.ticketlite.demo.service.NotificationsService;
 import com.ticketlite.demo.structure.exception.NotFoundException;
@@ -62,15 +63,20 @@ public class NotificationsController {
             @ApiResponse(responseCode = "500", description = "Error interno al crear la notificacion")
     })
 
-    @PostMapping("/")
-    public ResponseEntity<?> crearNotifi(@RequestParam Long userId, @RequestParam(required = false) Long eventId, @RequestParam String message, @RequestParam(required = false) String type){
+    @PostMapping("/responder")
+    public ResponseEntity<?> responderNotificacion(@RequestBody NotiRespuestaDTO request) {
         try {
-            NotificationsEntity result = notificationsService.crearNotifi(userId, eventId, message, type);
-            return ResponseEntity.status(HttpStatus.CREATED).body("Se creó exitosamente la notificacion");
-        }catch (NotFoundException e){
-            return ResponseEntity.status(404).body(e.getMessage());
-        }catch (Exception e){
-            return ResponseEntity.status(500).body("Error interno al crear la notificacion");
+            // Aquí solo se simula la respuesta, puedes expandirla para guardarla si deseas.
+            if (request.getNotificacionId() == null || request.getMensaje() == null || request.getMensaje().isBlank()) {
+                return ResponseEntity.badRequest().body("Datos incompletos para responder.");
+            }
+
+            // Puedes loguear o procesar la respuesta como desees.
+            System.out.println("Respuesta enviada a notificación ID " + request.getNotificacionId() + ": " + request.getMensaje());
+
+            return ResponseEntity.ok("Respuesta enviada correctamente.");
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Error al responder la notificación: " + e.getMessage());
         }
     }
 
