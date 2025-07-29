@@ -36,7 +36,7 @@ import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
-
+@CrossOrigin(origins = "http://127.0.0.1:5500")
 @RestController
 @RequestMapping("/api/public/events")
 @Tag(name = "Gestión de Eventos", description = "Operaciones CRUD para la administración de eventos")
