@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.math.BigDecimal;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -170,6 +171,7 @@ public class EventsService {
             newEvent.setCategory(event.getCategory());
             newEvent.setStatus(event.getStatus());
             newEvent.setAddress(event.getAddress());
+            newEvent.setTicketPrice(event.getTicketPrice());
             newEvent.setCreatedAt(LocalDateTime.now());
 
             // IMPORTANTE: guarda y asegura que tiene ID antes de asociar la imagen
@@ -204,6 +206,7 @@ public class EventsService {
             existingEvent.setStartDate(editEvent.getStartDate());
             existingEvent.setEndDate(editEvent.getEndDate());
             existingEvent.setCategory(editEvent.getCategory());
+            existingEvent.setTicketPrice(editEvent.getTicketPrice());
             existingEvent.setStatus(editEvent.getStatus());
             existingEvent.setAddress(editEvent.getAddress());
 
@@ -284,6 +287,7 @@ public class EventsService {
         }
 
         dto.setCategory(eventsEntity.getCategory());
+        dto.setTicketPrice(eventsEntity.getTicketPrice());
         dto.setStatus(eventsEntity.getStatus());
         dto.setAddress(eventsEntity.getAddress());
         dto.setCreatedAt(eventsEntity.getCreatedAt());

@@ -12,6 +12,7 @@ import com.ticketlite.demo.structure.json.PointDeserializer;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.ticketlite.demo.structure.json.PointSerializer;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -65,6 +66,10 @@ public class EventsEntity {
     @Column(name = "created_at", nullable = false)
     @Schema(description = "Fecha y hora de creación del evento en el sistema", example = "2025-06-12T15:30:00")
     private LocalDateTime createdAt;
+
+    @Column(name = "ticket_price")
+    private BigDecimal ticketPrice;
+
 
     // Campos temporales para recibir latitude/longitude en el JSON
     @Transient
@@ -199,5 +204,13 @@ public class EventsEntity {
 
     public void setLongitude(Double longitude) {
         this.longitude = longitude;
+    }
+
+    public BigDecimal getTicketPrice() {
+        return ticketPrice;
+    }
+
+    public void setTicketPrice(BigDecimal ticketPrice) {
+        this.ticketPrice = ticketPrice;
     }
 }

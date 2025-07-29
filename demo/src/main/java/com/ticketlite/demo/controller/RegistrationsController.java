@@ -136,10 +136,9 @@ public class RegistrationsController {
     })
 
     @DeleteMapping("/{registrationId}")
-    public ResponseEntity<String> deleteRegistration(@RequestParam Long registrationId){
+    public ResponseEntity<String> deleteRegistration(@PathVariable Long registrationId){
         try {
             registrationsService.deleteRegistration(registrationId);
-
             return ResponseEntity.ok("Registro eliminado Correctamente.");
         }catch (RuntimeException e){
             return ResponseEntity.status(404).body(e.getMessage());

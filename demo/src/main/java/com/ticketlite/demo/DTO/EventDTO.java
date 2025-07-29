@@ -3,6 +3,7 @@ package com.ticketlite.demo.DTO;
 import com.ticketlite.demo.model.EventsEntity.EventStatus;
 import io.swagger.v3.oas.annotations.media.Schema;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Schema(description = "DTO que representa un evento")
@@ -40,6 +41,8 @@ public class EventDTO {
 
     @Schema(description = "Fecha de creación del evento en formato ISO 8601", example = "2025-06-12T15:30:00", accessMode = Schema.AccessMode.READ_ONLY, type = "string", format = "date-time")
     private LocalDateTime createdAt;
+
+    private BigDecimal ticketPrice;
 
     public EventDTO() {
     }
@@ -132,5 +135,13 @@ public class EventDTO {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public BigDecimal getTicketPrice() {
+        return ticketPrice;
+    }
+
+    public void setTicketPrice(BigDecimal ticketPrice) {
+        this.ticketPrice = ticketPrice;
     }
 }

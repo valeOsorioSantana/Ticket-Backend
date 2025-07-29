@@ -5,6 +5,7 @@ import com.ticketlite.demo.model.Imagen;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.awt.*;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Schema(description = "DTO que representa un evento")
@@ -44,6 +45,8 @@ public class EventCompleteDTO {
     private LocalDateTime createdAt;
 
     private ImagenDTO imagen;
+
+    private BigDecimal ticketPrice;
 
 
     // Getters y Setters
@@ -142,5 +145,13 @@ public class EventCompleteDTO {
 
     public void setImagen(ImagenDTO imagen) {
         this.imagen = imagen;
+    }
+
+    public BigDecimal getTicketPrice() {
+        return ticketPrice;
+    }
+
+    public void setTicketPrice(BigDecimal ticketPrice) {
+        this.ticketPrice = ticketPrice;
     }
 }
