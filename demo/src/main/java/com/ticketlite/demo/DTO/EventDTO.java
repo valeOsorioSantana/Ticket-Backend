@@ -44,6 +44,7 @@ public class EventDTO {
 
     private BigDecimal ticketPrice;
 
+
     public EventDTO() {
     }
 
@@ -144,4 +145,5 @@ public class EventDTO {
     public void setTicketPrice(BigDecimal ticketPrice) {
         this.ticketPrice = ticketPrice;
     }
+
 }

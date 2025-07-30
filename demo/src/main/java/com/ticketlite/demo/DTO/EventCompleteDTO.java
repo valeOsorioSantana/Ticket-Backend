@@ -4,7 +4,7 @@ import com.ticketlite.demo.model.EventsEntity;
 import com.ticketlite.demo.model.Imagen;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-import java.awt.*;
+import java.util.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -44,7 +44,7 @@ public class EventCompleteDTO {
     @Schema(description = "Fecha de creación del evento", example = "2025-06-12T15:30:00")
     private LocalDateTime createdAt;
 
-    private ImagenDTO imagen;
+    private List<ImagenDTO> imagenes;
 
     private BigDecimal ticketPrice;
 
@@ -139,12 +139,12 @@ public class EventCompleteDTO {
         this.createdAt = createdAt;
     }
 
-    public ImagenDTO getImagen() {
-        return imagen;
+    public List<ImagenDTO> getImagenes() {
+        return imagenes;
     }
 
-    public void setImagen(ImagenDTO imagen) {
-        this.imagen = imagen;
+    public void setImagenes(List<ImagenDTO> imagenes) {
+        this.imagenes = imagenes;
     }
 
     public BigDecimal getTicketPrice() {
@@ -154,4 +154,5 @@ public class EventCompleteDTO {
     public void setTicketPrice(BigDecimal ticketPrice) {
         this.ticketPrice = ticketPrice;
     }
+
 }

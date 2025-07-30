@@ -25,13 +25,13 @@ public class ImageService {
         this.imagenRepository = imagenRepository;
     }
 
-    public Imagen uploadImage(MultipartFile file, EventsEntity newEvent) throws IOException {
+    public Imagen uploadImage(MultipartFile file, EventsEntity newEvent, String folder ) throws IOException {
         if (file == null || file.isEmpty()) {
             throw new IOException("Archivo de imagen vacío o nulo");
         }
 
         String fileName = UUID.randomUUID() + "-" + file.getOriginalFilename();
-        String key = "imagenes/" + fileName;
+        String key = folder + "/" + fileName;
 
         imageStorageService.uploadImage(file, key);
 
@@ -42,8 +42,8 @@ public class ImageService {
         return imagenRepository.save(imagen);
     }
 
-    public Optional<Imagen> getImage(Long id) {
-        return imagenRepository.findImagenByEventsId(id);
+    public Optional<Imagen> getImage(Long id, String folder) {
+        return imagenRepository.findByEvents_IdAndKeyS3ContainingIgnoreCase(id, folder);
     }
 
     public String getPresignedUrl(Long id) throws Exception {
@@ -53,14 +53,14 @@ public class ImageService {
         return imageStorageService.generatePresignedUrl(imagen.getKeyS3(), Duration.ofMinutes(15));
     }
 
-    public Imagen updateImage(Long id, MultipartFile file) throws IOException {
+    public Imagen updateImage(Long id, MultipartFile file, String folder) throws IOException {
         Imagen imagen = imagenRepository.findById(id)
                 .orElseThrow(() -> new IOException("Imagen no encontrada"));
 
         imageStorageService.deleteImage(imagen.getKeyS3());
 
         String fileName = UUID.randomUUID() + "-" + file.getOriginalFilename();
-        String newKey = "imagenes/" + fileName;
+        String newKey = folder + "/" + fileName;
 
         imageStorageService.uploadImage(file, newKey);
 

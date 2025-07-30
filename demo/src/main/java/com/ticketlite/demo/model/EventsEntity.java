@@ -70,7 +70,6 @@ public class EventsEntity {
     @Column(name = "ticket_price")
     private BigDecimal ticketPrice;
 
-
     // Campos temporales para recibir latitude/longitude en el JSON
     @Transient
     @JsonIgnore
@@ -213,4 +212,5 @@ public class EventsEntity {
     public void setTicketPrice(BigDecimal ticketPrice) {
         this.ticketPrice = ticketPrice;
     }
+
 }

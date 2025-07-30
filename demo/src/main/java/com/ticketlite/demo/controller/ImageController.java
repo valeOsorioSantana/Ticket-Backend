@@ -26,8 +26,8 @@ public class ImageController {
         this.eventsRepository = eventsRepository;
     }
 
-    @PostMapping("/upload/{idEvent}")
-    public ResponseEntity<?> upload(@RequestParam("file") MultipartFile file, @PathVariable Long idEvent) {
+    @PostMapping("/upload/{idEvent}/{folder}")
+    public ResponseEntity<?> upload(@RequestParam("file") MultipartFile file, @PathVariable Long idEvent, @PathVariable String folder) {
         if (file.isEmpty()) {
             return ResponseEntity.badRequest().body(Map.of("error", "Archivo vacío o no proporcionado"));
         }
@@ -37,7 +37,7 @@ public class ImageController {
             if (eventOpt.isEmpty()) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("error", "Evento no encontrada"));
             }
-            Imagen imagen = imageService.uploadImage(file, eventOpt.get());
+            Imagen imagen = imageService.uploadImage(file, eventOpt.get(), folder);
 
             return ResponseEntity.status(HttpStatus.CREATED).body(Map.of(
                     "Mesaje", "Imagen guardada correctamente"
@@ -47,9 +47,9 @@ public class ImageController {
         }
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<?> getImage(@PathVariable Long id) {
-        return imageService.getImage(id)
+    @GetMapping("/{id}/{folder}")
+    public ResponseEntity<?> getImage(@PathVariable Long id, @PathVariable String folder) {
+        return imageService.getImage(id, folder)
                 .map(imagen -> {
                     String url = null;
                     try {
@@ -67,10 +67,10 @@ public class ImageController {
                         .body(Map.of("error", "Imagen no encontrada")));
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, @RequestParam("file") MultipartFile file) {
+    @PutMapping("/{id}/{folder}")
+    public ResponseEntity<?> update(@PathVariable Long id, @PathVariable String folder , @RequestParam("file") MultipartFile file) {
         try {
-            Imagen imagen = imageService.updateImage(id, file);
+            Imagen imagen = imageService.updateImage(id, file, folder);
 
             return ResponseEntity.ok(Map.of(
                     "Mesaje", "Imagen actualizada correctamente"

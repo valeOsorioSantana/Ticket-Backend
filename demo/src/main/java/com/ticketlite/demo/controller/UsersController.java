@@ -41,11 +41,13 @@ public class UsersController {
     }
 
     //Metodos
+
     //JWT
     @GetMapping("/me")
     public ResponseEntity<?> getProfile(@AuthenticationPrincipal UsersEntity user) {
         return ResponseEntity.ok(user);
     }
+
     //GET ALL
     @Operation(summary = "Obtener todos los usuarios", description = "Recupera una lista de todos los usuarios en la base de datos")
     @ApiResponses(value = {
@@ -131,7 +133,7 @@ public class UsersController {
     @PutMapping("/{userId}")
     public ResponseEntity<String>editUser(@PathVariable Long userId, @RequestBody UsersEntity edit){
         try {
-            UsersEntity result = usersService.editUser(edit, userId);
+            usersService.editUser(edit, userId);
 
             return ResponseEntity.ok("Usuario actualizado con exito.");
         }catch (NotFoundException e){

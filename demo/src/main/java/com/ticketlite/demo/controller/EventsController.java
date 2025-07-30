@@ -175,11 +175,12 @@ public class EventsController {
                     required = true,
                     content = @Content(mediaType = MediaType.APPLICATION_OCTET_STREAM_VALUE)
             )
-            @RequestPart("file") MultipartFile file) {
+            @RequestPart("file") MultipartFile file,
+            @RequestPart(value = "mapFile", required = false) MultipartFile mapFile) {
 
         try {
             EventDTO event = objectMapper.readValue(eventJson, EventDTO.class);
-            eventsService.saveEvent(event, file);
+            eventsService.saveEvent(event, file, mapFile);
             return ResponseEntity.status(HttpStatus.CREATED).body("Se creó exitosamente el evento");
         } catch (ConflictException e) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
@@ -226,11 +227,18 @@ public class EventsController {
                     required = true,
                     content = @Content(mediaType = MediaType.APPLICATION_OCTET_STREAM_VALUE)
             )
-            @RequestPart(value = "file", required = false) MultipartFile file) {
+            @RequestPart(value = "file", required = false) MultipartFile file,
+            @Parameter(
+                    description = "Archivo del mapa del estadio",
+                    required = false,
+                    content = @Content(mediaType = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+            )
+            @RequestPart(value = "mapFile", required = false) MultipartFile mapFile) {
+
         try {
             EventDTO editEvent = objectMapper.readValue(eventJson, EventDTO.class);
             editEvent.setId(eventId);
-            eventsService.updateEvent(eventId, editEvent, file);
+            eventsService.updateEvent(eventId, editEvent, file, mapFile);
             return ResponseEntity.ok("Evento actualizado con éxito.");
         } catch (NotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());

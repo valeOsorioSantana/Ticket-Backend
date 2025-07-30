@@ -7,5 +7,7 @@ import java.util.Optional;
 
 public interface ImagenRepository extends JpaRepository<Imagen, Long> {
 
-    Optional<Imagen> findImagenByEventsId(Long idEvent);
+    Optional<Imagen> findByEvents_IdAndKeyS3ContainingIgnoreCase(Long eventId, String carpeta);
+
+
 }

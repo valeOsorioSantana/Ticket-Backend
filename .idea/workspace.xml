@@ -5,12 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7669594b-f4c7-44a9-b2a2-f80a934c30ce" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/ticketliteproyect.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ticketliteproyect.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/DTO/EventCompleteDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/DTO/EventCompleteDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/DTO/EventDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/DTO/EventDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/controller/EventsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/controller/EventsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/security/JwtService.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/security/JwtService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/controller/ImageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/controller/ImageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/controller/UsersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/controller/UsersController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/model/EventsEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/model/EventsEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/model/repository/ImagenRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/model/repository/ImagenRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/service/EventsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/service/EventsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/service/ImageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/service/ImageService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,9 +24,21 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 2
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "valeOsorioSantana"
+  }
 }]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/valeOsorioSantana/TicketsProyect.git",
+    "accountId": "ace5c4f9-d1ad-435c-a608-1a0f258a5b75"
+  }
+}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="30YA6w80y69fU219TeIWkIeDAsO" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -34,7 +50,7 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "vale",
-    "last_opened_file_path": "C:/Users/Aprendiz/Documents/ticketliteproyect/ticketliteproyect",
+    "last_opened_file_path": "C:/Users/Vale/Documents/Material de Estudio y Programacion/Codigos/Java/BackendTicketLite",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0"

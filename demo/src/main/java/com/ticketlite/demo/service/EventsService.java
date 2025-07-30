@@ -64,7 +64,8 @@ public class EventsService {
         List<EventCompleteDTO> eventCompleteDTOS = new ArrayList<>();
 
         for (EventsEntity event : events) {
-            Optional<Imagen> optionalImagen = imageService.getImage(event.getId());
+            Optional<Imagen> optionalImagen = imageService.getImage(event.getId(), "imagenes");
+            Optional<Imagen> optionalImagenMapas = imageService.getImage(event.getId(), "mapas");
 
             Imagen imagen = optionalImagen.orElseGet(() -> {
                 Imagen vacia = new Imagen();
@@ -72,7 +73,13 @@ public class EventsService {
                 return vacia;
             });
 
-            EventCompleteDTO dto = convertDTO(event, Optional.of(imagen));
+            Imagen imagen1Map = optionalImagenMapas.orElseGet(() -> {
+                Imagen vacia = new Imagen();
+                vacia.setKeyS3("");
+                return vacia;
+            });
+
+            EventCompleteDTO dto = convertDTO(event, Optional.of(imagen), Optional.of(imagen1Map));
             eventCompleteDTOS.add(dto);
         }
 
@@ -88,8 +95,11 @@ public class EventsService {
             return Optional.empty();
         }
 
-        Optional<Imagen> imagen = imageService.getImage(eventId);
-        EventCompleteDTO dto = convertDTO(event.get(), imagen);
+        Optional<Imagen> imagen = imageService.getImage(eventId, "imagenes");
+
+        Optional<Imagen> imagenMap = imageService.getImage(eventId, "mapas");
+
+        EventCompleteDTO dto = convertDTO(event.get(), imagen, imagenMap);
 
         return Optional.of(dto);
     }
@@ -100,8 +110,11 @@ public class EventsService {
         List<EventCompleteDTO> eventDTOs = new ArrayList<>();
 
         for (EventsEntity event : nearbyEvents) {
-            Optional<Imagen> imagen = imageService.getImage(event.getId());
-            EventCompleteDTO dto = convertDTO(event, imagen);
+            Optional<Imagen> imagen = imageService.getImage(event.getId(), "imagenes");
+
+            Optional<Imagen> imagenMap = imageService.getImage(event.getId(), "mapas");
+
+            EventCompleteDTO dto = convertDTO(event, imagen, imagenMap);
             eventDTOs.add(dto);
         }
 
@@ -141,7 +154,7 @@ public class EventsService {
 
     //Post
 
-    public EventsEntity saveEvent(EventDTO event, MultipartFile file) throws ConflictException {
+    public EventsEntity saveEvent(EventDTO event, MultipartFile file, MultipartFile seatingMapFile) throws ConflictException {
         try {
             Optional<EventsEntity> existente = eventsRepository.findByName(event.getName());
 
@@ -177,7 +190,13 @@ public class EventsService {
             // IMPORTANTE: guarda y asegura que tiene ID antes de asociar la imagen
             EventsEntity savedEvent = eventsRepository.saveAndFlush(newEvent);
 
-            imageService.uploadImage(file, savedEvent);
+            if (file != null && !file.isEmpty()) {
+                imageService.uploadImage(file, savedEvent, "imagenes");
+            }
+
+            if (seatingMapFile != null && !seatingMapFile.isEmpty()) {
+                imageService.uploadImage(seatingMapFile, savedEvent, "mapas");
+            }
 
             return savedEvent;
         } catch (NotFoundException e) {
@@ -189,7 +208,7 @@ public class EventsService {
 
     //PUT
     @Transactional
-    public EventsEntity updateEvent(Long eventId, EventDTO editEvent, MultipartFile file) throws NotFoundException, ConflictException {
+    public EventsEntity updateEvent(Long eventId, EventDTO editEvent, MultipartFile file, MultipartFile seatingMapFile) throws NotFoundException, ConflictException {
         try {
             EventsEntity existingEvent = eventsRepository.findById(eventId)
                     .orElseThrow(() -> new NotFoundException("Evento no encontrado con id " + eventId));
@@ -223,12 +242,23 @@ public class EventsService {
 
             if (file != null && !file.isEmpty()) {
                 // Obtener la imagen asociada al evento (si existe)
-                Optional<Imagen> optionalImagen = imageService.getImage(updatedEvent.getId()); // Este método debe implementarse si no existe
+                Optional<Imagen> optionalImagen = imageService.getImage(updatedEvent.getId(), "imagenes"); // Este método debe implementarse si no existe
 
                 if (optionalImagen.isPresent()) {
-                    imageService.updateImage(optionalImagen.get().getId(), file); // Actualiza la imagen existente
+                    imageService.updateImage(optionalImagen.get().getId(), file, "imagenes"); // Actualiza la imagen existente
                 } else {
-                    imageService.uploadImage(file, updatedEvent); // Sube una nueva si no había
+                    imageService.uploadImage(file, updatedEvent,"imagenes"); // Sube una nueva si no había
+                }
+            }
+
+            if (seatingMapFile != null && !seatingMapFile.isEmpty()) {
+                // Obtener la imagen asociada al evento (si existe)
+                Optional<Imagen> optionalImagen = imageService.getImage(updatedEvent.getId(),"mapas"); // Este método debe implementarse si no existe
+
+                if (optionalImagen.isPresent()) {
+                    imageService.updateImage(optionalImagen.get().getId(), seatingMapFile, "mapas"); // Actualiza la imagen existente
+                } else {
+                    imageService.uploadImage(seatingMapFile, updatedEvent, "mapas"); // Sube una nueva si no había
                 }
             }
 
@@ -251,11 +281,26 @@ public class EventsService {
         Optional<EventsEntity> event = eventsRepository.findById(id);
 
         // Intentar obtener la imagen asociada (opcional)
-        Optional<Imagen> imagenOpt = imageService.getImage(id);
+        Optional<Imagen> imagenOpt = imageService.getImage(id, "imagenes");
+
+        Optional<Imagen> imagenMapOpt = imageService.getImage(id, "mapas");
 
         // Si la imagen existe, intentar eliminarla con manejo de errores
         try {
             imagenOpt.ifPresent(imagen -> {
+                try {
+                    imageService.deleteImage(imagen.getId());
+                    log.info("Imagen asociada al evento {} eliminada correctamente.", id);
+                } catch (Exception e) {
+                    log.warn("No se pudo eliminar la imagen asociada al evento {}: {}", id, e.getMessage());
+                }
+            });
+        } catch (Exception ex) {
+            log.warn("Error inesperado al procesar imagen asociada al evento {}: {}", id, ex.getMessage());
+        }
+
+        try {
+            imagenMapOpt.ifPresent(imagen -> {
                 try {
                     imageService.deleteImage(imagen.getId());
                     log.info("Imagen asociada al evento {} eliminada correctamente.", id);
@@ -272,7 +317,7 @@ public class EventsService {
     }
 
 
-    private EventCompleteDTO convertDTO(EventsEntity eventsEntity, Optional<Imagen> imagenOpt) {
+    private EventCompleteDTO convertDTO(EventsEntity eventsEntity, Optional<Imagen> imagenOpt, Optional<Imagen> imagenMapOpt) {
         EventCompleteDTO dto = new EventCompleteDTO();
 
         dto.setId(eventsEntity.getId());
@@ -292,19 +337,38 @@ public class EventsService {
         dto.setAddress(eventsEntity.getAddress());
         dto.setCreatedAt(eventsEntity.getCreatedAt());
 
+
+        List<ImagenDTO> imagenesDto = new ArrayList<>();
+
         // Convertir Imagen a ImagenDTO con URL prefirmada
         if (imagenOpt.isPresent()) {
             Imagen imagen = imagenOpt.get();
             try {
                 String url = imageService.getPresignedUrl(imagen.getId());
                 ImagenDTO imagenDTO = new ImagenDTO(imagen.getId(), imagen.getNombreOriginal(), url);
-                dto.setImagen(imagenDTO);
+                imagenesDto.add(imagenDTO);
             } catch (Exception e) {
                 // En caso de error al generar URL
                 ImagenDTO imagenDTO = new ImagenDTO(imagen.getId(), imagen.getNombreOriginal(), "Error al generar URL");
-                dto.setImagen(imagenDTO);
+                imagenesDto.add(imagenDTO);
             }
         }
+
+        // Convertir Imagen a ImagenDTO con URL prefirmada
+        if (imagenMapOpt.isPresent()) {
+            Imagen imagen = imagenMapOpt.get();
+            try {
+                String url = imageService.getPresignedUrl(imagen.getId());
+                ImagenDTO imagenDTO = new ImagenDTO(imagen.getId(), imagen.getNombreOriginal(), url);
+                imagenesDto.add(imagenDTO);
+            } catch (Exception e) {
+                // En caso de error al generar URL
+                ImagenDTO imagenDTO = new ImagenDTO(imagen.getId(), imagen.getNombreOriginal(), "Error al generar URL");
+                imagenesDto.add(imagenDTO);
+            }
+        }
+
+        dto.setImagenes(imagenesDto);
 
         return dto;
     }
