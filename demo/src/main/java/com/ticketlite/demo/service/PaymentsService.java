@@ -1,5 +1,6 @@
 package com.ticketlite.demo.service;
 
+import com.ticketlite.demo.DTO.PaymentRequestDTO;
 import com.ticketlite.demo.model.PaymentsEntity;
 import com.ticketlite.demo.model.RegistrationsEntity;
 import com.ticketlite.demo.model.repository.PaymentsRepository;
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -25,6 +28,13 @@ public class PaymentsService {
         this.registrationsRepository = registrationsRepository;
     }
 
+    private static final List<String> MÉTODOS_PERMITIDOS = List.of(
+            "Tarjeta de crédito",
+            "Tarjeta de débito",
+            "PayPal",
+            "Transferencia bancaria"
+    );
+
     //Metodos
     //GET BY ID
     //obtener pago por id
@@ -38,8 +48,15 @@ public class PaymentsService {
 
     //POST
     //crear un nuevo pago
-    public PaymentsEntity createPayment(Long registrationId, String method, BigDecimal amount) {
+    public PaymentsEntity createPayment(PaymentRequestDTO dto) {
         try {
+            Long registrationId = dto.getRegistrationId();
+            String method = dto.getMethod();
+
+            if (!MÉTODOS_PERMITIDOS.contains(method)) {
+                throw new IllegalArgumentException("Método de pago inválido: " + method);
+            }
+
             boolean exists = paymentsRepository.existsByRegistrationId(registrationId);
             if (exists) {
                 throw new IllegalStateException("Ya existe un pago para este registro");
@@ -47,12 +64,14 @@ public class PaymentsService {
 
             RegistrationsEntity registration = registrationsRepository.findById(registrationId).orElseThrow(() -> new RuntimeException("Registro no encontrado"));
 
-            PaymentsEntity payment = new PaymentsEntity();
+            BigDecimal amount = registration.getPrice().multiply(BigDecimal.valueOf(registration.getQuantity()));
 
+            PaymentsEntity payment = new PaymentsEntity();
             payment.setRegistration(registration);
             payment.setMethod(method);
             payment.setAmount(amount);
-            payment.setStatus(PaymentsEntity.PaymentStatus.PENDIENTE);
+            payment.setStatus(PaymentsEntity.PaymentStatus.PAGADO);
+            payment.setPaidAt(LocalDateTime.now());
 
             return paymentsRepository.save(payment);
         }catch (NotFoundException e){
@@ -61,6 +80,26 @@ public class PaymentsService {
             throw new RuntimeException("Error al crear el pago: " + e.getMessage(), e);
         }
     }
+
+    //POST
+    //crear un nuevo pago automatico
+    public PaymentsEntity createPaymentAuto(RegistrationsEntity registration) {
+        if (paymentsRepository.existsByRegistrationId(registration.getId())) {
+            throw new IllegalStateException("Ya existe un pago para este registro");
+        }
+
+        BigDecimal amount = registration.getPrice().multiply(BigDecimal.valueOf(registration.getQuantity()));
+
+        PaymentsEntity payment = new PaymentsEntity();
+        payment.setRegistration(registration);
+        payment.setMethod("Por definir");
+        payment.setAmount(amount);
+        payment.setStatus(PaymentsEntity.PaymentStatus.PENDIENTE);
+        payment.setPaidAt(LocalDateTime.now());
+
+        return paymentsRepository.save(payment);
+    }
+
 
     //PUT
     //actualizar estado del pago

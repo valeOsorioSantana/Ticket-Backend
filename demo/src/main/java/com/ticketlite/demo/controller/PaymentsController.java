@@ -1,5 +1,6 @@
 package com.ticketlite.demo.controller;
 
+import com.ticketlite.demo.DTO.PaymentRequestDTO;
 import com.ticketlite.demo.model.EventsEntity;
 import com.ticketlite.demo.model.PaymentsEntity;
 import com.ticketlite.demo.service.PaymentsService;
@@ -88,10 +89,10 @@ public class PaymentsController {
     })
 
     @PostMapping("/")
-    public ResponseEntity<?> createPayment(@RequestParam Long registrationId, @RequestParam String method, @RequestParam BigDecimal amount ){
+    public ResponseEntity<?> createPayment(@RequestBody PaymentRequestDTO request){
         try {
-            PaymentsEntity created = paymentsService.createPayment(registrationId, method, amount);
-            return ResponseEntity.status(HttpStatus.CREATED).body("Se creó exitosamente el pago"+ created);
+            PaymentsEntity created = paymentsService.createPayment(request);
+            return ResponseEntity.status(HttpStatus.CREATED).body(created);
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Error al crear el pago: " + e.getMessage());
         }

@@ -1,5 +1,6 @@
 package com.ticketlite.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -65,6 +66,15 @@ public class RegistrationsEntity {
     @Schema(description = "Fecha y hora en la que se envió el recordatorio (si aplica)", example = "2025-07-01T08:00:00")
     private LocalDateTime reminderTime;
 
+    @Column( name = "quantity", nullable = false)
+    @Schema(description = "Cantidad de entradas compradas por el usuario", example = "2")
+    private Integer quantity;
+
+    @OneToOne(mappedBy = "registration", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    @Schema(description = "Pago asociado al registro")
+    private PaymentsEntity payment;
+
     // Enums
 
     public enum RegistrationStatus {
@@ -80,7 +90,7 @@ public class RegistrationsEntity {
 
     // Constructor completo
 
-    public RegistrationsEntity(Long id, UsersEntity users, EventsEntity events, String ticketType, BigDecimal price,
+    public RegistrationsEntity(PaymentsEntity payment,Integer quantity, Long id, UsersEntity users, EventsEntity events, String ticketType, BigDecimal price,
                                RegistrationStatus status, ReminderStatus reminderDeliveryStatus,
                                LocalDateTime registeredAt, LocalDateTime reminderTime) {
         this.id = id;
@@ -92,6 +102,8 @@ public class RegistrationsEntity {
         this.reminderDeliveryStatus = reminderDeliveryStatus;
         this.registeredAt = registeredAt;
         this.reminderTime = reminderTime;
+        this.quantity = quantity;
+        this.payment = payment;
     }
 
     public RegistrationsEntity() {
@@ -170,4 +182,21 @@ public class RegistrationsEntity {
     public void setReminderTime(LocalDateTime reminderTime) {
         this.reminderTime = reminderTime;
     }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public PaymentsEntity getPayment() {
+        return payment;
+    }
+
+    public void setPayment(PaymentsEntity payment) {
+        this.payment = payment;
+    }
+
 }

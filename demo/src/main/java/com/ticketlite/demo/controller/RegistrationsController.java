@@ -1,5 +1,6 @@
 package com.ticketlite.demo.controller;
 
+import com.ticketlite.demo.DTO.RegistrationDTO;
 import com.ticketlite.demo.model.EventsEntity;
 import com.ticketlite.demo.model.RegistrationsEntity;
 import com.ticketlite.demo.service.RegistrationsService;
@@ -48,9 +49,10 @@ public class RegistrationsController {
     @GetMapping("/user/{userId}")
     public ResponseEntity<?> getRegistrationsByUser(@PathVariable Long userId){
         try {
-            List<RegistrationsEntity> register = registrationsService.getRegistrationsByUser(userId);
+            List<RegistrationDTO> register = registrationsService.getRegistrationsDTOByUser(userId);
             return ResponseEntity.status(HttpStatus.OK).body(register);
         }catch (Exception e){
+            e.printStackTrace();
             return ResponseEntity.status(500).body("Error interno al procesar la solicitud");
         }
     }
@@ -68,7 +70,11 @@ public class RegistrationsController {
     public ResponseEntity<?> getRegistrationsByEvent(@PathVariable Long eventId){
         try {
             List<RegistrationsEntity> register = registrationsService.getRegistrationsByEvent(eventId);
-            return ResponseEntity.status(HttpStatus.OK).body(register);
+            if (register == null || register.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontraron registros para el evento con ID: " + eventId);
+            }
+
+            return ResponseEntity.ok(register);
         }catch (Exception e){
             return ResponseEntity.status(500).body("Error interno al procesar la solicitud");
         }
@@ -95,7 +101,8 @@ public class RegistrationsController {
                 return ResponseEntity.badRequest().body("El evento es requerido");
             }
             RegistrationsEntity result = registrationsService.register(registration);
-            return ResponseEntity.status(HttpStatus.CREATED).body("Se creó exitosamente el registro");
+            RegistrationDTO dto = registrationsService.convertToDTO(result);
+            return ResponseEntity.status(HttpStatus.CREATED).body(dto);
         }catch (NotFoundException e){
             return ResponseEntity.status(404).body(e.getMessage());
         }catch (Exception e){
@@ -114,11 +121,14 @@ public class RegistrationsController {
     })
 
     @PutMapping("/{id}")
-    public ResponseEntity<String>updateRegistrationDetails(@RequestBody RegistrationsEntity registration){
+    public ResponseEntity<String>updateRegistrationDetails(@PathVariable Long id,@RequestBody RegistrationsEntity registration){
         try {
+            if (registration.getId() == null || !registration.getId().equals(id)) {
+                return ResponseEntity.badRequest().body("El ID del path no coincide con el del registro.");
+            }
             RegistrationsEntity result = registrationsService.updateRegistrationDetails(registration);
-
-            return ResponseEntity.ok("Registro actualizado con exito."+result);
+            RegistrationDTO dto = registrationsService.convertToDTO(result);
+            return ResponseEntity.ok("Registro actualizado con exito."+dto);
         }catch (NotFoundException e){
             return ResponseEntity.status(404).body(e.getMessage());
         }catch (Exception e){

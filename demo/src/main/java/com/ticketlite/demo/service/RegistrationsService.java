@@ -1,9 +1,12 @@
 package com.ticketlite.demo.service;
 
+import com.ticketlite.demo.DTO.RegistrationDTO;
 import com.ticketlite.demo.model.EventsEntity;
+import com.ticketlite.demo.model.PaymentsEntity;
 import com.ticketlite.demo.model.RegistrationsEntity;
 import com.ticketlite.demo.model.UsersEntity;
 import com.ticketlite.demo.model.repository.EventsRepository;
+import com.ticketlite.demo.model.repository.PaymentsRepository;
 import com.ticketlite.demo.model.repository.RegistrationsRepository;
 import com.ticketlite.demo.model.repository.UsersRepository;
 import com.ticketlite.demo.structure.exception.NotFoundException;
@@ -13,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class RegistrationsService {
@@ -24,22 +28,27 @@ public class RegistrationsService {
     private EventsRepository eventsRepository;
     private EventAnalyticsService eventAnalyticsService;
     private NotificationsService notificationsService;
+    private PaymentsRepository paymentsRepository;
+    private PaymentsService paymentsService;
 
     //Importante para conectar el repository
     @Autowired
-    public RegistrationsService(NotificationsService notificationsService, EventAnalyticsService eventAnalyticsService, RegistrationsRepository registrationsRepository, UsersRepository usersRepository, EventsRepository eventsRepository) {
+    public RegistrationsService(PaymentsService paymentsService,PaymentsRepository paymentsRepository,NotificationsService notificationsService, EventAnalyticsService eventAnalyticsService, RegistrationsRepository registrationsRepository, UsersRepository usersRepository, EventsRepository eventsRepository) {
         this.registrationsRepository = registrationsRepository;
         this.usersRepository = usersRepository;
         this.eventsRepository = eventsRepository;
         this.eventAnalyticsService = eventAnalyticsService;
         this.notificationsService = notificationsService;
+        this.paymentsRepository = paymentsRepository;
+        this.paymentsService = paymentsService;
     }
 
     //Metodos
     //GET BY ID
-    //obtener registros por usuario
-    public List<RegistrationsEntity> getRegistrationsByUser(Long userId) {
-        return registrationsRepository.findByUsersId(userId);
+    //obtener registros por usuario DTO
+    public List<RegistrationDTO> getRegistrationsDTOByUser(Long userId) {
+        List<RegistrationsEntity> entities = registrationsRepository.findByUsersId(userId);
+        return entities.stream().map(this::convertToDTO).collect(Collectors.toList());
     }
     //obtener registros por evento
     public List<RegistrationsEntity> getRegistrationsByEvent(Long eventId) {
@@ -66,6 +75,8 @@ public class RegistrationsService {
 
             registration.setId(null);
             RegistrationsEntity savedRegistration = registrationsRepository.save(registration);
+
+            paymentsService.createPaymentAuto(savedRegistration);
 
             // Actualizar estadísticas
             eventAnalyticsService.updateEsta(eventId, "registration", null);
@@ -128,4 +139,14 @@ public class RegistrationsService {
         registrationsRepository.deleteAllByEventsId(id);
     }
 
+    public RegistrationDTO convertToDTO(RegistrationsEntity r) {
+        return new RegistrationDTO(
+                r.getId(),
+                r.getUsers().getId(),
+                r.getEvents().getId(),
+                r.getTicketType(),
+                r.getQuantity(),
+                r.getRegisteredAt()
+        );
+    }
 }

@@ -1,5 +1,6 @@
 package com.ticketlite.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -20,6 +21,7 @@ public class PaymentsEntity {
 
     @OneToOne
     @JoinColumn(name = "registration_id", nullable = false, unique = true)
+    @JsonBackReference
     @Schema(description = "Registro asociado al pago")
     private RegistrationsEntity registration;
 
@@ -83,6 +85,13 @@ public class PaymentsEntity {
 
     public void setRegistration(RegistrationsEntity registration) {
         this.registration = registration;
+        // Calcula el monto automáticamente
+        if (this.amount == null &&
+                registration != null &&
+                registration.getPrice() != null &&
+                registration.getQuantity() != null) {
+            this.amount = registration.getPrice().multiply(new BigDecimal(registration.getQuantity()));
+        }
     }
 
     public String getMethod() {
