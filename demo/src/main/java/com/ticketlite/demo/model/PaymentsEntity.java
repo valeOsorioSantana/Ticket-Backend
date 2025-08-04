@@ -52,7 +52,7 @@ public class PaymentsEntity {
     public enum PaymentStatus {
         PENDIENTE,
         PAGADO,
-        FALLIDO,
+        CANCELADO,
         REEMBOLSADO
     }
 

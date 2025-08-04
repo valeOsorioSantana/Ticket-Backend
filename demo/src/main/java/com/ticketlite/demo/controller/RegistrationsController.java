@@ -101,11 +101,14 @@ public class RegistrationsController {
                 return ResponseEntity.badRequest().body("El evento es requerido");
             }
             RegistrationsEntity result = registrationsService.register(registration);
+/*
             RegistrationDTO dto = registrationsService.convertToDTO(result);
-            return ResponseEntity.status(HttpStatus.CREATED).body(dto);
+*/
+            return ResponseEntity.status(HttpStatus.CREATED).body("Registro creado con ID: " + result.getId());
         }catch (NotFoundException e){
             return ResponseEntity.status(404).body(e.getMessage());
         }catch (Exception e){
+            e.printStackTrace();
             return ResponseEntity.status(500).body("Error interno al crear el registro");
         }
     }

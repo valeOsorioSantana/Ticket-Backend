@@ -32,8 +32,10 @@ public class PaymentsService {
             "Tarjeta de crédito",
             "Tarjeta de débito",
             "PayPal",
-            "Transferencia bancaria"
+            "PSE",
+            "Nequi"
     );
+
 
     //Metodos
     //GET BY ID
@@ -64,7 +66,7 @@ public class PaymentsService {
 
             RegistrationsEntity registration = registrationsRepository.findById(registrationId).orElseThrow(() -> new RuntimeException("Registro no encontrado"));
 
-            BigDecimal amount = registration.getPrice().multiply(BigDecimal.valueOf(registration.getQuantity()));
+            BigDecimal amount = dto.getAmount() != null ? dto.getAmount() : registration.getPrice().multiply(BigDecimal.valueOf(registration.getQuantity()));
 
             PaymentsEntity payment = new PaymentsEntity();
             payment.setRegistration(registration);
@@ -83,7 +85,7 @@ public class PaymentsService {
 
     //POST
     //crear un nuevo pago automatico
-    public PaymentsEntity createPaymentAuto(RegistrationsEntity registration) {
+    /*public PaymentsEntity createPaymentAuto(RegistrationsEntity registration) {
         if (paymentsRepository.existsByRegistrationId(registration.getId())) {
             throw new IllegalStateException("Ya existe un pago para este registro");
         }
@@ -98,7 +100,7 @@ public class PaymentsService {
         payment.setPaidAt(LocalDateTime.now());
 
         return paymentsRepository.save(payment);
-    }
+    }*/
 
 
     //PUT

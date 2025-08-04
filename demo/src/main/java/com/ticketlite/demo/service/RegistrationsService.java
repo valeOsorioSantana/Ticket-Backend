@@ -76,8 +76,6 @@ public class RegistrationsService {
             registration.setId(null);
             RegistrationsEntity savedRegistration = registrationsRepository.save(registration);
 
-            paymentsService.createPaymentAuto(savedRegistration);
-
             // Actualizar estadísticas
             eventAnalyticsService.updateEsta(eventId, "registration", null);
             notificationsService.notiAdmin(user, event, "se registró");
