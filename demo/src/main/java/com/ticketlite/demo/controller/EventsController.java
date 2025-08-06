@@ -62,9 +62,13 @@ public class EventsController {
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end) {
 
-        List<EventsEntity> events = (start != null && end != null)
-                ? eventsRepository.findByStartDateBetween(start, end)
-                : eventsRepository.findAll();
+        List<EventsEntity> events;
+
+        if (start != null && end != null) {
+            events = eventsRepository.findByStatusAndStartDateBetween(EventsEntity.EventStatus.PUBLICADO, start, end);
+        } else {
+            events = eventsRepository.findByStatus(EventsEntity.EventStatus.PUBLICADO);
+        }
 
         return events.stream()
                 .map(e -> new EventCalendarDTO(

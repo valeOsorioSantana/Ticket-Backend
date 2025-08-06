@@ -22,9 +22,10 @@ public interface EventsRepository extends JpaRepository<EventsEntity,Long> {
     List<EventsEntity> findByStartDateAfter(LocalDateTime startDate);
     List<EventsEntity> findByEndDateBefore(LocalDateTime endDate);
     List<EventsEntity> findByCategoryIn(List<String> category);
-    List<EventsEntity> findByStatus(String status);
+    List<EventsEntity> findByStatus(EventsEntity.EventStatus status);
     Optional<EventsEntity> findByName(String name);
 
+    List<EventsEntity> findByStatusAndStartDateBetween(EventsEntity.EventStatus status, LocalDateTime start, LocalDateTime end);
 
     boolean existsByName(String name);
 }

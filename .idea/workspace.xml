@@ -5,11 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7669594b-f4c7-44a9-b2a2-f80a934c30ce" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/controller/FavoritoController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/model/FavoritoEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/model/repository/FavoritoRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/service/FavoritoService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/controller/RegistrationsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/controller/RegistrationsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/model/PaymentsEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/model/PaymentsEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/service/PaymentsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/service/PaymentsService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/service/RegistrationsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/service/RegistrationsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/controller/EventsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/controller/EventsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/model/repository/EventsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/model/repository/EventsRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +21,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
