@@ -29,13 +29,12 @@ public class FavoritoController {
         this.usersRepository = usersRepository;
     }
 
-    @GetMapping("/favoritos/{userId}")
-    public ResponseEntity<List<EventsEntity>> obtenerFavoritos(@PathVariable Long userId) {
-        List<FavoritoEntity> favoritos = favoritoService.getFav(userId);
+    @GetMapping("")
+    public ResponseEntity<List<EventsEntity>> obtenerFavoritos(@PathVariable Long usersId) {
+        List<FavoritoEntity> favoritos = favoritoService.getFav(usersId);
         List<EventsEntity> eventos = favoritos.stream()
                 .map(FavoritoEntity::getEvents)
                 .toList();
-
         return ResponseEntity.ok(eventos);
     }
 

@@ -57,6 +57,11 @@ public class EventsController {
         this.eventAnalyticsService = eventAnalyticsService;
     }
 
+    @GetMapping("/hello")
+    public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
+        return String.format("Hello %s!", name);
+    }
+
     @GetMapping("/calendar")
     public List<EventCalendarDTO> getEventsForCalendar(
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start,
@@ -193,7 +198,7 @@ public class EventsController {
         }
     }
 
-    @PostMapping("/{eventId}/rate")
+    /*@PostMapping("/{eventId}/rate")
     public ResponseEntity<?> rateEvent(@PathVariable Long eventId, @RequestParam("rating") BigDecimal rating) {
 
         if (rating == null || rating.compareTo(BigDecimal.ONE) < 0 || rating.compareTo(BigDecimal.valueOf(5)) > 0) {
@@ -206,7 +211,7 @@ public class EventsController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al registrar la calificación: " + e.getMessage());
         }
-    }
+    }*/
 
     @Operation(summary = "Actualizar un evento", description = "Actualiza un evento existente y su imagen")
     @ApiResponses(value = {
