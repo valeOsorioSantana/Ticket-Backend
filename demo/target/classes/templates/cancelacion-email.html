@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Cancelación Confirmada</title>
+</head>
+<body style="margin: 0; padding: 0; background-color: #ffffff; font-family: 'Segoe UI', sans-serif;">
+
+<table width="100%" cellpadding="0" cellspacing="0" style="padding: 40px 0;">
+    <tr>
+        <td align="center">
+            <table width="600" cellpadding="0" cellspacing="0" style="background-color: #ffffff; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.06); overflow: hidden;">
+
+                <!-- Header con degradado -->
+                <tr style="background: linear-gradient(135deg, #1976d2, #42a5f5);">
+                    <td style="padding: 15px 30px; text-align: center;">
+                        <img src="https://img.icons8.com/fluency/96/cancel.png" alt="Cancelación" width="72" height="72" style="margin-bottom: 10px;">
+                        <h1 style="color: #ffffff; font-size: 26px; margin: 0;">¡Tu cancelación fue confirmada!</h1>
+                        <p style="color: #e3f2fd; font-size: 16px; margin-top: 8px;">Estamos tristes de que no asistas, pero esperamos verte pronto en otro evento.</p>
+                    </td>
+                </tr>
+
+                <!-- Cuerpo -->
+                <tr>
+                    <td style="padding: 25px 40px; color: #333; font-size: 16px; line-height: 1.8;">
+                        <p>Hola <strong th:text="${name}">Usuario</strong>,</p>
+                        <p>Te confirmamos que tu cancelación para el evento:</p>
+                        <p style="font-size: 18px; font-weight: bold; color: #1976d2;" th:text="${evento}">Nombre del Evento</p>
+                        <p>ha sido procesada correctamente. El reembolso se gestionará de acuerdo con la política del evento y recibirás una notificación cuando se haya completado.</p>
+
+                        <div style="margin: 35px 0; text-align: center;">
+                            <a href="https://ticketlite.com" style="background: linear-gradient(135deg, #1976d2, #42a5f5); color: white; text-decoration: none; padding: 14px 28px; border-radius: 50px; font-size: 16px; font-weight: 600; box-shadow: 0 4px 10px rgba(25, 118, 210, 0.3);">Explorar más eventos</a>
+                        </div>
+
+                        <p style="font-size: 14px; color: #666; text-align: center;">¿Tienes dudas? <a href="https://ticketlite.com/contacto" style="color: #1976d2; text-decoration: none;">Contáctanos aquí</a>.</p>
+                    </td>
+                </tr>
+
+                <!-- Footer -->
+                <tr style="background-color: #f4f8fd;">
+                    <td style="padding: 15px 40px; text-align: center; font-size: 13px; color: #999;">
+                        <p style="margin-bottom: 6px;">Gracias por confiar en <strong style="color: #1976d2;">TicketLite</strong> 🎫</p>
+                        <p style="margin: 0;">Este es un mensaje automático, por favor no respondas a este correo.</p>
+                        <p style="margin-top: 10px;">
+                            <a href="https://ticketlite.com" style="color: #1976d2; text-decoration: none;">www.ticketlite.com</a>
+                        </p>
+                    </td>
+                </tr>
+
+            </table>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Recuperación de Contraseña</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+        body {
+          font-family: 'Poppins', sans-serif;
+          background-color: #f0f4fb;
+          margin: 0;
+          padding: 0;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+          max-width: 600px;
+          margin: 40px auto;
+          background-color: #f6faff;
+          border-radius: 18px;
+          box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+          overflow: hidden;
+          border: 1px solid #e2e8f0;
+        }
+
+        .header {
+          background: linear-gradient(135deg, #2a65c9, #5393f7);
+          color: #ffffff;
+          text-align: center;
+          padding: 30px 30px;
+          font-size: 26px;
+          font-weight: 700;
+          letter-spacing: 0.5px;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .content {
+          padding: 36px 36px 42px;
+          color: #2a2a2a;
+          font-size: 16px;
+          line-height: 1.7;
+        }
+
+        .content h2 {
+          color: #2a65c9;
+          margin-top: 0;
+          font-weight: 600;
+          font-size: 22px;
+        }
+
+        .content p {
+          margin: 20px 0;
+        }
+
+        .token-box {
+          display: inline-block;
+          background: linear-gradient(135deg, #2a65c9, #5393f7);
+          color: #ffffff;
+          font-weight: 600;
+          font-size: 18px;
+          padding: 14px 28px;
+          border-radius: 10px;
+          user-select: all;
+          letter-spacing: 1.5px;
+          margin-top: 24px;
+          box-shadow: 0 5px 18px rgba(42, 101, 201, 0.3);
+          word-break: break-word;
+          text-align: center;
+        }
+
+        .footer {
+          text-align: center;
+          font-size: 13px;
+          color: #7a8ca0;
+          padding: 20px 30px;
+          background-color: #f7f9fc;
+          border-top: 1px solid #e1e5eb;
+        }
+
+        @media (max-width: 480px) {
+          .container {
+            margin: 20px 15px;
+          }
+          .header {
+            font-size: 22px;
+            padding: 22px;
+          }
+          .content {
+            padding: 24px 22px 32px;
+            font-size: 15px;
+          }
+          .token-box {
+            font-size: 16px;
+            padding: 12px 20px;
+          }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header" role="banner" aria-label="Recuperación de contraseña">
+        🔐 Recuperación de Contraseña
+    </div>
+    <div class="content">
+        <h2>Hola, <span th:text="${nombreUsuario}">Usuario</span> 👋</h2>
+        <p>
+            Recibimos una solicitud para <strong>restablecer tu contraseña</strong>.
+        </p>
+        <p>
+            Si tú la realizaste, por favor copia el siguiente token y pégalo en el campo correspondiente:
+        </p>
+        <div class="token-box" th:text="${urlRecuperacion}">TOKEN123</div>
+        <p>
+            ⏰ <em>Este código es válido por 15 minutos.</em>
+        </p>
+        <p>
+            Si no solicitaste este cambio, puedes ignorar este mensaje con tranquilidad.
+        </p>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; 2025 <strong>TicketLite</strong>. Todos los derechos reservados.
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bienvenido a TicketLite</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+        * {
+          box-sizing: border-box;
+          margin: 0;
+          padding: 0;
+        }
+
+        body {
+          font-family: 'Poppins', sans-serif;
+          background: #f0f8ff;
+          color: #1e1e1e;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          min-height: 100vh;
+          padding: 20px;
+        }
+
+        .card {
+          background: #ebf5ff;
+          border-radius: 24px;
+          max-width: 500px;
+          width: 100%;
+          padding: 60px 40px 50px 40px;
+          box-shadow:
+            0 10px 25px rgba(0, 0, 0, 0.1);
+          text-align: center;
+          overflow: hidden;
+          animation: fadeInUp 0.8s ease forwards;
+          border: 1px solid #e0eaf4;
+        }
+
+        .card svg.decor {
+          position: absolute;
+          top: 20px;
+          left: 20px;
+          width: 70px;
+          height: 70px;
+          fill: #ffffff;
+          opacity: 0.2;
+          transform: rotate(-10deg);
+          pointer-events: none;
+          user-select: none;
+          z-index: 0;
+        }
+
+        h2 {
+          font-size: 2.4rem;
+          font-weight: 600;
+          margin-bottom: 24px;
+          color: #1976d2;
+        }
+
+        h2 span {
+          color: #0d47a1;
+        }
+
+        p {
+          font-size: 1.1rem;
+          line-height: 1.6;
+          margin-bottom: 18px;
+          color: #37474f;
+        }
+
+        strong {
+          color: #1565c0;
+          font-weight: 600;
+        }
+
+        .btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          background: #1976d2;
+          color: #ffffff;
+          padding: 14px 32px;
+          font-weight: 600;
+          font-size: 1.1rem;
+          border-radius: 50px;
+          text-decoration: none;
+          box-shadow: 0 8px 20px rgba(25, 118, 210, 0.25);
+          transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn:hover {
+          background: #1565c0;
+          transform: translateY(-2px);
+        }
+
+        .btn svg {
+          width: 22px;
+          height: 22px;
+          fill: #ffffff;
+        }
+
+        .footer {
+          margin-top: 36px;
+          font-size: 0.9rem;
+          color: #90a4ae;
+        }
+
+        @keyframes fadeInUp {
+          0% {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @media (max-width: 480px) {
+          .card {
+            padding: 40px 25px;
+          }
+          h2 {
+            font-size: 2rem;
+          }
+          .btn {
+            padding: 12px 24px;
+            font-size: 1rem;
+          }
+        }
+    </style>
+</head>
+<body>
+<div class="card" role="main" aria-label="Bienvenida a TicketLite">
+    <svg class="decor" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+        <path d="M54 10H10a6 6 0 00-6 6v32a6 6 0 006 6h44a6 6 0 006-6V16a6 6 0 00-6-6zm-5 27a5 5 0 110-10 5 5 0 010 10z"/>
+    </svg>
+
+    <h2>¡Hola <span th:text="${name}">Usuario</span>!</h2>
+    <p>Bienvenido a <strong>TicketLite</strong>, tu plataforma confiable para comprar entradas de eventos.</p>
+    <p>Nos alegra que formes parte de nuestra comunidad. Haz clic en el botón para comenzar tu experiencia:</p>
+    <a href="https://tusitio.com" class="btn" role="button" aria-label="Explorar eventos">
+        Explorar eventos
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+    </a>
+    <div class="footer">© 2025 TicketLite · Todos los derechos reservados</div>
+</div>
+</body>
+</html>

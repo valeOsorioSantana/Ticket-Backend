@@ -1,13 +1,3 @@
-# IntelliJ
-.idea/
-*.iml
-
-
-# Maven / Gradle
-target/
-build/
-
-# Java
-*.class
-
-**/application.properties
+".env" 
+"/target" 
+"*.iml" 
