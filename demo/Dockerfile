@@ -9,11 +9,10 @@ RUN mvn clean install -DskipTests -B
 # Etapa 2: runtime con JDK ligero y bash instalado
 FROM eclipse-temurin:21-jre
 
-# Instala bash en runtime
-RUN apt-get update && apt-get install -y bash && apt-get clean
+# Instala bash en runtime y limpia cache para reducir tamaño
+RUN apt-get update && apt-get install -y --no-install-recommends bash && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 COPY --from=build /app/target/demo-0.0.1-SNAPSHOT.jar /app/demo.jar
 
-# Comando para ejecutar la app
 CMD ["java", "-jar", "/app/demo.jar"]
