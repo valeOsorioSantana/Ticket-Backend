@@ -1,18 +1,19 @@
-# Etapa 1: Compilación
+# Etapa 1: build con Maven y JDK
 FROM maven:3.9.6-eclipse-temurin-21 AS build
 
 WORKDIR /app
 COPY . /app/
-RUN mvn clean install -DskipTests -B && \
-    mvn dependency:list -DoutputFile=target/mvn-dependency-list.log -B
 
-# Etapa 2: Runtime con bash instalado
-FROM eclipse-temurin:21-jdk-jammy
+RUN mvn clean install -DskipTests -B
 
-# Instala bash
-RUN apt-get update && apt-get install -y bash
+# Etapa 2: runtime con JDK ligero y bash instalado
+FROM eclipse-temurin:21-jre
+
+# Instala bash en runtime
+RUN apt-get update && apt-get install -y bash && apt-get clean
 
 WORKDIR /app
-COPY --from=build /app/target/demo-0.0.1-SNAPSHOT.jar /app/app.jar
+COPY --from=build /app/target/demo-0.0.1-SNAPSHOT.jar /app/demo.jar
 
-CMD ["java", "-jar", "/app/app.jar"]
+# Comando para ejecutar la app
+CMD ["java", "-jar", "/app/demo.jar"]
