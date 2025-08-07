@@ -6,11 +6,10 @@ COPY . /app/
 
 RUN mvn clean install -DskipTests -B
 
-# Etapa 2: runtime con JDK ligero y bash instalado
-FROM eclipse-temurin:21-jre
+# Etapa 2: runtime con JDK ligero basado en Ubuntu Jammy para poder instalar bash
+FROM eclipse-temurin:21-jre-jammy
 
-# Instala bash en runtime y limpia cache para reducir tamaño
-RUN apt-get update && apt-get install -y --no-install-recommends bash && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y bash && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 COPY --from=build /app/target/demo-0.0.1-SNAPSHOT.jar /app/demo.jar
