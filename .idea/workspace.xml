@@ -4,27 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7669594b-f4c7-44a9-b2a2-f80a934c30ce" name="Changes" comment="Prueba 2&#10;Deploy">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/.env.example" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/demo/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/demo/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/controller/EventsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/controller/EventsController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/service/EventAnalyticsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/service/EventAnalyticsService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/service/EventsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/service/EventsService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/service/ImageService.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/service/ImageService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/service/NotificationsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/service/NotificationsService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/service/PasswordRecoveryServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/service/PasswordRecoveryServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/service/PaymentsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/service/PaymentsService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/service/RegistrationsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/service/RegistrationsService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/service/SessionsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/service/SessionsService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/service/TicketsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/service/TicketsService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/target/demo-0.0.1-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/demo-0.0.1-SNAPSHOT.jar.original" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/target/surefire-reports/TEST-com.ticketlite.demo.DemoApplicationTests.xml" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/surefire-reports/TEST-com.ticketlite.demo.DemoApplicationTests.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/target/surefire-reports/TEST-com.ticketlite.demo.controller.EventsControllerTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/surefire-reports/TEST-com.ticketlite.demo.controller.EventsControllerTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/target/surefire-reports/com.ticketlite.demo.DemoApplicationTests.txt" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/surefire-reports/com.ticketlite.demo.DemoApplicationTests.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/target/surefire-reports/com.ticketlite.demo.controller.EventsControllerTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/surefire-reports/com.ticketlite.demo.controller.EventsControllerTest.txt" afterDir="false" />
-    </list>
+    <list default="true" id="7669594b-f4c7-44a9-b2a2-f80a934c30ce" name="Changes" comment="Prueba 2&#10;Deploy" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
