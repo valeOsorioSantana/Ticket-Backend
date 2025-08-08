@@ -14,4 +14,5 @@ RUN apt-get update && apt-get install -y openjdk-21-jre-headless bash && rm -rf 
 WORKDIR /app
 COPY --from=build /app/target/demo-0.0.1-SNAPSHOT.jar /app/demo.jar
 
-CMD ["java", "-jar", "/app/demo.jar"]
+# Spring Boot detectará variables de entorno pasadas en el run
+ENTRYPOINT ["java", "-jar", "/app/demo.jar"]
