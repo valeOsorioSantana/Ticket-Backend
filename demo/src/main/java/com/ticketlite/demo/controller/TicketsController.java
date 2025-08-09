@@ -98,10 +98,10 @@ public class TicketsController {
             @ApiResponse(responseCode = "500", description = "Error interno al procesar la solicitud")
     })
 
-    @GetMapping("/users/{usersId}")
-    public ResponseEntity<?> getTicketByUser(@PathVariable Long usersId){
+    @GetMapping("/users/{userId}")
+    public ResponseEntity<?> getTicketByUser(@PathVariable Long userId){
         try {
-            List<TicketsEntity> tickets = ticketsService.getTicketByUserID(usersId);
+            List<TicketsEntity> tickets = ticketsService.getTicketByUserID(userId);
             if (tickets.isEmpty()) {
                 return ResponseEntity.status(HttpStatus.NO_CONTENT).body("No hay tickets para este usuario.");
             }

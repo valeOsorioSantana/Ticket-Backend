@@ -8,5 +8,5 @@ import java.util.Optional;
 
 public interface TicketsRepository extends JpaRepository<TicketsEntity,Long> {
     Optional<TicketsEntity> findByRegistrationId(Long registrationId);
-    List<TicketsEntity>findByUsers_Id(Long usersId);
+    List<TicketsEntity>findByUser_Id(Long userId);
 }

@@ -63,8 +63,8 @@ public class TicketsService {
     }
 
     //obtener ticket por ID de usuario
-    public List<TicketsEntity> getTicketByUserID(Long usersId) {
-        return ticketsRepository.findByUsers_Id(usersId);
+    public List<TicketsEntity> getTicketByUserID(Long userId) {
+        return ticketsRepository.findByUser_Id(userId);
 
     }
 
