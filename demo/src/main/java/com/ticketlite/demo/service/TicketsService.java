@@ -78,9 +78,11 @@ public class TicketsService {
 
             ticket.setRegistration(registration);
             ticket.setEvent(registration.getEvents());
+            ticket.setUser(registration.getUsers());
+
             String contenido = """
                 TICKET ID: %s EVENTO: %s FECHA: %s USUARIO: %s TIPO: %s PRECIO: %s
-        """.formatted(ticket.getId(),registration.getEvents().getName(),registration.getEvents().getStartDate(),registration.getUsers().getEmail(),registration.getTicketType(),registration.getPrice()
+        """.formatted(UUID.randomUUID(),registration.getEvents().getName(),registration.getEvents().getStartDate(),registration.getUsers().getEmail(),registration.getTicketType(),registration.getPrice()
             );
             byte[] imagenQR = generarQrComoBytes(contenido);
             String base64 = "data:image/png;base64," + Base64.getEncoder().encodeToString(imagenQR);
@@ -97,7 +99,6 @@ public class TicketsService {
             String email = registration.getUsers().getEmail();
             String mensaje = "Gracias por tu compra. Aquí tienes tu entrada adjunta con código QR.";
             emailServiceImple.enviarTicketConQR(email, "Tu entrada para " + registration.getEvents().getName(), mensaje, imagenQR);
-
 
             return ticket;
 
