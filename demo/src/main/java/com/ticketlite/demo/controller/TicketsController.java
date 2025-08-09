@@ -88,6 +88,29 @@ public class TicketsController {
         }
     }
 
+    //obtener ticket por ID de usuario
+    @Operation(summary = "Obtiene ticket por ID de usuario", description = "obtiene ticket por ID de usuario en la base de datos")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Ticket encontrado exitosamente",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = TicketsEntity.class))),
+            @ApiResponse(responseCode = "404", description = "Ticket no encontrado"),
+            @ApiResponse(responseCode = "500", description = "Error interno al procesar la solicitud")
+    })
+
+    @GetMapping("/users/{usersId}")
+    public ResponseEntity<?> getTicketByUser(@PathVariable Long usersId){
+        try {
+            List<TicketsEntity> tickets = ticketsService.getTicketByUserID(usersId);
+            if (tickets.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NO_CONTENT).body("No hay tickets para este usuario.");
+            }
+            return ResponseEntity.ok(tickets);
+        }catch (Exception e){
+            return ResponseEntity.status(500).body("Error interno al procesar la solicitud");
+        }
+    }
+
     //POST
     @Operation(summary = "Guardar un ticket", description = "Crea y guarda un nuevo ticket en la base de datos")
     @ApiResponses(value = {

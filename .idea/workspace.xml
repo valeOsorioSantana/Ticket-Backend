@@ -6,6 +6,24 @@
   <component name="ChangeListManager">
     <list default="true" id="7669594b-f4c7-44a9-b2a2-f80a934c30ce" name="Changes" comment="Prueba 2&#10;Deploy">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/model/TicketsEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/model/TicketsEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/model/repository/TicketsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/model/repository/TicketsRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/service/TicketsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/service/TicketsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/controller/EventsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/controller/EventsController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/service/EventAnalyticsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/service/EventAnalyticsService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/service/EventsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/service/EventsService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/service/ImageService.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/service/ImageService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/service/NotificationsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/service/NotificationsService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/service/PasswordRecoveryServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/service/PasswordRecoveryServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/service/PaymentsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/service/PaymentsService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/service/RegistrationsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/service/RegistrationsService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/service/SessionsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/service/SessionsService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/service/TicketsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/service/TicketsService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/example.application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,21 +62,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;JAR Application.demo-0.0.1-SNAPSHOT.jar.executor&quot;: &quot;Debug&quot;,
-    &quot;Maven.demo [org.springframework.boot:spring-boot-maven-plugin:3.5.0:run].executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Vale/Documents/Material de Estudio y Programacion/Codigos/Java/BackendTicketLite/demo/src/main/resources&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "JAR Application.demo-0.0.1-SNAPSHOT.jar.executor": "Debug",
+    "Maven.demo [org.springframework.boot:spring-boot-maven-plugin:3.5.0:run].executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/Vale/Documents/Material de Estudio y Programacion/Codigos/Java/BackendTicketLite",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\resources" />

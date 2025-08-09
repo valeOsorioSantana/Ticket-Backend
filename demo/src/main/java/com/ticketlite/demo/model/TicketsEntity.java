@@ -38,16 +38,21 @@ public class TicketsEntity {
     @Schema(description = "Estado del ticket", example = "Cancelada")
     private boolean cancelada;
 
+    @ManyToOne
+    @JoinColumn(name = "users_id",nullable = false)
+    private  UsersEntity users;
+
     // Constructor
 
 
-    public TicketsEntity(Long id, RegistrationsEntity registration, EventsEntity event, LocalDateTime issuedAt, String qrCode, boolean cancelada) {
+    public TicketsEntity(UsersEntity users, Long id, RegistrationsEntity registration, EventsEntity event, LocalDateTime issuedAt, String qrCode, boolean cancelada) {
         this.id = id;
         this.registration = registration;
         this.event = event;
         this.issuedAt = issuedAt;
         this.qrCode = qrCode;
         this.cancelada = cancelada;
+        this.users = users;
     }
 
     public TicketsEntity() {}
@@ -100,5 +105,13 @@ public class TicketsEntity {
 
     public void setCancelada(boolean cancelada) {
         this.cancelada = cancelada;
+    }
+
+    public UsersEntity getUsers() {
+        return users;
+    }
+
+    public void setUsers(UsersEntity users) {
+        this.users = users;
     }
 }

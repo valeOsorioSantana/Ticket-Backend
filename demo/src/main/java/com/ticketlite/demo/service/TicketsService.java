@@ -62,6 +62,12 @@ public class TicketsService {
         return ticketsRepository.findByRegistrationId(registrationId).orElseThrow(() -> new NotFoundException("Ticket no encontrado para el registro con ID: " + registrationId));
     }
 
+    //obtener ticket por ID de usuario
+    public List<TicketsEntity> getTicketByUserID(Long usersId) {
+        return ticketsRepository.findByUsers_Id(usersId);
+
+    }
+
     //POST
     //crear un ticket
     public TicketsEntity createTicket(Long registrationId) {
