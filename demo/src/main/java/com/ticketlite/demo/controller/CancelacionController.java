@@ -63,7 +63,7 @@ public class CancelacionController {
                     .body(new ReembolsoRespuestaDTO(null, 0, "ERROR", "La entrada no tiene evento asociado."));
         }
 
-        PoliticaCancelacion politica = politicaRepo.findByEventId(evento.getId());
+        PoliticaCancelacion politica = politicaRepo.findAll().stream().findFirst().orElse(null);
 
         if (politica == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)

@@ -133,23 +133,4 @@ public class TicketsController {
             return ResponseEntity.status(500).body("Error interno al procesar la solicitud");
         }
     }
-
-    //DELETE
-    @Operation(summary = "Eliminar un ticket", description = "Elimina un ticket en la base de datos")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Se Elimino correctamente el ticket",
-                    content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = TicketsEntity.class))),
-            @ApiResponse(responseCode = "404", description = "ticket no encontrado"),
-    })
-
-    @DeleteMapping("/{ticketId}")
-    public ResponseEntity<?> deleteTicket(@PathVariable Long ticketId){
-        try {
-            ticketsService.deleteTicket(ticketId);
-            return ResponseEntity.ok("Ticket eliminado Correctamente.");
-        }catch (RuntimeException e){
-            return ResponseEntity.status(404).body(e.getMessage());
-        }
-    }
 }

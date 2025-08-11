@@ -13,17 +13,12 @@ public class PoliticaCancelacion {
     @Column(name = "porcentaje_reembolso", nullable = false)
     private double porcentajeReembolso;
 
-    @OneToOne
-    @JoinColumn(name = "event_id", referencedColumnName = "id", nullable = false)
-    private EventsEntity event;
-
     //Constructor
 
-    public PoliticaCancelacion(Long id, int diasPreviosPermitidos, double porcentajeReembolso, EventsEntity event) {
+    public PoliticaCancelacion(Long id, int diasPreviosPermitidos, double porcentajeReembolso) {
         this.id = id;
         this.diasPreviosPermitidos = diasPreviosPermitidos;
         this.porcentajeReembolso = porcentajeReembolso;
-        this.event = event;
     }
 
     public PoliticaCancelacion() {
@@ -53,13 +48,5 @@ public class PoliticaCancelacion {
 
     public void setPorcentajeReembolso(double porcentajeReembolso) {
         this.porcentajeReembolso = porcentajeReembolso;
-    }
-
-    public EventsEntity getEvent() {
-        return event;
-    }
-
-    public void setEvent(EventsEntity event) {
-        this.event = event;
     }
 }

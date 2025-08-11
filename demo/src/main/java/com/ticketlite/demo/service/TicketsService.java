@@ -109,15 +109,6 @@ public class TicketsService {
         }
     }
 
-    //DELETE
-    public void deleteTicket (Long ticketId){
-        if (ticketsRepository.existsById(ticketId)){
-            ticketsRepository.deleteById(ticketId);
-        }else {
-            throw new RuntimeException("Ticket no encontrado por ID: " + ticketId);
-        }
-    }
-
     //Generar QR como imagen
     public byte[] generarQrComoBytes(String contenido) {
         try {
