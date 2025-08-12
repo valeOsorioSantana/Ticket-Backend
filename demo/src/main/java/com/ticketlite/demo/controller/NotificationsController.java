@@ -138,7 +138,7 @@ public class NotificationsController {
     })
 
     @DeleteMapping("/{notificationId}")
-    public ResponseEntity<String> deleteNoti(@PathVariable Long notificationId){
+    public ResponseEntity<String> deleteNoti(@PathVariable("notificationId") Long notificationId){
         try {
             notificationsService.deleteNoti(notificationId);
 
