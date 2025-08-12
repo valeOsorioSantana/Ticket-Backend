@@ -116,7 +116,7 @@ public class NotificationsController {
     })
 
     @PutMapping("/{userId}/mark-all-as-read")
-    public ResponseEntity<?>markAllNotiRead(@RequestParam Long userId){
+    public ResponseEntity<?>markAllNotiRead(@PathVariable Long userId){
         try {
             notificationsService.markAllNotiRead(userId);
             return ResponseEntity.ok("Notificaciones marcadas como leidas.");
