@@ -92,7 +92,7 @@ public class NotificationsController {
     })
 
     @PutMapping("/{id}/mark-as-read")
-    public ResponseEntity<?>markRead(@RequestParam Long notificationId){
+    public ResponseEntity<?>markRead(@PathVariable Long notificationId){
         try {
             NotificationsEntity notifications = notificationsService.markRead(notificationId);
 
