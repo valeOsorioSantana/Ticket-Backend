@@ -90,8 +90,7 @@ public class NotificationsController {
             @ApiResponse(responseCode = "404", description = "Notificacion no encontrada"),
             @ApiResponse(responseCode = "500", description = "Error interno al marcar la notificacion como leida")
     })
-
-    @PutMapping("/{id}/mark-as-read")
+    @PutMapping("/{notificationId}/mark-as-read")
     public ResponseEntity<?>markRead(@PathVariable Long notificationId){
         try {
             NotificationsEntity notifications = notificationsService.markRead(notificationId);
@@ -114,7 +113,6 @@ public class NotificationsController {
             @ApiResponse(responseCode = "404", description = "No hay notificaciones no leídas"),
             @ApiResponse(responseCode = "500", description = "Error interno al marcar notificaciones como leidas")
     })
-
     @PutMapping("/{userId}/mark-all-as-read")
     public ResponseEntity<?>markAllNotiRead(@PathVariable Long userId){
         try {
