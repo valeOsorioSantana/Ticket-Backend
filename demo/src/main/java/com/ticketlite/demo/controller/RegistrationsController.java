@@ -47,15 +47,16 @@ public class RegistrationsController {
     })
 
     @GetMapping("/user/{userId}")
-    public ResponseEntity<?> getRegistrationsByUser(@PathVariable Long userId){
+    public ResponseEntity<?> getRegistrationsByUser(@PathVariable Long userId) {
         try {
             List<RegistrationDTO> register = registrationsService.getRegistrationsDTOByUser(userId);
             return ResponseEntity.status(HttpStatus.OK).body(register);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(500).body("Error interno al procesar la solicitud");
         }
     }
+
     //obtener registros por evento
     @Operation(summary = "Buscar registros por evento", description = "Busca un registro por evento en la base de datos")
     @ApiResponses(value = {
@@ -67,7 +68,7 @@ public class RegistrationsController {
     })
 
     @GetMapping("/event/{eventId}")
-    public ResponseEntity<?> getRegistrationsByEvent(@PathVariable Long eventId){
+    public ResponseEntity<?> getRegistrationsByEvent(@PathVariable Long eventId) {
         try {
             List<RegistrationsEntity> register = registrationsService.getRegistrationsByEvent(eventId);
             if (register == null || register.isEmpty()) {
@@ -75,7 +76,7 @@ public class RegistrationsController {
             }
 
             return ResponseEntity.ok(register);
-        }catch (Exception e){
+        } catch (Exception e) {
             return ResponseEntity.status(500).body("Error interno al procesar la solicitud");
         }
     }
@@ -105,9 +106,9 @@ public class RegistrationsController {
             RegistrationDTO dto = registrationsService.convertToDTO(result);
 */
             return ResponseEntity.status(HttpStatus.CREATED).body("Registro creado con ID: " + result.getId());
-        }catch (NotFoundException e){
+        } catch (NotFoundException e) {
             return ResponseEntity.status(404).body(e.getMessage());
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(500).body("Error interno al crear el registro");
         }
@@ -124,17 +125,20 @@ public class RegistrationsController {
     })
 
     @PutMapping("/{registrationId}")
-    public ResponseEntity<String>updateRegistrationDetails(@PathVariable Long registrationId,@RequestBody RegistrationsEntity registration){
+    public ResponseEntity<String> updateRegistrationDetails(
+            @PathVariable Long registrationId,
+            @RequestBody RegistrationsEntity registration) {
         try {
-            if (registration.getId() == null || !registration.getId().equals(registrationId)) {
+            if (registration.getId() != null && !registration.getId().equals(registrationId)) {
                 return ResponseEntity.badRequest().body("El ID del path no coincide con el del registro.");
             }
+            registration.setId(registrationId); // <- toma el id del path
             RegistrationsEntity result = registrationsService.updateRegistrationDetails(registration);
             RegistrationDTO dto = registrationsService.convertToDTO(result);
-            return ResponseEntity.ok("Registro actualizado con exito."+dto);
-        }catch (NotFoundException e){
+            return ResponseEntity.ok("Registro actualizado con exito." + dto);
+        } catch (NotFoundException e) {
             return ResponseEntity.status(404).body(e.getMessage());
-        }catch (Exception e){
+        } catch (Exception e) {
             return ResponseEntity.status(500).body("Error interno al actualizar el registro");
         }
     }
@@ -149,11 +153,11 @@ public class RegistrationsController {
     })
 
     @DeleteMapping("/{registrationId}")
-    public ResponseEntity<String> deleteRegistration(@PathVariable Long registrationId){
+    public ResponseEntity<String> deleteRegistration(@PathVariable Long registrationId) {
         try {
             registrationsService.deleteRegistration(registrationId);
             return ResponseEntity.ok("Registro eliminado Correctamente.");
-        }catch (RuntimeException e){
+        } catch (RuntimeException e) {
             return ResponseEntity.status(404).body(e.getMessage());
         }
     }
