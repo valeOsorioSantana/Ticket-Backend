@@ -15,12 +15,14 @@ public interface EventsRepository extends JpaRepository<EventsEntity, Long> {
     List<EventsEntity> findByStartDateBetween(LocalDateTime startDate, LocalDateTime endDate);
 
     @Query(value = """
-            SELECT * FROM events e
+            SELECT * 
+            FROM events e
             WHERE ST_DistanceSphere(
                 ST_MakePoint(:lon, :lat),
-                ST_MakePoint(e.longitude, e.latitude)
+                e.location
             ) <= :radius
-            """, nativeQuery = true)
+            """,
+            nativeQuery = true)
     List<EventsEntity> findEventsNearby(
             @Param("lat") double lat,
             @Param("lon") double lon,
