@@ -123,10 +123,10 @@ public class RegistrationsController {
             @ApiResponse(responseCode = "500", description = "Error interno al actualizar el registro")
     })
 
-    @PutMapping("/{id}")
-    public ResponseEntity<String>updateRegistrationDetails(@PathVariable Long id,@RequestBody RegistrationsEntity registration){
+    @PutMapping("/{registrationId}")
+    public ResponseEntity<String>updateRegistrationDetails(@PathVariable Long registrationId,@RequestBody RegistrationsEntity registration){
         try {
-            if (registration.getId() == null || !registration.getId().equals(id)) {
+            if (registration.getId() == null || !registration.getId().equals(registrationId)) {
                 return ResponseEntity.badRequest().body("El ID del path no coincide con el del registro.");
             }
             RegistrationsEntity result = registrationsService.updateRegistrationDetails(registration);
