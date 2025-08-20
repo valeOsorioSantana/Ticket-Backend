@@ -7,6 +7,8 @@ import com.ticketlite.demo.model.repository.PoliticaCancelacionRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 public class PoliticaCancelacionInitializer implements CommandLineRunner {
 
@@ -22,9 +24,15 @@ public class PoliticaCancelacionInitializer implements CommandLineRunner {
     public void run(String... args) throws Exception {
         // Si ya existe una política, no hacer nada
         if (politicaRepo.count() == 0) {
-            Long eventId = 1L;
+            Long idEvento = 1L;
+            Optional<EventsEntity> opt = eventsRepository.findById(idEvento);
 
-            EventsEntity evento = eventsRepository.findById(eventId).orElseThrow(() -> new RuntimeException("Evento no encontrado"));
+            if (opt.isEmpty()) {
+                System.out.println("No existe evento con ID="+idEvento+" (la BD está vacía). Se omite creación de política.");
+                return; // <-- salimos y permitimos que la app siga arrancando
+            }
+
+            EventsEntity evento = opt.get();
 
             PoliticaCancelacion politica = new PoliticaCancelacion();
             politica.setDiasPreviosPermitidos(7); // Ejemplo: se puede cancelar hasta 7 días antes

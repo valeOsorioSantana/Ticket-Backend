@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="7669594b-f4c7-44a9-b2a2-f80a934c30ce" name="Changes" comment="Prueba 2&#10;Deploy">
       <change afterPath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/config/PoliticaCancelacionInitializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/demo/.env" beforeDir="false" afterPath="$PROJECT_DIR$/demo/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/controller/CancelacionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/controller/CancelacionController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/controller/ImageController.java" beforeDir="false" />
