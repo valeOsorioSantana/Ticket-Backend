@@ -43,6 +43,17 @@ public class UsersController {
     //Metodos
 
     //JWT
+
+    @Operation(
+            summary = "Obtener perfil del usuario autenticado",
+            description = "Devuelve la información del usuario actualmente autenticado mediante JWT"
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Perfil obtenido correctamente",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = UsersEntity.class))),
+            @ApiResponse(responseCode = "401", description = "No autenticado o token inválido")
+    })
     @GetMapping("/me")
     public ResponseEntity<?> getProfile(@AuthenticationPrincipal UsersEntity user) {
         return ResponseEntity.ok(user);
@@ -108,7 +119,7 @@ public class UsersController {
     @Parameters({
             @Parameter(name = "user", description = "Indica si el usuario es de tipo común (true) o no (false)", required = true)
     })
-    //@PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('USER')")
     @PostMapping("/{user}")
     public ResponseEntity<?> saveUser(@Valid @RequestBody CreateUserRequest request, @PathVariable boolean user) {
         try {

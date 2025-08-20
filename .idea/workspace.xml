@@ -6,12 +6,24 @@
   <component name="ChangeListManager">
     <list default="true" id="7669594b-f4c7-44a9-b2a2-f80a934c30ce" name="Changes" comment="Prueba 2&#10;Deploy">
       <change afterPath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/config/PoliticaCancelacionInitializer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo/src/main/resources/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo/src/main/resources/application-dev.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo/src/main/resources/application-prod.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo/src/test/java/com/ticketlite/demo/controller/SessionsControllerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo/src/test/java/com/ticketlite/demo/controller/TicketsControllerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/demo/.env" beforeDir="false" afterPath="$PROJECT_DIR$/demo/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/controller/AuthController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/controller/CancelacionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/controller/CancelacionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/controller/EventsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/controller/EventsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/controller/FavoritoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/controller/FavoritoController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/controller/ImageController.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/controller/NotificationsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/controller/NotificationsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/controller/PasswordRecoveryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/controller/PasswordRecoveryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/controller/RecommendationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/controller/RecommendationController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/controller/RegistrationsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/controller/RegistrationsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/controller/SatisfactionSurveyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/controller/SatisfactionSurveyController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/controller/SessionsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/controller/SessionsController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/controller/TicketsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/controller/TicketsController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/controller/UsersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/controller/UsersController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/model/PoliticaCancelacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/model/PoliticaCancelacion.java" afterDir="false" />
@@ -20,21 +32,42 @@
       <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/model/repository/PoliticaCancelacionRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/model/repository/PoliticaCancelacionRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/model/repository/TicketsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/model/repository/TicketsRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/service/TicketsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/ticketlite/demo/service/TicketsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/resources/templates/cancelacion-email.html" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/resources/templates/cancelacion-email.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/resources/templates/welcome-email.html" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/resources/templates/welcome-email.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/test/java/com/ticketlite/demo/controller/EventsControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/test/java/com/ticketlite/demo/controller/EventsControllerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/demo/target/classes/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/controller/AuthController.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/controller/AuthController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/controller/CancelacionController.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/controller/CancelacionController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/controller/EventsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/controller/EventsController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/service/EventAnalyticsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/service/EventAnalyticsService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/service/EventsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/service/EventsService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/service/ImageService.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/service/ImageService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/service/NotificationsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/service/NotificationsService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/service/PasswordRecoveryServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/service/PasswordRecoveryServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/service/PaymentsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/service/PaymentsService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/service/RegistrationsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/service/RegistrationsService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/service/SessionsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/service/SessionsService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/controller/FavoritoController$FavoritoRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/controller/FavoritoController$FavoritoRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/controller/FavoritoController.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/controller/FavoritoController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/controller/ImageController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/controller/NotificationsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/controller/NotificationsController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/controller/PasswordRecoveryController.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/controller/PasswordRecoveryController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/controller/RecommendationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/controller/RecommendationController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/controller/RegistrationsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/controller/RegistrationsController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/controller/SatisfactionSurveyController.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/controller/SatisfactionSurveyController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/controller/SessionsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/controller/SessionsController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/controller/TicketsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/controller/TicketsController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/controller/UsersController.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/controller/UsersController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/model/PoliticaCancelacion.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/model/PoliticaCancelacion.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/model/TicketsEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/model/TicketsEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/model/repository/EventsRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/model/repository/EventsRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/model/repository/PoliticaCancelacionRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/model/repository/PoliticaCancelacionRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/model/repository/TicketsRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/model/repository/TicketsRepository.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/service/TicketsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/com/ticketlite/demo/service/TicketsService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/demo/target/classes/example.application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/templates/cancelacion-email.html" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/templates/cancelacion-email.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/templates/welcome-email.html" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/templates/welcome-email.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/demo/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/demo/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/demo/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/surefire-reports/TEST-com.ticketlite.demo.DemoApplicationTests.xml" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/surefire-reports/TEST-com.ticketlite.demo.DemoApplicationTests.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/surefire-reports/TEST-com.ticketlite.demo.controller.EventsControllerTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/surefire-reports/TEST-com.ticketlite.demo.controller.EventsControllerTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/surefire-reports/com.ticketlite.demo.DemoApplicationTests.txt" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/surefire-reports/com.ticketlite.demo.DemoApplicationTests.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/surefire-reports/com.ticketlite.demo.controller.EventsControllerTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/surefire-reports/com.ticketlite.demo.controller.EventsControllerTest.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/test-classes/com/ticketlite/demo/controller/EventsControllerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/test-classes/com/ticketlite/demo/controller/EventsControllerTest.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,21 +106,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;JAR Application.demo-0.0.1-SNAPSHOT.jar.executor&quot;: &quot;Run&quot;,
-    &quot;Maven.demo [org.springframework.boot:spring-boot-maven-plugin:3.5.0:run].executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Vale/Documents/Material de Estudio y Programacion/Codigos/Java/BackendTicketLite&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "JAR Application.demo-0.0.1-SNAPSHOT.jar.executor": "Run",
+    "JUnit.DemoApplicationTests.contextLoads.executor": "Run",
+    "JUnit.EventsControllerTest.testGetAllEvents.executor": "Run",
+    "JUnit.EventsControllerTest.testGetEventByIdException.executor": "Run",
+    "JUnit.EventsControllerTest.testGetEventByIdFound.executor": "Run",
+    "JUnit.EventsControllerTest.testGetEventByIdNotFound.executor": "Run",
+    "JUnit.SessionsControllerTest.executor": "Run",
+    "JUnit.SessionsControllerTest.testSaveSessionEventNotFound.executor": "Run",
+    "JUnit.SessionsControllerTest.testSaveSessionInternalError.executor": "Run",
+    "JUnit.SessionsControllerTest.testSaveSessionSuccess.executor": "Run",
+    "JUnit.TicketsControllerTest.executor": "Run",
+    "JUnit.TicketsControllerTest.testGetTicketByIdException.executor": "Run",
+    "JUnit.TicketsControllerTest.testGetTicketByIdFound.executor": "Run",
+    "Maven.demo [org.springframework.boot:spring-boot-maven-plugin:3.5.0:run].executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/Vale/Documents/Material de Estudio y Programacion/Codigos/Java/BackendTicketLite",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\resources" />
@@ -97,14 +142,93 @@
       <recent name="C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\target" />
     </key>
   </component>
-  <component name="RunManager">
-    <configuration name="demo-0.0.1-SNAPSHOT.jar" type="JarApplication" temporary="true">
-      <option name="JAR_PATH" value="$PROJECT_DIR$/demo/target/demo-0.0.1-SNAPSHOT.jar" />
-      <method v="2" />
+  <component name="RunManager" selected="JUnit.SessionsControllerTest.testSaveSessionInternalError">
+    <configuration name="SessionsControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="demo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ticketlite.demo.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ticketlite.demo.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.ticketlite.demo.controller.SessionsControllerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SessionsControllerTest.testSaveSessionEventNotFound" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="demo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ticketlite.demo.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ticketlite.demo.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.ticketlite.demo.controller.SessionsControllerTest" />
+      <option name="METHOD_NAME" value="testSaveSessionEventNotFound" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SessionsControllerTest.testSaveSessionInternalError" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="demo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ticketlite.demo.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ticketlite.demo.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.ticketlite.demo.controller.SessionsControllerTest" />
+      <option name="METHOD_NAME" value="testSaveSessionInternalError" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SessionsControllerTest.testSaveSessionSuccess" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="demo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ticketlite.demo.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ticketlite.demo.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.ticketlite.demo.controller.SessionsControllerTest" />
+      <option name="METHOD_NAME" value="testSaveSessionSuccess" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TicketsControllerTest.testGetTicketByIdException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="demo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ticketlite.demo.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ticketlite.demo.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.ticketlite.demo.controller.TicketsControllerTest" />
+      <option name="METHOD_NAME" value="testGetTicketByIdException" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JAR Application.demo-0.0.1-SNAPSHOT.jar" />
+        <item itemvalue="JUnit.SessionsControllerTest.testSaveSessionInternalError" />
+        <item itemvalue="JUnit.SessionsControllerTest.testSaveSessionEventNotFound" />
+        <item itemvalue="JUnit.SessionsControllerTest.testSaveSessionSuccess" />
+        <item itemvalue="JUnit.SessionsControllerTest" />
+        <item itemvalue="JUnit.TicketsControllerTest.testGetTicketByIdException" />
       </list>
     </recent_temporary>
   </component>

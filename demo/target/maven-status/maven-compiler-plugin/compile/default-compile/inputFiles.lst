@@ -1,87 +1,87 @@
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\config\corsConfig.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\config\GeometryConfig.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\config\R2Config.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\config\SwaggerConfig.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\controller\AuthController.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\controller\CancelacionController.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\controller\EventAnalyticsController.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\controller\EventsController.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\controller\FavoritoController.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\controller\ImageController.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\controller\NotificationsController.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\controller\PasswordRecoveryController.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\controller\PaymentsController.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\controller\RecommendationController.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\controller\RegistrationsController.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\controller\SatisfactionSurveyController.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\controller\SessionsController.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\controller\TicketsController.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\controller\UsersController.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\DemoApplication.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\DTO\EventCalendarDTO.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\DTO\EventCompleteDTO.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\DTO\EventDTO.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\DTO\ImagenDTO.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\DTO\NotiRespuestaDTO.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\DTO\PaymentRequestDTO.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\DTO\ReembolsoRespuestaDTO.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\DTO\RegistrationDTO.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\DTO\SatisfactionSurveyRequestDTO.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\DTO\SolicitudCancelacionDTO.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\EventAnalyticsEntity.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\EventsEntity.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\FavoritoEntity.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\Imagen.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\NotificationsEntity.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\PasswordTokenEntity.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\PaymentsEntity.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\PoliticaCancelacion.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\Reembolso.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\RegistrationsEntity.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\repository\EventAnalyticsRepository.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\repository\EventsRepository.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\repository\FavoritoRepository.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\repository\ImagenRepository.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\repository\NotificationsRepository.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\repository\PasswordTokenCrudRepository.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\repository\PaymentsRepository.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\repository\PoliticaCancelacionRepository.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\repository\ReembolsoRepository.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\repository\RegistrationsRepository.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\repository\SatisfactionSurveyRepository.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\repository\SessionsRepository.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\repository\TicketsRepository.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\repository\UsersRepository.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\SatisfactionSurveyEntity.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\SessionsEntity.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\TicketsEntity.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\UsersEntity.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\security\CreateUserRequest.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\security\CustomUserDetails.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\security\CustomUserDetailsService.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\security\JwtAuthenticationFilter.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\security\JwtResponse.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\security\JwtService.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\security\LoginRequest.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\security\RegisterRequestDTO.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\security\SecurityConfig.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\service\AuthService.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\service\EmailServiceImple.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\service\EventAnalyticsService.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\service\EventsService.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\service\FavoritoService.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\service\ImageService.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\service\ImageStorageService.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\service\NotificationsService.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\service\PasswordRecoveryServiceImpl.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\service\PaymentsService.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\service\RecommendationService.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\service\RegistrationsService.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\service\SatisfactionSurveyService.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\service\SessionsService.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\service\TicketsService.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\service\UsersService.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\structure\exception\ConflictException.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\structure\exception\NotFoundException.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\structure\json\PointDeserializer.java
-C:\Users\Aprendiz\Documents\BackendTicketLite\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\structure\json\PointSerializer.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\config\corsConfig.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\config\GeometryConfig.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\config\PoliticaCancelacionInitializer.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\config\R2Config.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\config\SwaggerConfig.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\controller\AuthController.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\controller\CancelacionController.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\controller\EventAnalyticsController.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\controller\EventsController.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\controller\FavoritoController.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\controller\NotificationsController.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\controller\PasswordRecoveryController.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\controller\PaymentsController.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\controller\RecommendationController.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\controller\RegistrationsController.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\controller\SatisfactionSurveyController.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\controller\SessionsController.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\controller\TicketsController.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\controller\UsersController.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\DemoApplication.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\DTO\EventCalendarDTO.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\DTO\EventCompleteDTO.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\DTO\EventDTO.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\DTO\ImagenDTO.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\DTO\NotiRespuestaDTO.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\DTO\PaymentRequestDTO.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\DTO\ReembolsoRespuestaDTO.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\DTO\RegistrationDTO.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\DTO\SatisfactionSurveyRequestDTO.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\DTO\SolicitudCancelacionDTO.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\EventAnalyticsEntity.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\EventsEntity.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\FavoritoEntity.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\Imagen.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\NotificationsEntity.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\PasswordTokenEntity.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\PaymentsEntity.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\PoliticaCancelacion.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\Reembolso.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\RegistrationsEntity.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\repository\EventAnalyticsRepository.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\repository\EventsRepository.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\repository\FavoritoRepository.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\repository\ImagenRepository.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\repository\NotificationsRepository.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\repository\PasswordTokenCrudRepository.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\repository\PaymentsRepository.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\repository\PoliticaCancelacionRepository.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\repository\ReembolsoRepository.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\repository\RegistrationsRepository.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\repository\SatisfactionSurveyRepository.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\repository\SessionsRepository.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\repository\TicketsRepository.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\repository\UsersRepository.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\SatisfactionSurveyEntity.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\SessionsEntity.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\TicketsEntity.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\model\UsersEntity.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\security\CreateUserRequest.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\security\CustomUserDetails.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\security\CustomUserDetailsService.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\security\JwtAuthenticationFilter.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\security\JwtResponse.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\security\JwtService.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\security\LoginRequest.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\security\RegisterRequestDTO.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\security\SecurityConfig.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\service\AuthService.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\service\EmailServiceImple.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\service\EventAnalyticsService.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\service\EventsService.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\service\FavoritoService.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\service\ImageService.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\service\ImageStorageService.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\service\NotificationsService.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\service\PasswordRecoveryServiceImpl.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\service\PaymentsService.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\service\RecommendationService.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\service\RegistrationsService.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\service\SatisfactionSurveyService.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\service\SessionsService.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\service\TicketsService.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\service\UsersService.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\structure\exception\ConflictException.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\structure\exception\NotFoundException.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\structure\json\PointDeserializer.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\structure\json\PointSerializer.java

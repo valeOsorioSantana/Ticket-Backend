@@ -36,7 +36,6 @@ import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
-@CrossOrigin(origins = "http://127.0.0.1:5500")
 @RestController
 @RequestMapping("/api/public/events")
 @Tag(name = "Gestión de Eventos", description = "Operaciones CRUD para la administración de eventos")
@@ -57,15 +56,21 @@ public class EventsController {
         this.eventAnalyticsService = eventAnalyticsService;
     }
 
-    @GetMapping("/hello")
-    public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
-        return String.format("Hello %s!", name);
-    }
-
+    @Operation(
+            summary = "Obtener eventos para el calendario",
+            description = "Devuelve una lista de eventos publicados dentro de un rango de fechas (opcional). "
+                    + "Si no se especifican fechas, devuelve todos los eventos publicados."
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Eventos obtenidos exitosamente",
+                    content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            array = @ArraySchema(schema = @Schema(implementation = EventCalendarDTO.class)))),
+            @ApiResponse(responseCode = "204", description = "No se encontraron eventos en el rango especificado")
+    })
     @GetMapping("/calendar")
     public List<EventCalendarDTO> getEventsForCalendar(
-            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start,
-            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end) {
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)@Parameter(description = "Fecha inicial del rango (formato ISO)", example = "2025-01-01T00:00:00") LocalDateTime start,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)@Parameter(description = "Fecha final del rango (formato ISO)", example = "2025-01-31T23:59:59") LocalDateTime end) {
 
         List<EventsEntity> events;
 
@@ -87,11 +92,11 @@ public class EventsController {
                 .collect(toList());
     }
 
-    @Operation(summary = "Obtener todos los eventos", description = "Recupera una lista de todos los eventos")
+    @Operation(summary = "Obtener todos los eventos", description = "Recupera una lista de todos los eventos existentes")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Lista de eventos obtenida exitosamente",
                     content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            array = @ArraySchema(schema = @Schema(implementation = EventsEntity.class)))),
+                            array = @ArraySchema(schema = @Schema(implementation = EventCompleteDTO.class)))),
             @ApiResponse(responseCode = "204", description = "No hay eventos disponibles")
     })
     @GetMapping("/")
@@ -99,31 +104,41 @@ public class EventsController {
         return eventsService.getAllEvents();
     }
 
-    @Operation(summary = "Buscar eventos cercanos", description = "Busca eventos cercanos a una ubicación geográfica")
+    @Operation(summary = "Buscar eventos cercanos", description = "Busca eventos publicados dentro de un radio respecto a una ubicación (lat, lon)")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Eventos encontrados"),
+            @ApiResponse(responseCode = "200", description = "Eventos encontrados correctamente"),
             @ApiResponse(responseCode = "404", description = "No se encontraron eventos cercanos"),
-            @ApiResponse(responseCode = "500", description = "Error interno")
+            @ApiResponse(responseCode = "500", description = "Error interno al procesar la solicitud")
     })
     @GetMapping("/nearby")
     public List<EventCompleteDTO> getEventsNearby(
-            @RequestParam double lat,
-            @RequestParam double lon,
-            @RequestParam(defaultValue = "10000") double radius) {
+            @Parameter(description = "Latitud de la ubicación") @RequestParam double lat,
+            @Parameter(description = "Longitud de la ubicación") @RequestParam double lon,
+            @Parameter(description = "Radio de búsqueda en metros (opcional)", example = "10000") @RequestParam(defaultValue = "10000") double radius) {
         return eventsService.getEventsNearby(lat, lon, radius);
     }
 
+    @Operation(summary = "Filtrar eventos", description = "Filtra eventos por fecha de inicio, fecha de finalización, categoría o estado")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Eventos filtrados correctamente"),
+            @ApiResponse(responseCode = "400", description = "Valor de estado inválido"),
+            @ApiResponse(responseCode = "500", description = "Error interno al procesar la solicitud")
+    })
     @GetMapping("/events/filter")
     public List<EventsEntity> filterEvents(
+            @Parameter(description = "Fecha de inicio (formato ISO)", example = "2025-01-01T00:00:00")
             @RequestParam(required = false)
             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
             LocalDateTime startDate,
 
+            @Parameter(description = "Fecha de fin (formato ISO)", example = "2025-01-31T23:59:59")
             @RequestParam(required = false)
             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
             LocalDateTime endDate,
 
+            @Parameter(description = "Categoría del evento (opcional)")
             @RequestParam(required = false) String category,
+            @Parameter(description = "Estado del evento (opcional)", example = "PUBLICADO")
             @RequestParam(required = false) String status
     ) {
         final EventsEntity.EventStatus statusEnum;

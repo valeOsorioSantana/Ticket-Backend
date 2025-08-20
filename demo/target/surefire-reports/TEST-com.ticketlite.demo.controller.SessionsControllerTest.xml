@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.ticketlite.demo.controller.EventsControllerTest" time="0.909" tests="4" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.ticketlite.demo.controller.SessionsControllerTest" time="0.062" tests="6" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -59,18 +59,10 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="65.0"/>
   </properties>
-  <testcase name="testGetEventByIdException" classname="com.ticketlite.demo.controller.EventsControllerTest" time="0.862">
-    <system-err><![CDATA[Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
-WARNING: A Java agent has been loaded dynamically (C:\Users\Vale\.m2\repository\net\bytebuddy\byte-buddy-agent\1.17.5\byte-buddy-agent-1.17.5.jar)
-WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
-WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
-WARNING: Dynamic loading of agents will be disallowed by default in a future release
-]]></system-err>
-  </testcase>
-  <testcase name="testGetEventByIdNotFound" classname="com.ticketlite.demo.controller.EventsControllerTest" time="0.015"/>
-  <testcase name="testGetAllEvents" classname="com.ticketlite.demo.controller.EventsControllerTest" time="0.0">
-    <system-out><![CDATA[Resultado: [com.ticketlite.demo.DTO.EventCompleteDTO@50825a02, com.ticketlite.demo.DTO.EventCompleteDTO@68809cc7]
-]]></system-out>
-  </testcase>
-  <testcase name="testGetEventByIdFound" classname="com.ticketlite.demo.controller.EventsControllerTest" time="0.0"/>
+  <testcase name="testGetByIdNotFound" classname="com.ticketlite.demo.controller.SessionsControllerTest" time="0.031"/>
+  <testcase name="testSaveSessionSuccess" classname="com.ticketlite.demo.controller.SessionsControllerTest" time="0.0"/>
+  <testcase name="testSaveSessionEventNotFound" classname="com.ticketlite.demo.controller.SessionsControllerTest" time="0.0"/>
+  <testcase name="testGetByIdFound" classname="com.ticketlite.demo.controller.SessionsControllerTest" time="0.0"/>
+  <testcase name="testGetByIdException" classname="com.ticketlite.demo.controller.SessionsControllerTest" time="0.0"/>
+  <testcase name="testSaveSessionInternalError" classname="com.ticketlite.demo.controller.SessionsControllerTest" time="0.015"/>
 </testsuite>

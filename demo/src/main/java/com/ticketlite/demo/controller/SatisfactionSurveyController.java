@@ -4,6 +4,13 @@ import com.ticketlite.demo.DTO.SatisfactionSurveyRequestDTO;
 import com.ticketlite.demo.model.SatisfactionSurveyEntity;
 import com.ticketlite.demo.service.EventAnalyticsService;
 import com.ticketlite.demo.service.SatisfactionSurveyService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +24,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/public/events/satisfaction")
+@Tag(name = "Encuestas de Satisfacción", description = "Permite a los usuarios enviar encuestas de satisfacción para eventos")
 public class SatisfactionSurveyController {
     private final SatisfactionSurveyService surveyService;
     private final EventAnalyticsService eventAnalyticsService;
@@ -27,8 +35,17 @@ public class SatisfactionSurveyController {
         this.eventAnalyticsService = eventAnalyticsService;
     }
 
+    @Operation(summary = "Enviar encuesta de satisfacción",
+            description = "Guarda o actualiza una encuesta de satisfacción para un evento y actualiza las estadísticas asociadas")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Encuesta procesada y estadísticas actualizadas",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Map.class))),
+            @ApiResponse(responseCode = "400", description = "Datos de la encuesta inválidos"),
+            @ApiResponse(responseCode = "500", description = "Error al procesar la encuesta o actualizar estadísticas")
+    })
     @PostMapping
-    public ResponseEntity<?> submitSurvey(@RequestBody @Valid SatisfactionSurveyRequestDTO dto) {
+    public ResponseEntity<?> submitSurvey(@Parameter(description = "Datos de la encuesta de satisfacción", required = true) @RequestBody @Valid SatisfactionSurveyRequestDTO dto) {
         SatisfactionSurveyEntity saved = surveyService.saveOrUpdateSurvey(dto);
 
         try {

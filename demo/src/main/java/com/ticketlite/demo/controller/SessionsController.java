@@ -43,7 +43,6 @@ public class SessionsController {
             @ApiResponse(responseCode = "404", description = "Session no encontrada"),
             @ApiResponse(responseCode = "500", description = "Error interno al procesar la solicitud")
     })
-
     @GetMapping("/{id}")
     public SessionsEntity getById(@PathVariable("id") Long sessionId) {
         return sessionsService.getById(sessionId);
@@ -57,12 +56,19 @@ public class SessionsController {
                             schema = @Schema(implementation = SessionsEntity.class))),
             @ApiResponse(responseCode = "204", description = "No hay sessiones disponibles")
     })
-
     @GetMapping("/event/{eventId}")
     public List<SessionsEntity> getBySessions(@PathVariable Long eventId) {
         return sessionsService.getBySessions(eventId);
     }
 
+    // Obtener un evento por nombre
+    @Operation(summary = "Validar existencia de evento", description = "Verifica si existe un evento asociado al nombre proporcionado")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Evento encontrado correctamente",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = EventsEntity.class))),
+            @ApiResponse(responseCode = "404", description = "Evento no encontrado")
+    })
     @GetMapping("/name/{eventName}")
     public EventsEntity eventExistsByName (@PathVariable String eventName){
         return sessionsService.getEventByName(eventName);

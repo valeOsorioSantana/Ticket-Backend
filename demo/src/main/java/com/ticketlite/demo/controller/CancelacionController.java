@@ -10,6 +10,13 @@ import com.ticketlite.demo.model.repository.PoliticaCancelacionRepository;
 import com.ticketlite.demo.model.repository.ReembolsoRepository;
 import com.ticketlite.demo.model.repository.TicketsRepository;
 import com.ticketlite.demo.service.EmailServiceImple;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +32,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/cancelacion")
+@Tag(name = "Gestión de Cancelacion y Reembolso", description = "Operaciones para solicitar la cancelación de entradas y gestionar reembolsos")
 public class CancelacionController {
 
     private TicketsRepository ticketRepo;
@@ -40,8 +48,21 @@ public class CancelacionController {
         this.emailService = emailService;
     }
 
+    @Operation(
+            summary = "Solicitar reembolso de una entrada",
+            description = "Permite cancelar una entrada asociada a un evento y registrar la solicitud de reembolso, "
+                    + "siempre y cuando se cumplan las políticas de cancelación definidas."
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Reembolso solicitado con éxito",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ReembolsoRespuestaDTO.class))),
+            @ApiResponse(responseCode = "400", description = "Solicitud inválida o no cumple con la política de cancelación"),
+            @ApiResponse(responseCode = "404", description = "Entrada no encontrada"),
+            @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+    })
     @PostMapping("/{ticketId}/cancelar")
-    public ResponseEntity<ReembolsoRespuestaDTO> cancelarEntrada(@RequestBody SolicitudCancelacionDTO dto) {
+    public ResponseEntity<ReembolsoRespuestaDTO> cancelarEntrada(@Parameter(description = "Datos para procesar la cancelación", required = true)@RequestBody SolicitudCancelacionDTO dto) {
 
         Optional<TicketsEntity> optTicket = ticketRepo.findById(dto.getTicketsId());
 
