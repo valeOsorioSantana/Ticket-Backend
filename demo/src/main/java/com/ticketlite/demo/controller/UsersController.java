@@ -108,7 +108,7 @@ public class UsersController {
     @Parameters({
             @Parameter(name = "user", description = "Indica si el usuario es de tipo común (true) o no (false)", required = true)
     })
-    @PreAuthorize("hasRole('USER')")
+    //@PreAuthorize("hasRole('USER')")
     @PostMapping("/{user}")
     public ResponseEntity<?> saveUser(@Valid @RequestBody CreateUserRequest request, @PathVariable boolean user) {
         try {
