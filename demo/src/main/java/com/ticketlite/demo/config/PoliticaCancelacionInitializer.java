@@ -1,6 +1,8 @@
 package com.ticketlite.demo.config;
 
+import com.ticketlite.demo.model.EventsEntity;
 import com.ticketlite.demo.model.PoliticaCancelacion;
+import com.ticketlite.demo.model.repository.EventsRepository;
 import com.ticketlite.demo.model.repository.PoliticaCancelacionRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -9,18 +11,25 @@ import org.springframework.stereotype.Component;
 public class PoliticaCancelacionInitializer implements CommandLineRunner {
 
     private final PoliticaCancelacionRepository politicaRepo;
+    private final EventsRepository eventsRepository;
 
-    public PoliticaCancelacionInitializer(PoliticaCancelacionRepository politicaRepo) {
+    public PoliticaCancelacionInitializer(EventsRepository eventsRepository,PoliticaCancelacionRepository politicaRepo) {
         this.politicaRepo = politicaRepo;
+        this.eventsRepository = eventsRepository;
     }
 
     @Override
     public void run(String... args) throws Exception {
         // Si ya existe una política, no hacer nada
         if (politicaRepo.count() == 0) {
+            Long eventId = 1L;
+
+            EventsEntity evento = eventsRepository.findById(eventId).orElseThrow(() -> new RuntimeException("Evento no encontrado"));
+
             PoliticaCancelacion politica = new PoliticaCancelacion();
             politica.setDiasPreviosPermitidos(7); // Ejemplo: se puede cancelar hasta 7 días antes
             politica.setPorcentajeReembolso(0.8); // Ejemplo: 80% de reembolso
+            politica.setEvent(evento);
             politicaRepo.save(politica);
             System.out.println("Política de cancelación predeterminada creada.");
         }
