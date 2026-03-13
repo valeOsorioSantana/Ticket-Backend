@@ -1,2 +1,4 @@
+com\ticketlite\demo\controller\SessionsControllerTest.class
+com\ticketlite\demo\controller\TicketsControllerTest.class
 com\ticketlite\demo\DemoApplicationTests.class
 com\ticketlite\demo\controller\EventsControllerTest.class

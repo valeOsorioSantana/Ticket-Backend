@@ -1,5 +1,10 @@
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\assistant\chat\Conversation.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\assistant\chat\ConversationRepository.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\assistant\rag\RagService.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\assistant\vector\PgVectorUtils.java
 C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\config\corsConfig.java
 C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\config\GeometryConfig.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\config\OpenAiConfig.java
 C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\config\PoliticaCancelacionInitializer.java
 C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\config\R2Config.java
 C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\config\SwaggerConfig.java
@@ -11,6 +16,7 @@ C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendT
 C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\controller\NotificationsController.java
 C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\controller\PasswordRecoveryController.java
 C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\controller\PaymentsController.java
+C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\controller\RagController.java
 C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\controller\RecommendationController.java
 C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\controller\RegistrationsController.java
 C:\Users\Vale\Documents\Material de Estudio y Programacion\Codigos\Java\BackendTicketLite\demo\src\main\java\com\ticketlite\demo\controller\SatisfactionSurveyController.java
