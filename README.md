@@ -182,7 +182,3 @@ El sistema puede enviar automáticamente:
 Tecnóloga en **Análisis y Desarrollo de Software**
 
 ---
-
-## 📄 Licencia
-
-Este proyecto se distribuye bajo la licencia **MIT**.
